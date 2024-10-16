@@ -19,7 +19,7 @@ export default function Footer() {
     {
       icon: <BadgePercentIcon className="h-6 w-6" />,
       label: "Promotion",
-      href: "/promotion",
+      href: `${pathname}/promotion`,
     },
     {
       icon: <BellIcon className="h-6 w-6" />,

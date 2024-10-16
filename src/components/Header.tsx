@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Button } from "./ui/button";
 import { DownloadIcon, HamburgerMenuIcon } from "@radix-ui/react-icons";
-import { UserButton } from "@/app/(auth)/components/user-button";
+import { UserButton } from "@/app/[locale]/(auth)/components/user-button";
 
 export default function Header() {
   return (
@@ -9,9 +9,9 @@ export default function Header() {
       <Image
         src="/header-background.jpg"
         alt="Header background"
-        layout="fill"
-        objectFit="cover"
+        className="object-cover"
         quality={100}
+        fill
       />
       <div className="relative z-10 flex items-center justify-between p-4">
         <Button variant="link" className="text-white" size="icon">

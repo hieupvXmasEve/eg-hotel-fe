@@ -1,0 +1,9 @@
+{
+  "HomePage": {
+    "title": "Xin chào thế giới!",
+    "about": "Đi tới trang giới thiệu"
+  },
+  "NotFoundPage": {
+    "title": "Không tìm thấy trang"
+  }
+}
