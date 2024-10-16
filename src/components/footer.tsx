@@ -1,6 +1,5 @@
 "use client";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { Link, Pathnames, usePathname } from "@/i18n/routing";
 import {
   PhoneCallIcon,
   BadgePercentIcon,
@@ -11,15 +10,13 @@ import {
 
 export default function Footer() {
   const pathname = usePathname();
-  console.log("pathname", pathname);
-
   // Định nghĩa biến routes
-  const routes = [
+  const routes: { icon: React.ReactNode; label: string; href: Pathnames }[] = [
     { icon: <SearchIcon className="h-6 w-6" />, label: "Search", href: "/" },
     {
       icon: <BadgePercentIcon className="h-6 w-6" />,
       label: "Promotion",
-      href: `${pathname}/promotion`,
+      href: "/promotion",
     },
     {
       icon: <BellIcon className="h-6 w-6" />,
@@ -130,7 +127,7 @@ function FooterItem({
 }: {
   icon: React.ReactNode;
   label: string;
-  href: string;
+  href: Pathnames;
   isActive: boolean;
 }) {
   return (

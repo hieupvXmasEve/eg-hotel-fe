@@ -1,11 +1,11 @@
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
+import Footer from "@/components/footer";
+import Header from "@/components/header";
 
-interface HomeLayoutProps {
+interface AuthLayoutProps {
   children: React.ReactNode;
 }
 
-const HomeLayout: React.FC<HomeLayoutProps> = ({ children }) => {
+const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
@@ -15,4 +15,4 @@ const HomeLayout: React.FC<HomeLayoutProps> = ({ children }) => {
   );
 };
 
-export default HomeLayout;
+export default AuthLayout;

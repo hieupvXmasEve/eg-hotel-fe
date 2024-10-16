@@ -1,8 +1,8 @@
-import Image from "next/image";
-import { Button } from "./ui/button";
-import { DownloadIcon, HamburgerMenuIcon } from "@radix-ui/react-icons";
 import { UserButton } from "@/app/[locale]/(auth)/components/user-button";
-
+import { DownloadIcon, HamburgerMenuIcon } from "@radix-ui/react-icons";
+import Image from "next/image";
+import LanguagesButton from "./languages-button";
+import { Button } from "./ui/button";
 export default function Header() {
   return (
     <header className="relative overflow-hidden rounded-b-3xl pb-20">
@@ -13,7 +13,8 @@ export default function Header() {
         quality={100}
         fill
       />
-      <div className="relative z-10 flex items-center justify-between p-4">
+
+      <div className="relative flex items-center justify-between p-4">
         <Button variant="link" className="text-white" size="icon">
           <HamburgerMenuIcon className="h-6 w-6" />
         </Button>
@@ -25,10 +26,11 @@ export default function Header() {
           >
             <DownloadIcon className="h-6 w-6" />
           </Button>
+          <LanguagesButton />
           <UserButton />
         </div>
       </div>
-      <div className="relative z-10 p-4 text-white">
+      <div className="relative p-4 text-white">
         <h1 className="text-4xl font-bold">EG Paradise Angkor Villa Hotel</h1>
         <p className="mt-2">
           Chong Kao Sou Village Slor Kram Commune, Street 60, Siem Reap,

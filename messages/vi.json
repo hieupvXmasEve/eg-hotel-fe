@@ -1,9 +1,15 @@
 {
-  "HomePage": {
-    "title": "Xin chào thế giới!",
-    "about": "Đi tới trang giới thiệu"
-  },
   "NotFoundPage": {
     "title": "Không tìm thấy trang"
+  },
+  "auth": {
+    "user-btn": "đăng nhập"
+  },
+  "LocaleLayout": {
+    "title": "Khách sạn biệt thự EG Paradise Angkor"
+  },
+  "home": {
+    "btn-language": "ngôn ngữ",
+    "btn-search": "tìm kiếm"
   }
 }

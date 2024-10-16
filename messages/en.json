@@ -1,6 +1,15 @@
 {
-  "HomePage": {
-    "title": "Hello world!",
-    "about": "Go to the about page"
+  "NotFoundPage": {
+    "title": "Page not found"
+  },
+  "auth": {
+    "user-btn": "login"
+  },
+  "home": {
+    "btn-search": "search",
+    "btn-language": "language"
+  },
+  "LocaleLayout": {
+    "title": "EG Paradise Angkor Villa Hotel"
   }
 }

@@ -1,5 +1,5 @@
 "use client";
-import { DatePicker } from "@/components/Datepicker";
+import { DatePicker } from "@/components/datepicker";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -14,7 +14,7 @@ import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -64,7 +64,6 @@ export default function SignInPage() {
         message: "Mật khẩu không khớp.",
       });
     }
-    console.log(values);
   };
   return (
     <Card className="mx-auto mt-6 w-full max-w-[350px]">
