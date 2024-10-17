@@ -3,9 +3,13 @@ import { DownloadIcon, HamburgerMenuIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import LanguagesButton from "./languages-button";
 import { Button } from "./ui/button";
+import { useTranslations } from "next-intl";
+
 export default function Header() {
+  const t = useTranslations("home");
+
   return (
-    <header className="relative overflow-hidden rounded-b-3xl pb-20">
+    <header className="relative overflow-hidden rounded-b-3xl pb-12">
       <Image
         src="/header-background.jpg"
         alt="Header background"
@@ -31,11 +35,8 @@ export default function Header() {
         </div>
       </div>
       <div className="relative p-4 text-white">
-        <h1 className="text-4xl font-bold">EG Paradise Angkor Villa Hotel</h1>
-        <p className="mt-2">
-          Chong Kao Sou Village Slor Kram Commune, Street 60, Siem Reap,
-          Cambodia, 17256
-        </p>
+        <h1 className="text-4xl font-bold">{t("hotel-name")}</h1>
+        <p className="mt-2">{t("hotel-address")}</p>
       </div>
     </header>
   );

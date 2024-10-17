@@ -9,7 +9,24 @@
     "title": "Khách sạn biệt thự EG Paradise Angkor"
   },
   "home": {
-    "btn-language": "ngôn ngữ",
-    "btn-search": "tìm kiếm"
+    "btn-language": "Ngôn ngữ",
+    "btn-search": "Tìm kiếm",
+    "hotel-address": "Làng Chong Kao Sou Xã Slor Kram, Đường 60, Siem Reap, Campuchia, 17256",
+    "hotel-name": "Khách sạn biệt thự EG Paradise Angkor",
+    "search-form": {
+      "add-room": "Thêm phòng",
+      "adult": "Người lớn",
+      "age-0-to-17": "Tuổi 0 đến 17",
+      "btn-cancel": "Hủy bỏ",
+      "btn-done": "Xác nhận",
+      "children": "Trẻ em",
+      "pick-date": "Chọn ngày",
+      "remove-room": "Xóa phòng",
+      "room": "Phòng"
+    }
+  },
+  "btn": {
+    "cancel": "Hủy bỏ",
+    "done": "Xác nhận"
   }
 }

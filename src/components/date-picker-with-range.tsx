@@ -13,6 +13,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 
 interface DatePickerProps {
   date: DateRange | undefined;
@@ -24,14 +25,31 @@ export function DatePickerWithRange({
   date,
   setDate,
 }: DatePickerProps & React.HTMLAttributes<HTMLDivElement>) {
-  // const [date, setDate] = React.useState<DateRange | undefined>({
-  //   from: new Date(2022, 0, 20),
-  //   to: addDays(new Date(2022, 0, 20), 20),
-  // });
-
+  const [tempDate, setTempDate] = React.useState<DateRange | undefined>(date);
+  const [open, setOpen] = React.useState(false);
+  const t = useTranslations("home.search-form");
+  function onChangeDate(newDate: DateRange | undefined) {
+    setTempDate(newDate);
+  }
+  const isDifferentDate =
+    tempDate?.from &&
+    tempDate?.to &&
+    tempDate?.from?.getTime() !== tempDate?.to?.getTime();
+  function handleDone() {
+    if (isDifferentDate) {
+      setDate(tempDate);
+      setOpen(false);
+    }
+  }
+  React.useEffect(() => {
+    if (!open) {
+      setTempDate(date);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open]);
   return (
     <div className={cn("grid", className)}>
-      <Popover modal={true}>
+      <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
             id="date"
@@ -41,30 +59,41 @@ export function DatePickerWithRange({
               !date && "text-muted-foreground",
             )}
           >
-            <CalendarIcon className="mr-2 h-5 w-5" />
-            {date?.from ? (
-              date.to ? (
-                <>
-                  {format(date.from, "LLL dd, y")} -{" "}
-                  {format(date.to, "LLL dd, y")}
-                </>
+            <span className="flex w-full items-center">
+              <CalendarIcon className="mr-2 h-5 w-5" />
+              {date?.from ? (
+                date.to ? (
+                  <span className="flex-1 text-center">
+                    {format(date.from, "dd/MM/y")} -{" "}
+                    {format(date.to, "dd/MM/y")}
+                  </span>
+                ) : (
+                  format(date.from, "dd/MM/y")
+                )
               ) : (
-                format(date.from, "LLL dd, y")
-              )
-            ) : (
-              <span>Pick a date</span>
-            )}
+                <span>{t("pick-date")}</span>
+              )}
+            </span>
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-auto p-0" align="start">
+        <PopoverContent className="w-auto p-0" align="center">
           <Calendar
             initialFocus
             mode="range"
-            defaultMonth={date?.from}
-            selected={date}
-            onSelect={setDate}
+            defaultMonth={tempDate?.from}
+            selected={tempDate}
+            onSelect={onChangeDate}
             numberOfMonths={2}
+            fromDate={new Date()}
           />
+          <div className="m-2 flex justify-end gap-2">
+            <Button variant={"outline"} onClick={() => setOpen(false)}>
+              {t("btn-cancel")}
+            </Button>
+            <Button disabled={!isDifferentDate} onClick={handleDone}>
+              {t("btn-done")}
+            </Button>
+          </div>
         </PopoverContent>
       </Popover>
     </div>
