@@ -4,7 +4,7 @@ import ListRoomType from "./components/list-room-type";
 import RecommendRoom from "./components/recommend-room";
 export default function Home() {
   return (
-    <div className="z-50 -mt-10 px-5">
+    <div className="z-50 -mt-10">
       <RecentSearch />
       <HotelCarousel />
       <ListRoomType />

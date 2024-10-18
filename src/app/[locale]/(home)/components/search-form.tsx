@@ -52,6 +52,7 @@ export default function SearchForm() {
   });
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
+    console.log("ok");
     toast({
       title: "You submitted the following values:",
       description: (
@@ -66,14 +67,14 @@ export default function SearchForm() {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="grid w-full grid-cols-1 gap-2 md:grid-cols-4"
+          className="grid w-full grid-cols-1 gap-2 md:grid-cols-12"
         >
           {/* Choose hotel */}
           <FormField
             control={form.control}
             name="hotel_id"
             render={({ field }) => (
-              <FormItem className="basis-1/4">
+              <FormItem className="col-span-3">
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
@@ -97,7 +98,7 @@ export default function SearchForm() {
             control={form.control}
             name="check_in_date"
             render={({ field }) => (
-              <FormItem className="basis-1/4">
+              <FormItem className="col-span-3">
                 <DatePickerWithRange
                   date={field.value}
                   setDate={field.onChange}
@@ -107,10 +108,10 @@ export default function SearchForm() {
             )}
           />
           {/* Choose people */}
-          <div className="basis-1/4">
+          <div className="col-span-4">
             <PeopleBooking rooms={rooms} setRooms={setRooms} />
           </div>
-          <div className="basis-1/4">
+          <div className="col-span-2">
             <Button type="submit" className="w-full capitalize">
               {t("btn-search")}
             </Button>

@@ -19,12 +19,22 @@ const carouselItems = [
   {
     image: "/images/hotel-carousel-1.jpg",
     title: "Luxurious rooms with stunning city views",
-    alt: "Hotel room interior",
+    alt: "Hotel room",
   },
   {
     image: "/images/hotel-carousel-1.jpg",
     title: "Fine dining restaurant and rooftop bar",
     alt: "Restaurant interior",
+  },
+  {
+    image: "/images/hotel-carousel-1.jpg",
+    title: "Hotel with a full-service spa and airport shuttle service",
+    alt: "Hotel room interior with a full-service spa and airport shuttle service",
+  },
+  {
+    image: "/images/hotel-carousel-1.jpg",
+    title: "Hotel",
+    alt: "Hotel room interior a",
   },
 ];
 
@@ -43,7 +53,10 @@ export default function HotelCarousel() {
       >
         <CarouselContent>
           {carouselItems.map((item, index) => (
-            <CarouselItem key={index}>
+            <CarouselItem
+              key={index}
+              className="w-full md:basis-1/2 lg:basis-1/3 xl:basis-1/4"
+            >
               <Card className="overflow-hidden rounded-2xl">
                 <CardContent className="flex aspect-auto items-center justify-center p-0">
                   <Image
