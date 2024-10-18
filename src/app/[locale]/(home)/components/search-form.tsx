@@ -62,25 +62,25 @@ export default function SearchForm() {
     });
   }
   return (
-    <div className="flex w-full flex-col items-center gap-2 rounded-md border-2 border-primary bg-white p-2 md:flex-row">
+    <div className="rounded-md border-2 border-primary bg-white p-2">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="w-full space-y-2"
+          className="grid w-full grid-cols-1 gap-2 md:grid-cols-4"
         >
           {/* Choose hotel */}
           <FormField
             control={form.control}
             name="hotel_id"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="basis-1/4">
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                 >
-                  <FormControl>
+                  <FormControl className="truncate">
                     <SelectTrigger>
-                      <Hotel className="h-5 w-5" />
+                      <Hotel className="h-5 w-5 flex-shrink-0" />
                       <SelectValue placeholder="Select hotel" />
                     </SelectTrigger>
                   </FormControl>
@@ -97,7 +97,7 @@ export default function SearchForm() {
             control={form.control}
             name="check_in_date"
             render={({ field }) => (
-              <FormItem className="">
+              <FormItem className="basis-1/4">
                 <DatePickerWithRange
                   date={field.value}
                   setDate={field.onChange}
@@ -107,10 +107,14 @@ export default function SearchForm() {
             )}
           />
           {/* Choose people */}
-          <PeopleBooking rooms={rooms} setRooms={setRooms} />
-          <Button type="submit" className="w-full capitalize">
-            {t("btn-search")}
-          </Button>
+          <div className="basis-1/4">
+            <PeopleBooking rooms={rooms} setRooms={setRooms} />
+          </div>
+          <div className="basis-1/4">
+            <Button type="submit" className="w-full capitalize">
+              {t("btn-search")}
+            </Button>
+          </div>
         </form>
       </Form>
     </div>

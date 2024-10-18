@@ -48,14 +48,14 @@ export function DatePickerWithRange({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
   return (
-    <div className={cn("grid", className)}>
+    <div className={cn("", className)}>
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
             id="date"
             variant={"outline"}
             className={cn(
-              "justify-start px-3 text-left font-normal",
+              "w-full justify-start px-3 text-left font-normal",
               !date && "text-muted-foreground",
             )}
           >
@@ -63,7 +63,7 @@ export function DatePickerWithRange({
               <CalendarIcon className="mr-2 h-5 w-5" />
               {date?.from ? (
                 date.to ? (
-                  <span className="flex-1 text-center">
+                  <span className="flex-1 truncate text-center">
                     {format(date.from, "dd/MM/y")} -{" "}
                     {format(date.to, "dd/MM/y")}
                   </span>

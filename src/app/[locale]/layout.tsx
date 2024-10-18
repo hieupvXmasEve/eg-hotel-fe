@@ -4,19 +4,7 @@ import {
   getTranslations,
   unstable_setRequestLocale,
 } from "next-intl/server";
-import localFont from "next/font/local";
 import { ReactNode } from "react";
-
-const geistSans = localFont({
-  src: "../fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "../fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
 
 // export const metadata: Metadata = {
 //   title: "EG Paradise Angkor Villa Hotel",
@@ -54,14 +42,8 @@ export default async function RootLayout({
   // side is the easiest way to get started
   const messages = await getMessages();
   return (
-    <html lang={locale} suppressHydrationWarning={true}>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} flex min-h-screen flex-col antialiased`}
-      >
-        <NextIntlClientProvider messages={messages}>
-          {children}
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <NextIntlClientProvider messages={messages}>
+      {children}
+    </NextIntlClientProvider>
   );
 }

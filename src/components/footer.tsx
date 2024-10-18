@@ -1,17 +1,22 @@
 "use client";
-import { Link, Pathnames, usePathname } from "@/i18n/routing";
+import { Link, usePathname } from "@/i18n/routing";
 import {
-  PhoneCallIcon,
   BadgePercentIcon,
-  SearchIcon,
   BellIcon,
+  PhoneCallIcon,
+  SearchIcon,
   UserIcon,
 } from "lucide-react";
 
+type FooterPathname = "/promotion" | "/service" | "/hotline" | "/profile" | "/";
 export default function Footer() {
   const pathname = usePathname();
   // Định nghĩa biến routes
-  const routes: { icon: React.ReactNode; label: string; href: Pathnames }[] = [
+  const routes: {
+    icon: React.ReactNode;
+    label: string;
+    href: FooterPathname;
+  }[] = [
     { icon: <SearchIcon className="h-6 w-6" />, label: "Search", href: "/" },
     {
       icon: <BadgePercentIcon className="h-6 w-6" />,
@@ -127,7 +132,7 @@ function FooterItem({
 }: {
   icon: React.ReactNode;
   label: string;
-  href: Pathnames;
+  href: FooterPathname;
   isActive: boolean;
 }) {
   return (

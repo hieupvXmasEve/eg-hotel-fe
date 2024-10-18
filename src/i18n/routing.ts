@@ -14,15 +14,25 @@ export const routing = defineRouting({
     "/forgot-password": "/forgot-password",
     "/reset-password": "/reset-password",
     "/rooms": "/rooms",
+
     "/promotion": "/promotion",
-    "/amenities": "/amenities",
-    "/contact": "/contact",
+    "/service": "/service",
     "/hotline": "/hotline",
     "/profile": "/profile",
+
+    "/amenities": "/amenities",
+    "/contact": "/contact",
     "/booking": "/booking",
-    "/service": "/service",
     "/payment": "/payment",
     "/review": "/review",
+    "/[hotelName]": {
+      en: "/[hotelName]",
+      vi: "/[hotelName]",
+    },
+    "/[hotelName]/[roomName]": {
+      en: "/[hotelName]/[roomName]",
+      vi: "/[hotelName]/[roomName]",
+    },
     "#": "/#",
   },
 });
@@ -32,5 +42,5 @@ export type Locale = (typeof routing.locales)[number];
 
 // Lightweight wrappers around Next.js' navigation APIs
 // that will consider the routing configuration
-export const { Link, redirect, usePathname, useRouter } =
+export const { Link, redirect, getPathname, usePathname, useRouter } =
   createLocalizedPathnamesNavigation(routing);

@@ -7,9 +7,9 @@ interface AuthLayoutProps {
 
 const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
   return (
-    <div className="mx-auto flex min-h-screen max-w-screen-sm flex-col">
+    <div className="flex min-h-screen flex-col">
       <Header />
-      <main className="z-10 flex-grow pb-16 md:pb-0">{children}</main>
+      <main className="flex-grow px-5 pb-16 pt-40 md:pb-0">{children}</main>
       <Footer />
     </div>
   );
