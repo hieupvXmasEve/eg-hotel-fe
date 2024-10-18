@@ -25,7 +25,7 @@ import { addDays } from "date-fns";
 import { Hotel } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
-import PeopleBooking, { Room } from "./people-booking";
+import PeopleBooking, { Room } from "./search-room/people-booking";
 import { Button } from "@/components/ui/button";
 
 const FormSchema = z.object({

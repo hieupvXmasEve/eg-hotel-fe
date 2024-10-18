@@ -14,7 +14,6 @@ export const routing = defineRouting({
     "/forgot-password": "/forgot-password",
     "/reset-password": "/reset-password",
     "/rooms": "/rooms",
-    "/rooms/[id]": "/rooms/[id]",
     "/promotion": "/promotion",
     "/amenities": "/amenities",
     "/contact": "/contact",

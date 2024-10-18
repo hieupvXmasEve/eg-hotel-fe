@@ -23,7 +23,11 @@
       "pick-date": "Chọn ngày",
       "remove-room": "Xóa phòng",
       "room": "Phòng"
-    }
+    },
+    "title-hotel-carousel": "Khách sạn tiện nghi có spa đầy đủ dịch vụ và dịch vụ đưa đón sân bay",
+    "title-recent-search": "Tìm kiếm gần đây của bạn",
+    "title-recommend-room": "Được đề xuất cho bạn",
+    "title-room-type": "Các loại phòng"
   },
   "btn": {
     "cancel": "Hủy bỏ",

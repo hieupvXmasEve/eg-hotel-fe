@@ -6,6 +6,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 
 const carouselItems = [
@@ -28,10 +29,11 @@ const carouselItems = [
 ];
 
 export default function HotelCarousel() {
+  const t = useTranslations("home");
   return (
-    <div className="my-6 w-full overflow-hidden">
+    <section className="my-6 w-full overflow-hidden">
       <h3 className="mb-4 text-lg font-semibold text-slate-600">
-        Comfortable hotel with a full-service spa and airport shuttle service
+        {t("title-hotel-carousel")}
       </h3>
       <Carousel
         opts={{
@@ -59,6 +61,6 @@ export default function HotelCarousel() {
         <CarouselPrevious className="left-0" />
         <CarouselNext className="right-0" />
       </Carousel>
-    </div>
+    </section>
   );
 }

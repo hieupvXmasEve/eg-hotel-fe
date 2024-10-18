@@ -1,4 +1,5 @@
 import { Link } from "@/i18n/routing";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 
 interface Room {
@@ -10,6 +11,7 @@ interface Room {
 }
 
 export default function Component() {
+  const t = useTranslations("home");
   const rooms: Room[] = [
     {
       id: 1,
@@ -34,7 +36,7 @@ export default function Component() {
   return (
     <div className="mx-auto my-6 w-full">
       <h2 className="mb-4 text-lg font-semibold text-slate-600">
-        Your recent searches
+        {t("title-recent-search")}
       </h2>
       <div className="space-y-4">
         {rooms.map((room) => (
@@ -51,9 +53,9 @@ export default function Component() {
                 className="rounded-lg"
               />
               <div>
-                <h3 className="text-xl font-semibold">{room.name}</h3>
+                <h3 className="text-lg font-semibold">{room.name}</h3>
                 <p className="text-gray-500">
-                  {room.dateRange}, {room.people} people
+                  {room.dateRange}, {room.people} {t("search-form.adult")}
                 </p>
               </div>
             </div>
