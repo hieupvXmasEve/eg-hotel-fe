@@ -4,8 +4,12 @@ import { cn } from "@/lib/utils";
 import { useEffect, useRef, useState } from "react";
 import Photos from "./components/photos";
 import Overview from "./components/overview";
+import Map from "./components/map";
+import Amenities from "./components/amenities";
+import Accessibility from "./components/accessibility";
+import Policies from "./components/policies";
 
-type Section = "overview" | "accessibility" | "policies";
+type Section = "overview" | "accessibility" | "policies" | "amenities";
 
 export default function RoomPage() {
   const [activeSection, setActiveSection] = useState<Section>("overview");
@@ -14,6 +18,7 @@ export default function RoomPage() {
     overview: useRef(null),
     accessibility: useRef(null),
     policies: useRef(null),
+    amenities: useRef(null),
   };
 
   useEffect(() => {
@@ -39,7 +44,8 @@ export default function RoomPage() {
     return () => {
       observers.forEach((observer) => observer.disconnect());
     };
-  }, [sectionRefs]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const scrollToSection = (sectionId: Section) => {
     sectionRefs[sectionId].current?.scrollIntoView({
@@ -49,13 +55,16 @@ export default function RoomPage() {
 
   const navItems: { title: Section; component: React.ReactNode }[] = [
     { title: "overview", component: <Overview /> },
+    { title: "amenities", component: <div>Popular amenities</div> },
     { title: "accessibility", component: <div>Accessibility</div> },
     { title: "policies", component: <div>Policies</div> },
   ];
 
   return (
     <div className="">
-      <Photos />
+      <section ref={sectionRefs.overview}>
+        <Photos />
+      </section>
       <nav className="sticky top-0 z-10 mt-2 border-b border-gray-300 bg-white">
         <ul className="flex justify-start">
           {navItems.map((item) => (
@@ -76,11 +85,25 @@ export default function RoomPage() {
         </ul>
       </nav>
       <div className="mt-6 space-y-4">
-        {navItems.map((id) => (
-          <section key={id.title} ref={sectionRefs[id.title]} className="">
-            {id.component}
-          </section>
-        ))}
+        <div className="grid grid-cols-4">
+          <div className="col-span-3">
+            <section className="">
+              <Overview />
+            </section>
+            <section ref={sectionRefs.amenities} className="mt-4">
+              <Amenities />
+            </section>
+          </div>
+          <div className="col-span-1">
+            <Map />
+          </div>
+        </div>
+        <section ref={sectionRefs.accessibility} className="">
+          <Accessibility />
+        </section>
+        <section ref={sectionRefs.policies} className="">
+          <Policies />
+        </section>
       </div>
     </div>
   );

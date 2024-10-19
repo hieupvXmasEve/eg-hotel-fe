@@ -9,7 +9,7 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
-      <main className="container mx-auto flex-grow px-2 pb-16 pt-48 md:px-5 md:pb-0 md:pt-16">
+      <main className="container mx-auto flex-grow px-2 pb-16 pt-48 md:px-5 md:pt-16">
         {children}
       </main>
       <Footer />

@@ -42,7 +42,6 @@
       "check-in": "Đăng ký vào",
       "check-out": "Trả phòng",
       "children": "những đứa trẻ",
-      "facilities": "Cơ sở",
       "information": "Thông tin",
       "location": "Vị trí",
       "price": "Giá",
@@ -65,7 +64,35 @@
       "room-type": "Loại phòng",
       "tax-and-fee": "Thuế và phí",
       "title": "Tổng quan",
-      "view": "Xem"
+      "view": "Xem",
+      "highlights": "Điểm nổi bật",
+      "night": "đêm",
+      "night-plural": "đêm",
+      "price-title": "Giá cho {dayBooking}",
+      "rooms": "phòng"
+    },
+    "accessibility": {
+      "common-areas": "Khu vực chung",
+      "rooms": "Phòng",
+      "title": "Khả năng tiếp cận"
+    },
+    "amenities": {
+      "amenity-title": "Tiện ích bất động sản",
+      "btn-see-all": "Xem tất cả chỗ ở",
+      "title": "Tiện ích phổ biến"
+    },
+    "map": {
+      "title": "Khám phá khu vực"
+    },
+    "policies": {
+      "access-methods": "Phương thức truy cập",
+      "check-in": "Đăng ký vào",
+      "check-out": "Trả phòng",
+      "children-and-extra-beds": "Trẻ em và giường phụ",
+      "pets": "Thú cưng",
+      "property-payment-types": "Các loại thanh toán tài sản",
+      "special-check-in-instructions": "Hướng dẫn nhận phòng đặc biệt",
+      "title": "Chính sách"
     }
   }
 }

@@ -37,7 +37,7 @@
     "overview": {
       "title": "Overview",
       "information": "Information",
-      "facilities": "Facilities",
+      "highlights": "Highlights",
       "reviews": "Reviews",
       "location": "Location",
       "check-in": "Check-in",
@@ -64,8 +64,35 @@
       "room-deposit-policy": "Room deposit policy",
       "room-payment-method": "Room payment method",
       "room": "room",
+      "rooms": "rooms",
       "adult": "adult",
-      "children": "children"
+      "children": "children",
+      "price-title": "Price for {dayBooking}",
+      "night": "night",
+      "night-plural": "nights"
+    },
+    "amenities": {
+      "title": "Popular amenities",
+      "btn-see-all": "See all properties",
+      "amenity-title": "Property amentities"
+    },
+    "accessibility": {
+      "title": "Accessibility",
+      "common-areas": "Common areas",
+      "rooms": "Rooms"
+    },
+    "policies": {
+      "title": "Policies",
+      "check-in": "Check-in",
+      "check-out": "Check-out",
+      "special-check-in-instructions": "Special check-in instructions",
+      "access-methods": "Access methods",
+      "pets": "Pets",
+      "children-and-extra-beds": "Children and extra beds",
+      "property-payment-types": "Property payment types"
+    },
+    "map": {
+      "title": "Explore the area"
     }
   }
 }
