@@ -32,5 +32,40 @@
   "btn": {
     "cancel": "Hủy bỏ",
     "done": "Xác nhận"
+  },
+  "room": {
+    "overview": {
+      "adult": "người lớn",
+      "bathroom": "Phòng tắm",
+      "bed-config": "Cấu hình giường",
+      "bed-type": "Loại giường",
+      "check-in": "Đăng ký vào",
+      "check-out": "Trả phòng",
+      "children": "những đứa trẻ",
+      "facilities": "Cơ sở",
+      "information": "Thông tin",
+      "location": "Vị trí",
+      "price": "Giá",
+      "reviews": "Đánh giá",
+      "room": "phòng",
+      "room-amenities": "Tiện nghi phòng",
+      "room-and-guest": "Phòng và khách",
+      "room-cancellation": "Hủy phòng",
+      "room-cancellation-policy": "Chính sách hủy phòng",
+      "room-deposit": "Đặt cọc phòng",
+      "room-deposit-policy": "Chính sách đặt cọc phòng",
+      "room-facilities": "Tiện nghi phòng",
+      "room-payment": "Thanh toán phòng",
+      "room-payment-method": "Phương thức thanh toán phòng",
+      "room-payment-policy": "Chính sách thanh toán tiền phòng",
+      "room-policies": "Chính sách phòng",
+      "room-safety": "Phòng an toàn",
+      "room-services": "Dịch vụ phòng",
+      "room-size": "Kích thước phòng",
+      "room-type": "Loại phòng",
+      "tax-and-fee": "Thuế và phí",
+      "title": "Tổng quan",
+      "view": "Xem"
+    }
   }
 }

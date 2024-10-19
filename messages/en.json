@@ -32,5 +32,40 @@
   "btn": {
     "cancel": "Cancel",
     "done": "Done"
+  },
+  "room": {
+    "overview": {
+      "title": "Overview",
+      "information": "Information",
+      "facilities": "Facilities",
+      "reviews": "Reviews",
+      "location": "Location",
+      "check-in": "Check-in",
+      "check-out": "Check-out",
+      "price": "Price",
+      "tax-and-fee": "Tax and fee",
+      "room-and-guest": "Room and guest",
+      "room-type": "Room type",
+      "room-amenities": "Room amenities",
+      "room-facilities": "Room facilities",
+      "room-size": "Room size",
+      "bed-type": "Bed type",
+      "view": "View",
+      "bed-config": "Bed configuration",
+      "bathroom": "Bathroom",
+      "room-safety": "Room safety",
+      "room-services": "Room services",
+      "room-policies": "Room policies",
+      "room-cancellation": "Room cancellation",
+      "room-deposit": "Room deposit",
+      "room-payment": "Room payment",
+      "room-cancellation-policy": "Room cancellation policy",
+      "room-payment-policy": "Room payment policy",
+      "room-deposit-policy": "Room deposit policy",
+      "room-payment-method": "Room payment method",
+      "room": "room",
+      "adult": "adult",
+      "children": "children"
+    }
   }
 }
