@@ -7,6 +7,7 @@ import {
   SearchIcon,
   UserIcon,
 } from "lucide-react";
+import LogoColor from "./logo-color";
 
 type FooterPathname = "/promotion" | "/service" | "/hotline" | "/profile" | "/";
 export default function Footer() {
@@ -60,63 +61,84 @@ export default function Footer() {
       {/* Desktop footer */}
       <div className="hidden bg-gray-100 py-6 md:block">
         <div className="container mx-auto px-4">
-          <div className="flex flex-wrap items-center justify-between">
-            <div className="mb-4 w-full md:mb-0 md:w-1/3">
-              <h3 className="mb-2 text-lg font-semibold">
-                EG Paradise Angkor Villa Hotel
-              </h3>
+          <div className="grid grid-cols-12 gap-4">
+            {/* column 1 */}
+            <div className="col-span-3 flex flex-col gap-4">
+              <LogoColor />
               <p className="text-sm text-gray-600">
-                Luxury accommodation in Siem Reap, Cambodia
+                The starting point for your next project with Minimal UI Kit,
+                built on the newest version of Material-UI ?, ready to be
+                customized to your style.
               </p>
             </div>
-            <div className="mb-4 w-full md:mb-0 md:w-1/3">
-              <h4 className="text-md mb-2 font-semibold">Quick Links</h4>
+            {/* column 2 */}
+            <div className="col-span-2 col-start-6">
+              <h4 className="text-md mb-2 font-semibold">Minimal</h4>
               <ul className="text-sm">
                 <li>
-                  <Link href="/" className="text-gray-600 hover:text-gray-900">
-                    Home
-                  </Link>
-                </li>
-                <li>
                   <Link
-                    href="/rooms"
-                    className="text-gray-600 hover:text-gray-900"
+                    href="/about"
+                    className="text-gray-600 hover:text-primary"
                   >
-                    Rooms
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/amenities"
-                    className="text-gray-600 hover:text-gray-900"
-                  >
-                    Amenities
+                    About us
                   </Link>
                 </li>
                 <li>
                   <Link
                     href="/contact"
-                    className="text-gray-600 hover:text-gray-900"
+                    className="text-gray-600 hover:text-primary"
                   >
-                    Contact
+                    Contact us
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/amenities"
+                    className="text-gray-600 hover:text-primary"
+                  >
+                    FAG
                   </Link>
                 </li>
               </ul>
             </div>
-            <div className="w-full md:w-1/3">
-              <h4 className="text-md mb-2 font-semibold">Contact Us</h4>
-              <p className="text-sm text-gray-600">
-                Chong Kao Sou Village Slor Kram Commune, Street 60, Siem Reap,
-                Cambodia, 17256
-              </p>
-              <p className="text-sm text-gray-600">Phone: +855 XX XXX XXX</p>
-              <p className="text-sm text-gray-600">
-                Email: info@egparadiseangkor.com
-              </p>
+            {/* column 3 */}
+            <div className="col-span-2">
+              <h4 className="text-md mb-2 font-semibold">Legal</h4>
+              <ul className="text-sm">
+                <li>
+                  <Link href="/" className="text-gray-600 hover:text-primary">
+                    Terms and Condition
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/rooms"
+                    className="text-gray-600 hover:text-primary"
+                  >
+                    Privacy Policy
+                  </Link>
+                </li>
+              </ul>
             </div>
-          </div>
-          <div className="mt-6 text-center text-sm text-gray-600">
-            © 2024 EG Paradise Angkor Villa Hotel. All rights reserved.
+            {/* column 4 */}
+            <div className="col-span-3">
+              <h4 className="text-md mb-2 font-semibold">Contact</h4>
+              <p className="text-sm text-gray-600">
+                Los Angeles, 359 Hidden Valley Road
+              </p>
+              <a
+                href="tel:+855123456789"
+                className="text-sm text-gray-600 hover:text-primary"
+              >
+                Phone: +855 XX XXX XXX
+              </a>
+              <a
+                href="mailto:support@minimals.cc"
+                className="text-sm text-gray-600 hover:text-primary"
+              >
+                support@minimals.cc
+              </a>
+            </div>
           </div>
         </div>
       </div>

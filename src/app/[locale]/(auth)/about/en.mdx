@@ -1,3 +1,77 @@
-# Home
+import Image from "next/image";
+import { MapPin, Hotel } from "lucide-react";
+import { CommunityIcon } from "@/components/icon";
 
-Welcome to my site!
+<div className="flex items-center justify-between gap-20">
+  <div className="flex flex-1 flex-col gap-4 text-center">
+    <h1 className="font-bold text-3xl text-primary">
+      EG Paradise Angkor Villa Hotel
+    </h1>
+    <div>
+      Located near the city center and popular tourist attractions, we offer you
+      a wonderful resort experience with the perfect combination of modern
+      comfort and local cultural beauty.
+    </div>
+  </div>
+  <div className="flex items-baseline gap-4">
+    <div className="relative">
+      <Image
+        src="/images/about-1.jpg"
+        alt="logo"
+        width={202}
+        height={239}
+        className="rounded-lg"
+      />
+    </div>
+    <div className="relative">
+      <Image
+        src="/images/about-2.jpg"
+        alt="logo"
+        width={264}
+        height={312}
+        className="rounded-lg"
+      />
+    </div>
+  </div>
+
+</div>
+
+{/* Location */}
+
+<div className="mt-10 flex flex-col items-center gap-2">
+  <MapPin className="h-14 w-10 text-primary" />
+  <h2 className="text-2xl font-bold text-primary">Ideal Location</h2>
+  <div>
+    EG Paradise Angkor Villa Hotel is situated near major attractions such as
+    Angkor Wat and Siem Reap Night Market, making it easy for you to explore the
+    beauty of this region. Just a few minutes' walk away, you will never have to
+    worry about missing out on exciting experiences here.
+  </div>
+</div>
+<div className="mt-10 flex flex-col items-center gap-2">
+  <Hotel className="h-14 w-10 text-primary" />
+  <h2 className="text-2xl font-bold text-primary">Modern Apartments</h2>
+  <div>
+    We offer a variety of rooms, from single rooms to spacious apartments, to
+    suit all your needs. All rooms are designed in a modern style, fully
+    equipped, providing a comfortable space for you to relax and enjoy your
+    holiday.
+  </div>
+</div>
+<div className="mt-10 flex flex-col items-center gap-2">
+  <CommunityIcon className="h-14 w-10 text-primary" />
+  <h2 className="text-2xl font-bold text-primary">Community Connection</h2>
+  <div>
+    We believe that connecting with others is equally important. Here, you can
+    meet and socialize with other travelers in common areas or join fun
+    activities that we organize.
+  </div>
+</div>
+<div className="mt-10 text-center text-xl font-bold">
+  EG Paradise Angkor Villa Hotel is not just a place to stay but an ideal
+  destination for those who want to experience the cultural beauty of Cambodia
+  in a modern and comfortable setting.
+</div>
+<div className="text-center text-xl font-bold">
+  Contact us today to book your stay and start your journey of exploration!
+</div>

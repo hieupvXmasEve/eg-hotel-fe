@@ -94,5 +94,25 @@
       "special-check-in-instructions": "Hướng dẫn nhận phòng đặc biệt",
       "title": "Chính sách"
     }
+  },
+  "contact": {
+    "contact-information": "Thông tin liên hệ",
+    "email": "E-mail",
+    "feedback": "Nhận xét",
+    "first-name": "Tên",
+    "get-back-to-you": "Chúng tôi sẽ liên hệ lại với bạn sớm nhất có thể.",
+    "last-name": "Họ",
+    "message": "Tin nhắn",
+    "message-placeholder": "Nhập tin nhắn của bạn ở đây.",
+    "optional": "(không bắt buộc)",
+    "other": "Khác",
+    "phone": "Điện thoại",
+    "reservation": "Yêu cầu đặt chỗ",
+    "send": "Gửi",
+    "send-message": "Gửi tin nhắn cho chúng tôi",
+    "subject": "Chủ thể",
+    "support": "Hỗ trợ khách hàng",
+    "title": "Liên hệ với chúng tôi",
+    "select-subject": "Chọn một chủ đề"
   }
 }

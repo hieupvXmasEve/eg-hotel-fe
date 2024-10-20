@@ -94,5 +94,25 @@
     "map": {
       "title": "Explore the area"
     }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "contact-information": "Contact information",
+    "send-message": "Send us a message",
+    "get-back-to-you": "We'll get back to you as soon as possible.",
+    "first-name": "First name",
+    "last-name": "Last name",
+    "email": "Email",
+    "phone": "Phone",
+    "message": "Message",
+    "optional": "(optional)",
+    "subject": "Subject",
+    "reservation": "Reservation Inquiry",
+    "support": "Customer Support",
+    "feedback": "Feedback",
+    "other": "Other",
+    "send": "Send",
+    "message-placeholder": "Enter your message here.",
+    "select-subject": "Select a subject"
   }
 }

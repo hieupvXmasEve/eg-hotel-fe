@@ -1,3 +1,76 @@
-# Home
+import Image from "next/image";
+import { MapPin, Hotel } from "lucide-react";
+import { CommunityIcon } from "@/components/icon";
 
-Chào bạn!
+<div className="flex items-center justify-between gap-20">
+  <div className="flex flex-1 flex-col gap-4 text-center">
+    <h1 className="font-bold text-3xl text-primary">
+      EG Paradise Angkor Villa Hotel
+    </h1>
+    <div>
+      Nằm gần trung tâm thành phố và các điểm du lịch nổi tiếng, chúng tôi mang đến cho bạn trải nghiệm nghỉ dưỡng tuyệt vời với sự kết hợp hoàn hảo giữa sự tiện nghi hiện đại và vẻ đẹp văn hóa địa phương.
+    </div>
+  </div>
+  <div className="flex items-baseline gap-4">
+    <div className="relative">
+      <Image
+        src="/images/about-1.jpg"
+        alt="logo"
+        width={202}
+        height={239}
+        className="rounded-lg"
+      />
+    </div>
+    <div className="relative">
+      <Image
+        src="/images/about-2.jpg"
+        alt="logo"
+        width={264}
+        height={312}
+        className="rounded-lg"
+      />
+    </div>
+  </div>
+
+</div>
+
+{/* Location */}
+
+<div className="mt-10 flex flex-col items-center gap-2">
+  <MapPin className="h-14 w-10 text-primary" />
+  <h2 className="text-2xl font-bold text-primary">Vị trí lý tưởng</h2>
+  <div>
+    EG Paradise Angkor Villa Hotel tọa lạc gần các điểm tham quan hấp dẫn như
+    Angkor Wat và chợ đêm Siem Reap, giúp bạn dễ dàng khám phá vẻ đẹp của vùng
+    đất này. Với khoảng cách chỉ một vài phút đi bộ, bạn sẽ không bao giờ phải
+    lo lắng về việc bỏ lỡ những trải nghiệm thú vị tại đây.
+  </div>
+</div>
+<div className="mt-10 flex flex-col items-center gap-2">
+  <Hotel className="h-14 w-10 text-primary" />
+  <h2 className="text-2xl font-bold text-primary">Căn hộ hiện đại</h2>
+  <div>
+    Chúng tôi cung cấp nhiều loại phòng nghỉ, từ phòng đơn đến căn hộ rộng rãi,
+    phù hợp với mọi nhu cầu của bạn. Các phòng đều được thiết kế hiện đại, tiện
+    nghi đầy đủ, mang đến không gian thoải mái để bạn thư giãn và tận hưởng kỳ
+    nghỉ.
+  </div>
+</div>
+<div className="mt-10 flex flex-col items-center gap-2">
+  <CommunityIcon className="h-14 w-10 text-primary" />
+  <h2 className="text-2xl font-bold text-primary">Kết nối cộng đồng</h2>
+  <div>
+    Chúng tôi tin rằng việc kết nối với những người khác cũng quan trọng không
+    kém. Tại đây, bạn có thể gặp gỡ và giao lưu với các du khách khác trong
+    không gian chung hoặc tham gia các hoạt động thú vị mà chúng tôi tổ chức.
+  </div>
+</div>
+<div className="mt-10 text-center text-xl font-bold">
+  EG Paradise Angkor Villa Hotel không chỉ là nơi nghỉ ngơi, mà còn là điểm đến
+  lý tưởng cho những ai muốn trải nghiệm vẻ đẹp văn hóa của Campuchia trong một
+  không gian tiện nghi và hiện đại.
+</div>
+<div className="text-center text-xl font-bold">
+  Hãy liên hệ với chúng tôi ngay hôm nay để đặt phòng và bắt đầu hành trình khám
+  phá của bạn!
+</div>
