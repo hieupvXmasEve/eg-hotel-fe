@@ -16,7 +16,9 @@ export default function Photos() {
         <figure
           className={cn(
             "relative aspect-video",
-            index === 0 ? "col-span-2 row-span-2" : "",
+            index === 0
+              ? "col-span-4 row-span-2 md:col-span-2"
+              : "hidden md:block",
           )}
           key={index}
         >

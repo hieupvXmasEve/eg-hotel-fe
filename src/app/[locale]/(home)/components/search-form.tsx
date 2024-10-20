@@ -18,16 +18,17 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { toast } from "@/hooks/use-toast";
 
 import { DatePickerWithRange } from "@/components/date-picker-with-range";
-import { addDays } from "date-fns";
+import { Button } from "@/components/ui/button";
+import { useRouter } from "@/i18n/routing";
+import { addDays, format } from "date-fns";
 import { Hotel } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import PeopleBooking, { Room } from "./search-room/people-booking";
-import { Button } from "@/components/ui/button";
 
+const listHotel = [{ id: "1", name: "eg-hotel" }];
 const FormSchema = z.object({
   hotel_id: z.string({
     required_error: "Please select an email to display.",
@@ -38,7 +39,9 @@ const FormSchema = z.object({
   }),
 });
 export default function SearchForm() {
-  const [rooms, setRooms] = useState<Room[]>([{ adults: 2, children: 0 }]);
+  const router = useRouter();
+
+  const [rooms, setRooms] = useState<Room[]>([{ adults: 1, children: 0 }]);
   const t = useTranslations("home");
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -52,14 +55,25 @@ export default function SearchForm() {
   });
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log("ok");
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
+    const date_from = format(data.check_in_date.from, "dd-MM-yyyy");
+    const date_to = format(data.check_in_date.to, "dd-MM-yyyy");
+
+    // Create URLSearchParams from the query object
+    const params = new URLSearchParams();
+    console.log("rooms", rooms);
+    rooms.forEach((room, index) => {
+      params.append(`rooms[${index}][adults]`, room.adults.toString());
+      params.append(`rooms[${index}][children]`, room.children.toString());
+    });
+    console.log("params.toString()", params.toString());
+    router.push({
+      pathname: "/[hotelName]",
+      params: { hotelName: listHotel[0].name },
+      query: {
+        date_from: date_from,
+        date_to: date_to,
+        rooms: params.toString(),
+      },
     });
   }
   return (

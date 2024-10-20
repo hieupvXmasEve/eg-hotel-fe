@@ -15,6 +15,7 @@ export default function Header() {
         className="object-cover"
         quality={100}
         fill
+        priority
       />
       <div className="container relative mx-auto flex h-20 items-center justify-between px-4">
         <Link href="/" className="md:hidden">

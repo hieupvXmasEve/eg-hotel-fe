@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 export default function Accessibility() {
   const t = useTranslations("room.accessibility");
   return (
-    <div className="grid grid-cols-3 gap-4">
+    <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
       <div className="space-y-2">
         <h3 className="text-lg font-bold">{t("title")}</h3>
         <p className="text-sm text-gray-500">

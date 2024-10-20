@@ -1,3 +1,4 @@
+import { convertQueryStringToJson, Result } from "@/lib/utils";
 import Room from "../components/room";
 
 const rooms = [
@@ -22,10 +23,17 @@ const rooms = [
 ];
 export default function HotelPage({
   params,
+  searchParams,
 }: {
   params: { hotelName: string };
+  searchParams: {
+    date_to: string;
+    rooms: string;
+  };
 }) {
-  console.log("params", params.hotelName);
+  let occupanciesRoom: Result = [];
+  occupanciesRoom = convertQueryStringToJson(searchParams.rooms);
+  console.log("occupanciesRoom", occupanciesRoom, params);
 
   return (
     <div className="space-y-3">

@@ -93,6 +93,12 @@
       "property-payment-types": "Các loại thanh toán tài sản",
       "special-check-in-instructions": "Hướng dẫn nhận phòng đặc biệt",
       "title": "Chính sách"
+    },
+    "book-now": {
+      "book-now": "ĐẶT NGAY",
+      "number-of-rooms": "Số phòng",
+      "rooms": "phòng",
+      "title": "Đặt ngay"
     }
   },
   "contact": {

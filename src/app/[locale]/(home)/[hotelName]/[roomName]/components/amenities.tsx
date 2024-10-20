@@ -29,9 +29,12 @@ export default function Amenities() {
   return (
     <div className="space-y-4">
       <h3 className="text-lg font-bold">{t("title")}</h3>
-      <div className="flex flex-wrap gap-x-10 gap-y-4">
+      <div className="flex flex-wrap gap-y-4 md:gap-x-10">
         {amenities.map((amenity) => (
-          <div key={amenity.title} className="flex basis-1/3 gap-3">
+          <div
+            key={amenity.title}
+            className="flex basis-1/2 md:basis-1/3 md:gap-3"
+          >
             {amenity.icon}
             <p>{amenity.title}</p>
           </div>

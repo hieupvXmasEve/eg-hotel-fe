@@ -3,10 +3,10 @@ import { useTranslations } from "next-intl";
 export default function Policies() {
   const t = useTranslations("room.policies");
   return (
-    <div className="grid grid-cols-3 gap-4">
+    <div className="grid grid-cols-1 md:grid-cols-3">
       <h3 className="text-lg font-bold">{t("title")}</h3>
       <div className="col-span-2 space-y-2">
-        <div className="grid grid-cols-2">
+        <div className="grid grid-cols-1 md:grid-cols-2">
           <div className="space-y-2">
             <h4 className="text-lg">{t("check-in")}</h4>
             <ul className="space-y-1 text-sm text-gray-500">

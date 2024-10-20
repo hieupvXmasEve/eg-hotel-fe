@@ -26,14 +26,8 @@ export const routing = defineRouting({
     "/booking": "/booking",
     "/payment": "/payment",
     "/review": "/review",
-    "/[hotelName]": {
-      en: "/[hotelName]",
-      vi: "/[hotelName]",
-    },
-    "/[hotelName]/[roomName]": {
-      en: "/[hotelName]/[roomName]",
-      vi: "/[hotelName]/[roomName]",
-    },
+    "/[hotelName]": "/[hotelName]",
+    "/[hotelName]/[roomName]": "/[hotelName]/[roomName]",
     "#": "/#",
   },
 });

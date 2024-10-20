@@ -19,6 +19,7 @@ export default function Header() {
           className="rounded-b-3xl object-cover"
           quality={100}
           fill
+          priority
         />
         <div className="container relative mx-auto w-full">
           <div className="flex items-center justify-between p-4">

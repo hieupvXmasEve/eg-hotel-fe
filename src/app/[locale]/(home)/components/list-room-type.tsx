@@ -45,9 +45,10 @@ export default function ListRoomType() {
         {roomTypes.map((roomType) => (
           <Link
             href={{
-              pathname: "/[hotelName]",
+              pathname: "/[hotelName]/[roomName]",
               params: {
                 hotelName: roomType.href,
+                roomName: roomType.title,
               },
             }}
             key={roomType.title}

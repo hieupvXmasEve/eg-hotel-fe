@@ -112,7 +112,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="/rooms"
+                    href="/policies"
                     className="text-gray-600 hover:text-primary"
                   >
                     Privacy Policy
