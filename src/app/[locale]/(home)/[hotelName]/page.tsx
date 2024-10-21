@@ -1,5 +1,5 @@
+import Room from "@/features/hotels/room";
 import { convertQueryStringToJson, Result } from "@/lib/utils";
-import Room from "../components/room";
 
 const rooms = [
   {

@@ -1,5 +1,4 @@
-import { UserButton } from "@/app/[locale]/(auth)/components/user-button";
-import SearchForm from "@/app/[locale]/(home)/components/search-form";
+import UserButton from "@/components/user-button";
 import { Link } from "@/i18n/routing";
 import { DownloadIcon, HamburgerMenuIcon } from "@radix-ui/react-icons";
 import { useTranslations } from "next-intl";
@@ -7,6 +6,7 @@ import Image from "next/image";
 import LanguagesButton from "./languages-button";
 import Logo from "./logo";
 import { Button } from "./ui/button";
+import SearchForm from "@/features/home/components/search-form";
 
 export default function Header() {
   const t = useTranslations("home");
@@ -21,8 +21,8 @@ export default function Header() {
           fill
           priority
         />
-        <div className="container relative mx-auto w-full">
-          <div className="flex items-center justify-between p-4">
+        <div className="container relative">
+          <div className="flex items-center justify-between py-4">
             <Link href="/" className="relative hidden h-full md:block">
               <Logo className="h-14" />
             </Link>
@@ -41,7 +41,7 @@ export default function Header() {
               <UserButton />
             </div>
           </div>
-          <div className="relative p-4 text-white">
+          <div className="relative py-4 text-white">
             <h1 className="text-4xl font-bold">{t("hotel-name")}</h1>
             <p className="mt-2">{t("hotel-address")}</p>
           </div>

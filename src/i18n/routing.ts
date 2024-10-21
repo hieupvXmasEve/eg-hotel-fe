@@ -21,6 +21,7 @@ export const routing = defineRouting({
     "/hotline": "/hotline",
     "/profile": "/profile",
 
+    "/checkout": "/checkout",
     "/amenities": "/amenities",
     "/contact": "/contact",
     "/booking": "/booking",
@@ -29,10 +30,11 @@ export const routing = defineRouting({
     "/[hotelName]": "/[hotelName]",
     "/[hotelName]/[roomName]": "/[hotelName]/[roomName]",
     "#": "/#",
+    "/api/rooms/[roomId]/checkout": "/api/rooms/[roomId]/checkout",
   },
 });
 
-export type Pathnames = keyof typeof routing.pathnames;
+// export type Pathnames = keyof typeof routing.pathnames;
 export type Locale = (typeof routing.locales)[number];
 
 // Lightweight wrappers around Next.js' navigation APIs

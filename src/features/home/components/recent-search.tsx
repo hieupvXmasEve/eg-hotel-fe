@@ -11,7 +11,7 @@ interface Room {
   people: number;
 }
 
-export default function Component() {
+export default function RecentSearch() {
   const t = useTranslations("home");
   const rooms: Room[] = [
     {
@@ -46,7 +46,7 @@ export default function Component() {
       <h2 className="mb-2 text-lg font-semibold text-slate-600">
         {t("title-recent-search")}
       </h2>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
+      <div className="2xl:grid-cols-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {rooms.map((room) => (
           <Link href="#" key={room.id} className="block">
             <Card key={room.id} className="overflow-hidden">

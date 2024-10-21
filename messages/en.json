@@ -120,5 +120,18 @@
     "send": "Send",
     "message-placeholder": "Enter your message here.",
     "select-subject": "Select a subject"
+  },
+  "checkout": {
+    "form": {
+      "first-name": "First name",
+      "last-name": "Last name",
+      "email": "Email",
+      "phone": "Phone",
+      "complete-booking": "Complete Booking",
+      "country-code": "Country code",
+      "special-requests": "Accessibility & special requests (optional)"
+    },
+    "taxes-and-fees": "Taxes and fees",
+    "payment-method": "Payment method"
   }
 }

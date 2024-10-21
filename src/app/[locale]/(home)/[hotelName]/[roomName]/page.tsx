@@ -1,14 +1,14 @@
 "use client";
 
+import Accessibility from "@/features/rooms/components/accessibility";
+import Amenities from "@/features/rooms/components/amenities";
+import BookNow from "@/features/rooms/components/book-now";
+import MapComponent from "@/features/rooms/components/map";
+import Overview from "@/features/rooms/components/overview";
+import Photos from "@/features/rooms/components/photos";
+import Policies from "@/features/rooms/components/policies";
 import { cn } from "@/lib/utils";
 import { useEffect, useRef, useState } from "react";
-import Photos from "./components/photos";
-import Overview from "./components/overview";
-import Map from "./components/map";
-import Amenities from "./components/amenities";
-import Accessibility from "./components/accessibility";
-import Policies from "./components/policies";
-import BookNow from "./components/book-now";
 
 type Section = "overview" | "accessibility" | "policies" | "amenities";
 
@@ -97,7 +97,7 @@ export default function RoomPage() {
               </section>
             </div>
             <div className="col-span-4 md:col-span-1">
-              <Map />
+              <MapComponent />
             </div>
           </div>
           <section ref={sectionRefs.accessibility} className="">

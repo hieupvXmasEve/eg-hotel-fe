@@ -8,7 +8,7 @@ interface User {
   avatarUrl: string;
   name: string;
 }
-export function UserButton() {
+export default function UserButton() {
   const [user, setUser] = useState<User | null>(null);
   const t = useTranslations("auth");
   useEffect(() => {

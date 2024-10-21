@@ -1,5 +1,6 @@
 import Footer from "@/components/footer";
 import Header from "@/features/auth/components/header";
+
 interface AuthLayoutProps {
   children: React.ReactNode;
 }

@@ -6,9 +6,23 @@ const config: Config = {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/features/*/components/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
+      container: {
+        center: true,
+        padding: "1rem",
+        screens: {
+          sm: "100%",
+          md: "100%",
+          lg: "100%",
+          xl: "1200px",
+        },
+      },
+      fontFamily: {
+        inter: ["Inter", "Arial", "Helvetica", "sans-serif"],
+      },
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",

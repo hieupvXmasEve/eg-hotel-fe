@@ -2,10 +2,10 @@
 import LanguagesButton from "@/components/languages-button";
 import Logo from "@/components/logo";
 import { Button } from "@/components/ui/button";
+import UserButton from "@/components/user-button";
 import { Link } from "@/i18n/routing";
 import { Cross1Icon } from "@radix-ui/react-icons";
 import Image from "next/image";
-import { UserButton } from "./user-button";
 export default function Header() {
   return (
     <header className="relative h-20 overflow-hidden rounded-b-3xl pb-20">
