@@ -26,8 +26,7 @@ export default function Photos() {
             src={photo}
             alt="room"
             fill
-            objectFit="cover"
-            className="rounded-lg"
+            className="rounded-lg object-cover"
           />
         </figure>
       ))}

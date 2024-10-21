@@ -8,13 +8,7 @@ import {
 } from "@stripe/react-stripe-js";
 import { convertToSubcurrency } from "@/lib/convertToSubcurrency";
 
-const CheckoutPage = ({
-  amount,
-  roomId,
-}: {
-  amount: number;
-  roomId: number;
-}) => {
+const CheckoutPage = ({ amount }: { amount: number; roomId: number }) => {
   const stripe = useStripe();
   const elements = useElements();
   const [errorMessage, setErrorMessage] = useState<string>();
@@ -22,7 +16,7 @@ const CheckoutPage = ({
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    fetch(`/api/rooms/${roomId}/checkout`, {
+    fetch(`/api/checkout`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -31,7 +25,7 @@ const CheckoutPage = ({
     })
       .then((res) => res.json())
       .then((data) => setClientSecret(data.clientSecret));
-  }, [amount, roomId]);
+  }, [amount]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

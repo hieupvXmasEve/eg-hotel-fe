@@ -30,7 +30,6 @@ export const routing = defineRouting({
     "/[hotelName]": "/[hotelName]",
     "/[hotelName]/[roomName]": "/[hotelName]/[roomName]",
     "#": "/#",
-    "/api/rooms/[roomId]/checkout": "/api/rooms/[roomId]/checkout",
   },
 });
 

@@ -1,4 +1,6 @@
-import Room from "@/features/hotels/room";
+"use client";
+import { useGetRooms } from "@/features/hotels/api/use-get-rooms";
+import Room from "@/features/hotels/components/room";
 import { convertQueryStringToJson, Result } from "@/lib/utils";
 
 const rooms = [
@@ -34,7 +36,11 @@ export default function HotelPage({
   let occupanciesRoom: Result = [];
   occupanciesRoom = convertQueryStringToJson(searchParams.rooms);
   console.log("occupanciesRoom", occupanciesRoom, params);
-
+  const { data, isLoading } = useGetRooms({ hotelId: params.hotelName });
+  console.log("data", data);
+  console.log("isLoading", isLoading);
+  if (isLoading) return <Room.Skeleton />;
+  console.log("data", data);
   return (
     <div className="space-y-3">
       {rooms.map((room) => (

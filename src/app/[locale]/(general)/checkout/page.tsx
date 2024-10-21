@@ -33,7 +33,7 @@ import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { format } from "date-fns";
 import { useTranslations } from "next-intl";
-import CheckoutElement from "@/features/checkout/components/checkout-element";
+// import CheckoutElement from "@/features/checkout/components/checkout-element";
 
 const roomReservation = {
   checkIn: new Date(),
@@ -208,8 +208,8 @@ export default function HotelCheckout() {
         <div className="space-y-4">
           <h2 className="text-xl font-semibold">{t("payment-method")}</h2>
           <div className="rounded-lg border p-4">
-            <CheckoutElement />
-            {/* Implement Stripe payment component here */}
+            {/* <CheckoutElement /> */}
+            Implement Stripe payment component here
           </div>
         </div>
       </div>
