@@ -5,11 +5,10 @@ import {
   BellIcon,
   PhoneCallIcon,
   SearchIcon,
-  UserIcon,
 } from "lucide-react";
 import LogoColor from "./logo-color";
 
-type FooterPathname = "/promotion" | "/service" | "/hotline" | "/profile" | "/";
+type FooterPathname = "/promotion" | "/service" | "/hotline" | "/";
 export default function Footer() {
   const pathname = usePathname();
   // Định nghĩa biến routes
@@ -33,11 +32,6 @@ export default function Footer() {
       icon: <PhoneCallIcon className="h-6 w-6" />,
       label: "Hotline",
       href: "/hotline",
-    },
-    {
-      icon: <UserIcon className="h-6 w-6" />,
-      label: "Profile",
-      href: "/profile",
     },
   ];
 

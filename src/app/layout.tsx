@@ -1,22 +1,13 @@
+import QueryProviders from "@/components/query-provider";
+import { Toaster } from "@/components/ui/toaster";
+import { routing } from "@/i18n/routing";
+import { ClerkProvider } from "@clerk/nextjs";
 import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
-import localFont from "next/font/local";
+import { Inter } from "next/font/google";
 import { ReactNode } from "react";
 import "./globals.css";
-import { Toaster } from "@/components/ui/toaster";
-import QueryProviders from "@/components/query-provider";
-import { routing } from "@/i18n/routing";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
-
+const inter = Inter({ subsets: ["latin"] });
 // export const metadata: Metadata = {
 //   title: "EG Paradise Angkor Villa Hotel",
 //   description: "Luxury hotel in Siem Reap, Cambodia",
@@ -55,13 +46,15 @@ export default async function RootLayout({
   // Providing all messages to the client
   // side is the easiest way to get started
   return (
-    <html lang={locale} suppressHydrationWarning={true}>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} flex min-h-screen flex-col antialiased`}
-      >
-        <QueryProviders>{children}</QueryProviders>
-        <Toaster />
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang={locale} suppressHydrationWarning={true}>
+        <body
+          className={`${inter.className} flex min-h-screen flex-col antialiased`}
+        >
+          <QueryProviders>{children}</QueryProviders>
+          <Toaster />
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

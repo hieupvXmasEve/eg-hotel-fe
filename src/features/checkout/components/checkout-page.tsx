@@ -7,8 +7,15 @@ import {
   PaymentElement,
 } from "@stripe/react-stripe-js";
 import { convertToSubcurrency } from "@/lib/convertToSubcurrency";
+import { Button } from "@/components/ui/button";
 
-const CheckoutPage = ({ amount }: { amount: number; roomId: number }) => {
+const CheckoutPage = ({
+  amount,
+  roomId,
+}: {
+  amount: number;
+  roomId: number;
+}) => {
   const stripe = useStripe();
   const elements = useElements();
   const [errorMessage, setErrorMessage] = useState<string>();
@@ -16,7 +23,7 @@ const CheckoutPage = ({ amount }: { amount: number; roomId: number }) => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    fetch(`/api/checkout`, {
+    fetch(`/api/room/${roomId}/checkout`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -25,7 +32,7 @@ const CheckoutPage = ({ amount }: { amount: number; roomId: number }) => {
     })
       .then((res) => res.json())
       .then((data) => setClientSecret(data.clientSecret));
-  }, [amount]);
+  }, [amount, roomId]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -84,12 +91,12 @@ const CheckoutPage = ({ amount }: { amount: number; roomId: number }) => {
 
       {errorMessage && <div>{errorMessage}</div>}
 
-      <button
+      <Button
         disabled={!stripe || loading}
-        className="mt-2 w-full rounded-md bg-black p-5 font-bold text-white disabled:animate-pulse disabled:opacity-50"
+        className="mt-2 w-full rounded-md p-5 font-bold text-white disabled:animate-pulse disabled:opacity-50"
       >
         {!loading ? `Pay $${amount}` : "Processing..."}
-      </button>
+      </Button>
     </form>
   );
 };

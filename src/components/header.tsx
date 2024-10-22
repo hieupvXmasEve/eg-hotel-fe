@@ -1,15 +1,19 @@
+"use server";
+
 import UserButton from "@/components/user-button";
+import SearchForm from "@/features/home/components/search-form";
 import { Link } from "@/i18n/routing";
 import { DownloadIcon, HamburgerMenuIcon } from "@radix-ui/react-icons";
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 import LanguagesButton from "./languages-button";
 import Logo from "./logo";
 import { Button } from "./ui/button";
-import SearchForm from "@/features/home/components/search-form";
+import { Suspense } from "react";
+import { Loader } from "lucide-react";
 
-export default function Header() {
-  const t = useTranslations("home");
+export default async function Header() {
+  const t = await getTranslations("home");
   return (
     <>
       <header className="relative pb-8">
@@ -37,7 +41,9 @@ export default function Header() {
               >
                 <DownloadIcon className="h-6 w-6" />
               </Button>
-              <LanguagesButton />
+              <Suspense fallback={<Loader className="h-6 w-6" />}>
+                <LanguagesButton />
+              </Suspense>
               <UserButton />
             </div>
           </div>
