@@ -39,8 +39,8 @@ export default function HotelPage({
   const { data, isLoading } = useGetRooms({ hotelId: params.hotelName });
   console.log("data", data);
   console.log("isLoading", isLoading);
-  if (isLoading) return <Room.Skeleton />;
-  console.log("data", data);
+  // if (isLoading) return <Room.Skeleton />;
+  // console.log("data", data);
   return (
     <div className="space-y-3">
       {rooms.map((room) => (

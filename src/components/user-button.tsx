@@ -19,7 +19,7 @@ export default function UserButton() {
           <ClerkUserButton.Action
             label="Orders"
             labelIcon={<Logs />}
-            onClick={() => router.push("/orders")}
+            onClick={() => router.push("/my-account/order-history")}
           />
         </ClerkUserButton.MenuItems>
       </ClerkUserButton>
