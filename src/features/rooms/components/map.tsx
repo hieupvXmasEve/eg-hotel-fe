@@ -7,6 +7,7 @@ import {
 
 export default function MapComponent() {
   const t = useTranslations("room.map");
+  // 13.366339065974268, 103.87884199576183
   return (
     <div>
       <h4 className="text-lg font-bold">{t("title")}</h4>

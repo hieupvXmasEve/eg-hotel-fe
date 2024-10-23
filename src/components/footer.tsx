@@ -7,10 +7,12 @@ import {
   SearchIcon,
 } from "lucide-react";
 import LogoColor from "./logo-color";
+import { useTranslations } from "next-intl";
 
 type FooterPathname = "/promotion" | "/service" | "/hotline" | "/";
-export default function Footer() {
+export default function Footer({}) {
   const pathname = usePathname();
+  const t = useTranslations();
   // Định nghĩa biến routes
   const routes: {
     icon: React.ReactNode;
@@ -67,14 +69,16 @@ export default function Footer() {
             </div>
             {/* column 2 */}
             <div className="col-span-2 col-start-6">
-              <h4 className="text-md mb-2 font-semibold">Minimal</h4>
-              <ul className="text-sm">
+              <h4 className="text-md mb-2 font-semibold">
+                {t("footer.minimals")}
+              </h4>
+              <ul className="space-y-2 text-sm">
                 <li>
                   <Link
                     href="/about"
                     className="text-gray-600 hover:text-primary"
                   >
-                    About us
+                    {t("footer.about-us")}
                   </Link>
                 </li>
                 <li>
@@ -82,7 +86,7 @@ export default function Footer() {
                     href="/contact"
                     className="text-gray-600 hover:text-primary"
                   >
-                    Contact us
+                    {t("footer.contact-us")}
                   </Link>
                 </li>
                 <li>
@@ -90,18 +94,20 @@ export default function Footer() {
                     href="/amenities"
                     className="text-gray-600 hover:text-primary"
                   >
-                    FAG
+                    {t("footer.fag")}
                   </Link>
                 </li>
               </ul>
             </div>
             {/* column 3 */}
             <div className="col-span-2">
-              <h4 className="text-md mb-2 font-semibold">Legal</h4>
-              <ul className="text-sm">
+              <h4 className="text-md mb-2 font-semibold">
+                {t("footer.legal")}
+              </h4>
+              <ul className="space-y-2 text-sm">
                 <li>
                   <Link href="/" className="text-gray-600 hover:text-primary">
-                    Terms and Condition
+                    {t("footer.terms-of-service")}
                   </Link>
                 </li>
                 <li>
@@ -109,29 +115,37 @@ export default function Footer() {
                     href="/policies"
                     className="text-gray-600 hover:text-primary"
                   >
-                    Privacy Policy
+                    {t("footer.privacy-policy")}
                   </Link>
                 </li>
               </ul>
             </div>
             {/* column 4 */}
             <div className="col-span-3">
-              <h4 className="text-md mb-2 font-semibold">Contact</h4>
-              <p className="text-sm text-gray-600">
-                Los Angeles, 359 Hidden Valley Road
-              </p>
-              <a
-                href="tel:+855123456789"
-                className="text-sm text-gray-600 hover:text-primary"
-              >
-                Phone: +855 XX XXX XXX
-              </a>
-              <a
-                href="mailto:support@minimals.cc"
-                className="text-sm text-gray-600 hover:text-primary"
-              >
-                support@minimals.cc
-              </a>
+              <h4 className="text-md mb-2 font-semibold">
+                {t("footer.contact")}
+              </h4>
+              <ul className="space-y-2 text-sm">
+                <li>
+                  <p className="text-gray-600">{t("home.hotel-address")}</p>
+                </li>
+                <li>
+                  <a
+                    href="tel:+855123456789"
+                    className="text-gray-600 hover:text-primary"
+                  >
+                    {t("home.hotel-phone")}
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="mailto:support@minimals.cc"
+                    className="text-gray-600 hover:text-primary"
+                  >
+                    {t("home.hotel-email")}
+                  </a>
+                </li>
+              </ul>
             </div>
           </div>
         </div>

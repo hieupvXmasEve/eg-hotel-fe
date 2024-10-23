@@ -2,46 +2,51 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Link } from "@/i18n/routing";
 import Image from "next/image";
+import { IRoom } from "../api/use-get-rooms";
 
-interface Room {
-  id: number;
-  image: string;
-  name: string;
-  price: number;
-  address: string;
-  hotelNameUrl: string;
-  roomNameUrl: string;
-}
+// interface Room {
+//   id: number;
+//   image: string;
+//   name: string;
+//   price: number;
+//   address: string;
+//   hotelNameUrl: string;
+//   roomNameUrl: string;
+// }
 
-export default function Room({ room }: { room: Room }) {
+export default function Room({ room }: { room: IRoom }) {
   return (
     <Link
       href={{
         pathname: "/[hotelName]/[roomName]",
         params: {
-          hotelName: room.hotelNameUrl,
-          roomName: room.roomNameUrl,
+          hotelName: room.room_type_name,
+          roomName: room.room_type_name,
         },
       }}
-      key={room.id}
+      key={room.room_id}
       className="block"
     >
-      <div
-        key={room.id}
-        className="flex h-32 rounded-lg bg-white shadow-md sm:h-36"
-      >
+      <div className="flex h-32 rounded-lg bg-white shadow-md sm:h-36">
         <div className="relative w-28 sm:w-48">
-          <Image
-            src={room.image}
-            alt={`${room.name} image`}
-            className="rounded-lg object-cover object-center"
-            fill
-          />
+          {room.room_images.length > 0 ? (
+            room.room_images.map((roomImg) => (
+              <Image
+                key={roomImg.room_image_id}
+                src={roomImg.image}
+                alt={`${room.room_type_name} image`}
+                className="rounded-lg object-cover object-center"
+                fill
+              />
+            ))
+          ) : (
+            <div className="h-full w-full bg-secondary"></div>
+          )}
         </div>
         <div className="flex h-full flex-1 flex-col justify-between p-2">
           <div>
-            <h3 className="text-lg font-semibold">{room.name}</h3>
-            <p className="text-sm text-slate-500">{room.address}</p>
+            <h3 className="text-lg font-semibold">{room.room_type_name}</h3>
+            {/* <p className="text-sm text-slate-500">{room.address}</p> */}
             <Image
               src="/images/rooms/pool-icon.svg"
               alt="pool"
@@ -60,7 +65,7 @@ export default function Room({ room }: { room: Room }) {
               <span className="text-slate-500">Very good</span>
               <span className="text-slate-500">(123 reviews)</span>
             </div>
-            <span className="text-xl font-semibold">${room.price}</span>
+            <span className="text-xl font-semibold">${room.base_price}</span>
           </div>
         </div>
       </div>

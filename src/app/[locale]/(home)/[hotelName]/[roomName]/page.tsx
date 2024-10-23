@@ -3,13 +3,23 @@
 import Accessibility from "@/features/rooms/components/accessibility";
 import Amenities from "@/features/rooms/components/amenities";
 import BookNow from "@/features/rooms/components/book-now";
-import MapComponent from "@/features/rooms/components/map";
+
 import Overview from "@/features/rooms/components/overview";
 import Photos from "@/features/rooms/components/photos";
 import Policies from "@/features/rooms/components/policies";
 import { cn } from "@/lib/utils";
+import { Loader } from "lucide-react";
+import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 
+const MapComponent = dynamic(() => import("@/features/rooms/components/map"), {
+  ssr: false,
+  loading: () => (
+    <div className="flex items-center justify-center">
+      <Loader className="animate-spin" />
+    </div>
+  ),
+});
 type Section = "overview" | "accessibility" | "policies" | "amenities";
 
 export default function RoomPage() {

@@ -16,9 +16,10 @@ interface RoomFeature {
   position: number;
 }
 
-interface Room {
+export interface IRoom {
   room_id: number;
-  room_name: string;
+  room_type_id: number;
+  room_type_name: string;
   room_images: RoomImage[];
   room_features: RoomFeature[];
   review: string;
@@ -27,16 +28,8 @@ interface Room {
   country_name: string;
   base_price: number;
 }
-
-// interface ApiResponse {
-//   success: boolean;
-//   data: {
-//     rooms: Room[];
-//   };
-//   status: number;
-// }
 export const useGetRooms = ({ hotelId }: UseGetRoomsProps) => {
-  const query = useQuery<Room[]>({
+  const query = useQuery<IRoom[]>({
     queryKey: ["rooms"],
     queryFn: async () => {
       console.log("hotelId ->", hotelId);
@@ -45,11 +38,12 @@ export const useGetRooms = ({ hotelId }: UseGetRoomsProps) => {
       return [
         {
           room_id: 1,
-          room_name: "Room 1",
+          room_type_id: 1,
+          room_type_name: "Villa",
           room_images: [
             {
               room_image_id: 1,
-              image: "image1.jpg",
+              image: "/images/rooms/demo.jpg",
               cover: true,
             },
           ],

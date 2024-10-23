@@ -8,6 +8,8 @@
   "home": {
     "hotel-name": "EG Paradise Angkor Villa Hotel",
     "hotel-address": "Chong Kao Sou Village Slor Kram Commune, Street 60, Siem Reap, Cambodia, 17256",
+    "hotel-phone": "+855 XX XXX XXX",
+    "hotel-email": "support@minimals.cc",
     "btn-search": "search",
     "btn-language": "language",
     "title-recent-search": "Your recent searches",
@@ -34,6 +36,12 @@
     "done": "Done"
   },
   "room": {
+    "nav": {
+      "overview": "Overview",
+      "amenities": "Amenities",
+      "accessibility": "Accessibility",
+      "policies": "Policies"
+    },
     "overview": {
       "title": "Overview",
       "information": "Information",
@@ -133,5 +141,15 @@
     },
     "taxes-and-fees": "Taxes and fees",
     "payment-method": "Payment method"
+  },
+  "footer": {
+    "about-us": "About us",
+    "contact-us": "Contact us",
+    "fag": "FAG",
+    "privacy-policy": "Privacy policy",
+    "terms-of-service": "Terms of service",
+    "contact": "Contact",
+    "minimals": "Minimals",
+    "legal": "Legal"
   }
 }

@@ -34,13 +34,13 @@ export default function Overview() {
         <div>
           <p className="text-sm">{t("check-in")}</p>
           <p className="font-medium text-primary">
-            {format(roomReservation.checkIn, "EEE d MMM")}
+            {format(roomReservation.checkIn, "dd/MM/yyy")}
           </p>
         </div>
         <div>
           <p className="text-sm">{t("check-out")}</p>
           <p className="font-medium text-primary">
-            {format(roomReservation.checkOut, "EEE d MMM")}
+            {format(roomReservation.checkOut, "dd/MM/yyy")}
           </p>
         </div>
       </div>

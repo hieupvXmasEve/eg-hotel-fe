@@ -100,7 +100,7 @@ export default function PeopleBooking({
                   )}
                 </div>
                 <div className="flex items-center justify-between">
-                  <span>Adults</span>
+                  <span>{t("adult")}</span>
                   <div className="flex items-center space-x-2">
                     <Button
                       variant="outline"
