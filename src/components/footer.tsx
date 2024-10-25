@@ -5,11 +5,17 @@ import {
   BellIcon,
   PhoneCallIcon,
   SearchIcon,
+  UserIcon,
 } from "lucide-react";
 import LogoColor from "./logo-color";
 import { useTranslations } from "next-intl";
 
-type FooterPathname = "/promotion" | "/service" | "/hotline" | "/";
+type FooterPathname =
+  | "/promotion"
+  | "/service"
+  | "/hotline"
+  | "/"
+  | "/my-account";
 export default function Footer({}) {
   const pathname = usePathname();
   const t = useTranslations();
@@ -34,6 +40,11 @@ export default function Footer({}) {
       icon: <PhoneCallIcon className="h-6 w-6" />,
       label: "Hotline",
       href: "/hotline",
+    },
+    {
+      icon: <UserIcon className="h-6 w-6" />,
+      label: "Profile",
+      href: "/my-account",
     },
   ];
 

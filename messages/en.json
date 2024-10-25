@@ -151,5 +151,13 @@
     "contact": "Contact",
     "minimals": "Minimals",
     "legal": "Legal"
+  },
+  "order-history": {
+    "title": "Order history",
+    "room": "room",
+    "adult": "adult",
+    "children": "children",
+    "booking-info": "Booking information",
+    "booking-details": "Booking details"
   }
 }

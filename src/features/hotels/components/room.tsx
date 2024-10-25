@@ -2,7 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Link } from "@/i18n/routing";
 import Image from "next/image";
-import { IRoom } from "../api/use-get-rooms";
+import { IRoom } from "../data/use-get-rooms";
 
 // interface Room {
 //   id: number;

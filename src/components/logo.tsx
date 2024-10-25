@@ -6,9 +6,9 @@ export default function Logo({ className }: { className?: string }) {
     <Image
       src="/images/logo.png"
       alt="Logo"
-      className={cn("size-full", className)}
-      width={100}
-      height={200}
+      className={cn("h-full w-auto", className)}
+      width={196}
+      height={56}
       priority
     />
   );

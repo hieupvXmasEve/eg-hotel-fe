@@ -151,5 +151,13 @@
     "minimals": "Tối thiểu",
     "privacy-policy": "Chính sách bảo mật",
     "terms-of-service": "Điều khoản dịch vụ"
+  },
+  "order-history": {
+    "adult": "người lớn",
+    "booking-details": "Chi tiết đặt chỗ",
+    "booking-info": "Thông tin đặt phòng",
+    "children": "những đứa trẻ",
+    "room": "phòng",
+    "title": "Lịch sử đặt hàng"
   }
 }
