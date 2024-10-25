@@ -5,8 +5,7 @@ export const env = createEnv({
   emptyStringAsUndefined: true,
   server: {
     // DATABASE_URL: z.string().url(),
-    // CLERK_SECRET_KEY: z.string(),
-    // CLERK_WEBHOOK_SECRET: z.string(),
+    // API_URL: z.string().url(),
     STRIPE_SECRET_KEY: z.string(),
     // STRIPE_WEBHOOK_SECRET: z.string(),
     // STRIPE_BASIC_PLAN_STRIPE_PRICE_ID: z.string(),

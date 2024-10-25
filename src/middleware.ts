@@ -1,48 +1,43 @@
 import { routing } from "@/i18n/routing";
-import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import createMiddleware from "next-intl/middleware";
+import { NextRequest, NextResponse } from "next/server";
+import { getAuthState } from "./features/auth/utils";
 
-const isProtectedRoute = createRouteMatcher([
-  "/:locale/my-account(.*)",
-  // Thêm các route được bảo vệ khác vào đây
-]);
-const isAuthRoute = createRouteMatcher([
-  "/:locale/sign-in(.*)",
-  "/:locale/sign-up(.*)",
-  // Thêm các route xác thực khác vào đây
-]);
 const intlMiddleware = createMiddleware(routing);
 
-export default clerkMiddleware((auth, req) => {
-  // Không áp dụng bảo vệ cho các route xác thực
-  if (isAuthRoute(req)) {
-    return intlMiddleware(req);
+const PUBLIC_ROUTES = ["/sign-in", "/sign-up"];
+
+const PROTECTED_ROUTES = ["/my-account"];
+
+export default async function middleware(req: NextRequest) {
+  const [, locale, ...segments] = req.nextUrl.pathname.split("/");
+  const pathname = `/${segments.join("/")}`;
+
+  // Apply intl middleware for all routes
+  const response = intlMiddleware(req);
+
+  const authState = await getAuthState();
+
+  // Redirect authenticated users from public routes to home
+  if (
+    authState.isAuthenticated &&
+    PUBLIC_ROUTES.some((route) => pathname.startsWith(route))
+  ) {
+    return NextResponse.redirect(new URL(`/${locale}`, req.url));
   }
 
-  // Bảo vệ các route cần xác thực
-  if (isProtectedRoute(req)) {
-    auth().protect();
+  // Check if the route is protected
+  if (PROTECTED_ROUTES.some((route) => pathname.startsWith(route))) {
+    if (!authState.isAuthenticated) {
+      // Redirect to sign-in page if not authenticated
+      const signInUrl = new URL(`/${locale}/sign-in`, req.url);
+      signInUrl.searchParams.set("callbackUrl", req.url);
+      return NextResponse.redirect(signInUrl);
+    }
   }
-
-  return intlMiddleware(req);
-});
+  return response;
+}
 
 export const config = {
-  // Match only internationalized pathnames
-  matcher: [
-    // Enable a redirect to a matching locale at the root
-    "/",
-
-    // Set a cookie to remember the previous locale for
-    // all requests that have a locale prefix
-    "/(vi|en)/:path*",
-    // only applies this middleware to files in the app directory
-    "/((?!api|_next|.*\\..*).*)",
-    // "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
-    // "/(api|trpc)(.*)",
-    // "/((?!api|_next/static|_next/image|favicon.ico).*)",
-    // Enable redirects that add missing locales
-    // (e.g. `/pathnames` -> `/en/pathnames`)
-    // "/((?!_next|_vercel|.*\\..*).*)",
-  ],
+  matcher: ["/", "/(vi|en)/:path*", "/((?!api|_next|.*\\..*).*)"],
 };

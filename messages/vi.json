@@ -159,5 +159,31 @@
     "children": "những đứa trẻ",
     "room": "phòng",
     "title": "Lịch sử đặt hàng"
+  },
+  "sign-in": {
+    "forgot-password": "Quên mật khẩu?",
+    "sign-in": "Đăng nhập",
+    "sign-in-error": "Lỗi đăng nhập",
+    "sign-in-success": "Đăng nhập thành công",
+    "sign-up": "Đăng ký",
+    "title": "Đăng nhập"
+  },
+  "sign-up": {
+    "birthday": "Ngày sinh",
+    "confirm-password": "Xác nhận mật khẩu",
+    "email": "E-mail",
+    "female": "Nữ giới",
+    "first-name": "Tên",
+    "gender": "Giới tính",
+    "have-account": "Có tài khoản?",
+    "last-name": "Họ",
+    "male": "Nam giới",
+    "password": "Mật khẩu",
+    "phone": "Số điện thoại",
+    "sign-in": "Đăng nhập",
+    "sign-up": "Đăng ký",
+    "sign-up-error": "Đăng ký lỗi",
+    "sign-up-success": "Đăng ký thành công",
+    "title": "Đăng ký"
   }
 }

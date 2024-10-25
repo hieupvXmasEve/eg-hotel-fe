@@ -1,28 +1,48 @@
-"use client";
 import { Button } from "@/components/ui/button";
-import { Link, useRouter } from "@/i18n/routing";
-// import { auth } from "@clerk/nextjs/server";
-import { UserButton as ClerkUserButton, useAuth } from "@clerk/nextjs";
-// import { getTranslations } from "next-intl/server";
-import { Logs } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { getAuthState } from "@/features/auth/utils";
+import { Link } from "@/i18n/routing";
+import { getTranslations } from "next-intl/server";
+import Image from "next/image";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
 
-export default function UserButton() {
-  const t = useTranslations("auth");
-  const { userId } = useAuth();
-  const router = useRouter();
-
-  if (userId) {
+export default async function UserButton() {
+  const t = await getTranslations("auth");
+  const { user } = await getAuthState();
+  console.log("user", user);
+  if (user) {
     return (
-      <ClerkUserButton>
-        <ClerkUserButton.MenuItems>
-          <ClerkUserButton.Action
-            label="Orders"
-            labelIcon={<Logs />}
-            onClick={() => router.push("/my-account/order-history")}
-          />
-        </ClerkUserButton.MenuItems>
-      </ClerkUserButton>
+      <div className="relative">
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="hover:bg-transparent"
+            >
+              <Image
+                src={user.avatar_url}
+                alt={user.display_name}
+                width={32}
+                height={32}
+                className="rounded-full"
+              />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="w-56" align="end">
+            <DropdownMenuGroup>
+              <DropdownMenuItem>My account</DropdownMenuItem>
+              <DropdownMenuItem>Orders</DropdownMenuItem>
+              <DropdownMenuItem>Logout</DropdownMenuItem>
+            </DropdownMenuGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
     );
   }
 
