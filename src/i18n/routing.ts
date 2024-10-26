@@ -21,7 +21,7 @@ export const routing = defineRouting({
     "/hotline": "/hotline",
     "/my-account": "/my-account",
     "/my-account/order-history": "/my-account/order-history",
-
+    "/my-account/[section]": "/my-account/[section]",
     "/checkout": "/checkout",
     "/amenities": "/amenities",
     "/contact": "/contact",

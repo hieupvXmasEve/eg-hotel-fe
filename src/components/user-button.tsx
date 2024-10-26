@@ -3,6 +3,7 @@ import { getAuthState } from "@/features/auth/utils";
 import { Link } from "@/i18n/routing";
 import { getTranslations } from "next-intl/server";
 import Image from "next/image";
+import Logout from "./logout";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,9 +14,9 @@ import {
 
 export default async function UserButton() {
   const t = await getTranslations("auth");
-  const { user } = await getAuthState();
-  console.log("user", user);
-  if (user) {
+  const { user, isAuthenticated } = getAuthState();
+
+  if (user && isAuthenticated) {
     return (
       <div className="relative">
         <DropdownMenu>
@@ -36,9 +37,19 @@ export default async function UserButton() {
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56" align="end">
             <DropdownMenuGroup>
-              <DropdownMenuItem>My account</DropdownMenuItem>
-              <DropdownMenuItem>Orders</DropdownMenuItem>
-              <DropdownMenuItem>Logout</DropdownMenuItem>
+              <DropdownMenuItem>
+                <Link href="/my-account" className="block w-full">
+                  {t("profile")}
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Link href="/my-account/order-history" className="block w-full">
+                  {t("order-history")}
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Logout />
+              </DropdownMenuItem>
             </DropdownMenuGroup>
           </DropdownMenuContent>
         </DropdownMenu>

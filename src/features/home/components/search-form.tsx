@@ -38,7 +38,10 @@ const FormSchema = z.object({
     to: z.date(),
   }),
 });
-export default function SearchForm() {
+interface SearchFormProps {
+  hotels: { id: number; name: string; value: string }[];
+}
+export default function SearchForm({ hotels }: SearchFormProps) {
   const router = useRouter();
 
   const [rooms, setRooms] = useState<Room[]>([{ adults: 1, children: 0 }]);
@@ -46,7 +49,7 @@ export default function SearchForm() {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      hotel_id: "1",
+      hotel_id: hotels[0].value,
       check_in_date: {
         from: new Date(),
         to: addDays(new Date(), 1),
@@ -100,7 +103,11 @@ export default function SearchForm() {
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    <SelectItem value="1">{t("hotel-name")}</SelectItem>
+                    {hotels.map((hotel) => (
+                      <SelectItem key={hotel.id} value={hotel.value}>
+                        {hotel.name}
+                      </SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
                 <FormMessage />

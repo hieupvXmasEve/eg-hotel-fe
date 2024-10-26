@@ -1,3 +1,4 @@
+"use server";
 import { clearAuthCookies } from "@/features/auth/utils";
 
 export const signOut = async () => {

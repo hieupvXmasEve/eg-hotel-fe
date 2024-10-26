@@ -72,15 +72,15 @@ export default function SignUpPage() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      Email: "hieunuce11@gmail.com",
-      Password: "123456",
-      confirm_password: "123456",
+      Email: "",
+      Password: "",
+      confirm_password: "",
       Gender: "1",
-      FirstName: "Hieu",
-      LastName: "Nguyen",
+      FirstName: "",
+      LastName: "",
       Newsletter: [],
-      Phone: "+849090",
-      Birthday: new Date(),
+      Phone: "",
+      Birthday: undefined,
     },
   });
 
@@ -130,7 +130,6 @@ export default function SignUpPage() {
       Newsletter: convertNewsletter(values.Newsletter),
       DisplayName: values.FirstName + " " + values.LastName,
     };
-    console.log(signUpData);
     signUpMutation.mutate(signUpData);
   };
 

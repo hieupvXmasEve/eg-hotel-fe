@@ -3,7 +3,10 @@
     "title": "Page not found"
   },
   "auth": {
-    "user-btn": "login"
+    "user-btn": "login",
+    "profile": "My account",
+    "order-history": "Order history",
+    "logout": "Logout"
   },
   "home": {
     "hotel-name": "EG Paradise Angkor Villa Hotel",

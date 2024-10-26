@@ -1,5 +1,3 @@
-"use server";
-
 import UserButton from "@/components/user-button";
 import SearchForm from "@/features/home/components/search-form";
 import { Link } from "@/i18n/routing";
@@ -11,9 +9,18 @@ import Logo from "./logo";
 import { Button } from "./ui/button";
 import { Suspense } from "react";
 import { Loader } from "lucide-react";
+import { getHotel } from "@/features/home/data/get-hotel";
 
 export default async function Header() {
   const t = await getTranslations("home");
+  const { data } = await getHotel();
+  // console.log("data", data);
+  const hotels =
+    data?.map((hotel) => ({
+      id: hotel.id,
+      name: hotel.hotel_name,
+      value: hotel.id.toString(),
+    })) || [];
   return (
     <>
       <header className="relative pb-8">
@@ -52,7 +59,7 @@ export default async function Header() {
             <p className="mt-2">{t("hotel-address")}</p>
           </div>
           <div className="absolute bottom-0 left-0 w-full translate-y-full px-2 md:px-5">
-            <SearchForm />
+            <SearchForm hotels={hotels} />
           </div>
         </div>
       </header>

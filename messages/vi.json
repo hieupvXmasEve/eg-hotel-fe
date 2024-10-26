@@ -3,7 +3,10 @@
     "title": "Không tìm thấy trang"
   },
   "auth": {
-    "user-btn": "đăng nhập"
+    "user-btn": "đăng nhập",
+    "logout": "Đăng xuất",
+    "order-history": "Lịch sử đặt hàng",
+    "profile": "Tài khoản của tôi"
   },
   "LocaleLayout": {
     "title": "Khách sạn biệt thự EG Paradise Angkor"

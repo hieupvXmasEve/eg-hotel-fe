@@ -38,7 +38,6 @@ export const getAuthState = (): AuthState => {
 
   const isAuthenticated =
     accessToken !== null && user !== null && !isTokenExpired(accessToken);
-
   return { user, accessToken, isAuthenticated };
 };
 
@@ -52,6 +51,7 @@ export const isTokenExpired = (token: string): boolean => {
   try {
     const decodedToken = jwtDecode<{ exp: number }>(token);
     const currentTime = Date.now() / 1000;
+    console.log("decodedToken", new Date(decodedToken.exp * 1000));
     return decodedToken.exp < currentTime;
   } catch {
     return true;

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { env } from "@/data/env/client";
 import https from "https";
+import { getAuthState } from "@/features/auth/utils";
 
 // import { getAuthState, refreshToken } from "@/features/auth/utils";
 
@@ -15,16 +16,17 @@ const axiosInstance = axios.create({
   }),
 });
 
-// axiosInstance.interceptors.request.use(
-//   async (config) => {
-//     const { accessToken } = getAuthState();
-//     if (accessToken) {
-//       config.headers["Authorization"] = `Bearer ${accessToken}`;
-//     }
-//     return config;
-//   },
-//   (error) => Promise.reject(error),
-// );
+axiosInstance.interceptors.request.use(
+  async (config) => {
+    const { accessToken } = getAuthState();
+    console.log("accessToken", accessToken);
+    if (accessToken) {
+      config.headers["Authorization"] = `Bearer ${accessToken}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error),
+);
 
 // axiosInstance.interceptors.response.use(
 //   (response) => response,

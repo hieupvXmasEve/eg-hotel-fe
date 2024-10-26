@@ -20,7 +20,7 @@ import { toast } from "@/hooks/use-toast";
 
 const SignInSchema = z.object({
   email: z.string().email(),
-  password: z.string().min(6),
+  password: z.string().min(4),
 });
 
 type SignInFormData = z.infer<typeof SignInSchema>;
@@ -42,7 +42,7 @@ export const SignInForm = () => {
     formData.append("password", data.password);
 
     const result = await signInAction(formData);
-    console.log("result");
+    console.log("result", result);
 
     if (result?.success) {
       router.push("/"); // Redirect to dashboard on success
