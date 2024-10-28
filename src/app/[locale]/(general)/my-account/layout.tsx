@@ -8,7 +8,7 @@ export default function MyAccountLayout({
   return (
     <div className="flex h-full flex-grow flex-col md:flex-row">
       <SidebarAccount />
-      <div className="flex-1 overflow-y-auto p-6">{children}</div>
+      <div className="flex-1 overflow-y-auto px-6">{children}</div>
     </div>
   );
 }

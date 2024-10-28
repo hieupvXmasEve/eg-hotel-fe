@@ -9,7 +9,7 @@ export default function Logout() {
     await signOut();
   }
   return (
-    <div onClick={handleLogout} className="w-full cursor-pointer">
+    <div onClick={handleLogout} className="flex flex-1 cursor-pointer">
       {t("logout")}
     </div>
   );

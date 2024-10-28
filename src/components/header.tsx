@@ -21,6 +21,7 @@ export default async function Header() {
       name: hotel.hotel_name,
       value: hotel.id.toString(),
     })) || [];
+  console.log("hotels", hotels);
   return (
     <>
       <header className="relative pb-8">

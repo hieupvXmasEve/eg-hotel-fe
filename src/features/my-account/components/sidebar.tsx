@@ -2,26 +2,27 @@
 
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { Link } from "@/i18n/routing";
+import { signOut } from "@/features/auth/server/actions/sign-out";
+import { Link, usePathname } from "@/i18n/routing";
 import { History, LogOut, User } from "lucide-react";
-import { useState } from "react";
+import { useTranslations } from "next-intl";
 const menuItems = [
-  { id: "profile", label: "Profile", icon: User, path: "/" },
-  // { id: "bookings", label: "Bookings", icon: Hotel, path: "/my-account/bookings" },
+  { id: "profile", label: "Profile", icon: User, path: "" },
   {
     id: "history",
     label: "Order History",
     icon: History,
     path: "order-history",
   },
-  // { id: "payments", label: "Payment Methods", icon: CreditCard, path: "/my-account/payments" },
-  // { id: "settings", label: "Account Settings", icon: Settings, path: "/my-account/settings" },
 ];
 export default function SidebarAccount() {
-  const [activeSection, setActiveSection] = useState("profile");
-
+  const t = useTranslations("account");
+  const pathname = usePathname();
+  async function handleLogout() {
+    await signOut();
+  }
   return (
-    <aside className="w-full border-r bg-white p-6 md:w-64">
+    <aside className="w-full bg-white p-6 md:w-64 md:border-r">
       <h2 className="mb-6 text-2xl font-bold">My Account</h2>
       <nav className="space-y-2">
         {menuItems.map((item) => (
@@ -35,9 +36,12 @@ export default function SidebarAccount() {
             key={item.id}
           >
             <Button
-              variant={activeSection === item.id ? "default" : "ghost"}
+              variant={
+                pathname === `/my-account${item.path ? `/${item.path}` : ""}`
+                  ? "default"
+                  : "ghost"
+              }
               className="w-full justify-start"
-              onClick={() => setActiveSection(item.id)}
             >
               <item.icon className="mr-2 h-4 w-4" />
               {item.label}
@@ -49,9 +53,10 @@ export default function SidebarAccount() {
       <Button
         variant="outline"
         className="w-full justify-start text-red-500 hover:bg-red-50 hover:text-red-700"
+        onClick={handleLogout}
       >
         <LogOut className="mr-2 h-4 w-4" />
-        Sign Out
+        {t("logout")}
       </Button>
     </aside>
   );

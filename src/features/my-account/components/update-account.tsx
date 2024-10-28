@@ -1,7 +1,15 @@
 "use client";
 import { DatePicker } from "@/components/datepicker";
+import PhoneInput from "@/components/phone-input";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Form,
   FormControl,
@@ -13,22 +21,16 @@ import {
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { EyeIcon, EyeOffIcon, Loader2 } from "lucide-react";
-import { Link, useRouter } from "@/i18n/routing";
-import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { Loader2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import PhoneInput from "@/components/phone-input";
-import { useTranslations } from "next-intl";
-import { Checkbox } from "@/components/ui/checkbox";
-import { useMutation } from "@tanstack/react-query";
 
-import {
-  convertNewsletter,
-  signUp,
-  SignUpData,
-} from "@/features/auth/server/actions/sign-up";
+import { convertNewsletter } from "@/features/auth/server/actions/sign-up";
 import { toast } from "@/hooks/use-toast";
+import { UserData } from "../data/get-user-info";
+import { updateUser, UpdateUserData } from "../server/actions/update-user";
 
 const itemsNewsletter = [
   {
@@ -43,9 +45,6 @@ const itemsNewsletter = [
 
 const formSchema = z.object({
   Email: z.string().min(1, "Email is required.").email("Email is invalid."),
-  Password: z.string().min(4, {
-    message: "Password must be at least 4 characters.",
-  }),
   confirm_password: z.string().min(4, {
     message: "Password must be at least 4 characters.",
   }),
@@ -58,43 +57,34 @@ const formSchema = z.object({
   Phone: z.string().min(1, "Phone number is required."),
   Newsletter: z.array(z.string()),
 });
-
-export default function SignUpPage() {
-  const t = useTranslations("sign-up");
-  const router = useRouter();
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
-  const togglePasswordVisibility = () => setShowPassword(!showPassword);
-  const toggleConfirmPasswordVisibility = () =>
-    setShowConfirmPassword(!showConfirmPassword);
-
+interface UpdateAccountProps {
+  user: UserData;
+}
+export default function UpdateAccount({ user }: UpdateAccountProps) {
+  const t = useTranslations();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      Email: "",
-      Password: "",
-      confirm_password: "",
+      Email: user.email,
       Gender: "1",
-      FirstName: "",
-      LastName: "",
+      FirstName: user.first_name,
+      LastName: user.last_name,
       Newsletter: [],
-      Phone: "",
-      Birthday: undefined,
+      Phone: user.phone,
+      Birthday: new Date(user.birthday),
     },
   });
 
-  const signUpMutation = useMutation({
-    mutationFn: (data: SignUpData) => signUp(data),
+  const updateUserMutation = useMutation({
+    mutationFn: (data: UpdateUserData) => updateUser(data),
     onSuccess: (data) => {
       if (data.success) {
         toast({
-          title: t("sign-up-success"),
+          title: t("account.update-account-success"),
         });
-        router.push("/sign-in");
       } else {
         toast({
-          title: t("sign-up-error"),
+          title: t("account.update-account-error"),
           description: data.message,
           variant: "destructive",
         });
@@ -102,7 +92,7 @@ export default function SignUpPage() {
     },
     onError: (error) => {
       toast({
-        title: t("sign-up-error"),
+        title: t("sign-up.sign-up-error"),
         variant: "destructive",
       });
       console.error("Sign-up error:", error);
@@ -110,37 +100,42 @@ export default function SignUpPage() {
   });
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    if (values.Password !== values.confirm_password) {
-      form.setError("confirm_password", {
-        message: t("password-mismatch"),
-      });
-      form.setError("Password", {
-        message: t("password-mismatch"),
-      });
-      return;
-    }
-    const signUpData: SignUpData = {
-      Email: values.Email,
-      Password: values.Password,
+    const updateData: UpdateUserData = {
+      DisplayName: values.FirstName + " " + values.LastName,
+      ContactName: "",
+      ContactTitle: "",
+      AvatarUrl: "",
       Gender: Number(values.Gender),
+      Birthday: Math.floor(values.Birthday.getTime() / 1000),
       FirstName: values.FirstName,
       LastName: values.LastName,
-      Birthday: Math.floor(values.Birthday.getTime() / 1000),
       Phone: values.Phone,
+      Fax: "",
+      Website: "",
+      CNIC: "",
+      NTN: "",
+      STRN: "",
+      VAT: "",
       Newsletter: convertNewsletter(values.Newsletter),
-      DisplayName: values.FirstName + " " + values.LastName,
+      RegionId: 0,
+      CountryId: 0,
+      StateId: 0,
+      CityId: 0,
+      Address: "",
+      PostalCode: "",
     };
-    signUpMutation.mutate(signUpData);
+    updateUserMutation.mutate(updateData);
   };
 
   return (
-    <Card className="container mx-auto mt-6 w-full">
+    <Card className="container mx-auto">
       <CardHeader>
-        <CardTitle className="text-center text-2xl font-bold">
-          {t("title")}
+        <CardTitle className="text-left text-2xl font-bold">
+          {t("account.basic-info")}
         </CardTitle>
+        <CardDescription>{t("account.description")}</CardDescription>
       </CardHeader>
-      <CardContent className="px-2">
+      <CardContent className="">
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
@@ -152,7 +147,7 @@ export default function SignUpPage() {
               name="Gender"
               render={({ field }) => (
                 <FormItem className="col-span-2 space-y-3">
-                  <FormLabel>{t("gender")}</FormLabel>
+                  <FormLabel>{t("sign-up.gender")}</FormLabel>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
@@ -164,7 +159,7 @@ export default function SignUpPage() {
                           <RadioGroupItem value="1" />
                         </FormControl>
                         <FormLabel className="font-normal">
-                          {t("male")}
+                          {t("sign-up.male")}
                         </FormLabel>
                       </FormItem>
                       <FormItem className="flex items-center space-x-3 space-y-0">
@@ -172,7 +167,7 @@ export default function SignUpPage() {
                           <RadioGroupItem value="0" />
                         </FormControl>
                         <FormLabel className="font-normal">
-                          {t("female")}
+                          {t("sign-up.female")}
                         </FormLabel>
                       </FormItem>
                     </RadioGroup>
@@ -188,9 +183,9 @@ export default function SignUpPage() {
               name="FirstName"
               render={({ field }) => (
                 <FormItem className="col-span-2 md:col-span-1">
-                  <FormLabel>{t("first-name")}</FormLabel>
+                  <FormLabel>{t("sign-up.first-name")}</FormLabel>
                   <FormControl>
-                    <Input placeholder={t("first-name")} {...field} />
+                    <Input placeholder={t("sign-up.first-name")} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -202,9 +197,9 @@ export default function SignUpPage() {
               name="LastName"
               render={({ field }) => (
                 <FormItem className="col-span-2 md:col-span-1">
-                  <FormLabel>{t("last-name")}</FormLabel>
+                  <FormLabel>{t("sign-up.last-name")}</FormLabel>
                   <FormControl>
-                    <Input placeholder={t("last-name")} {...field} />
+                    <Input placeholder={t("sign-up.last-name")} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -216,7 +211,7 @@ export default function SignUpPage() {
               name="Birthday"
               render={({ field }) => (
                 <FormItem className="col-span-2 md:col-span-1">
-                  <FormLabel>{t("birthday")}</FormLabel>
+                  <FormLabel>{t("sign-up.birthday")}</FormLabel>
                   <DatePicker date={field.value} setDate={field.onChange} />
                   <FormMessage />
                 </FormItem>
@@ -228,9 +223,9 @@ export default function SignUpPage() {
               name="Email"
               render={({ field }) => (
                 <FormItem className="col-span-2 md:col-span-1">
-                  <FormLabel>{t("email")}</FormLabel>
+                  <FormLabel>{t("sign-up.email")}</FormLabel>
                   <FormControl>
-                    <Input placeholder={t("email")} {...field} />
+                    <Input placeholder={t("sign-up.email")} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -242,75 +237,9 @@ export default function SignUpPage() {
               name="Phone"
               render={({ field }) => (
                 <FormItem className="col-span-2 md:col-span-1">
-                  <FormLabel>{t("phone")}</FormLabel>
+                  <FormLabel>{t("sign-up.phone")}</FormLabel>
                   <FormControl>
-                    <PhoneInput placeholder={t("phone")} {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            {/* Password */}
-            <FormField
-              control={form.control}
-              name="Password"
-              render={({ field }) => (
-                <FormItem className="col-span-2 md:col-span-1">
-                  <FormLabel>{t("password")}</FormLabel>
-                  <FormControl>
-                    <div className="relative">
-                      <Input
-                        type={showPassword ? "text" : "password"}
-                        placeholder={t("password")}
-                        {...field}
-                      />
-                      <div className="absolute inset-y-0 right-0 flex cursor-pointer items-center pr-3 text-gray-400">
-                        {showPassword ? (
-                          <EyeOffIcon
-                            className="size-5"
-                            onClick={togglePasswordVisibility}
-                          />
-                        ) : (
-                          <EyeIcon
-                            className="size-5"
-                            onClick={togglePasswordVisibility}
-                          />
-                        )}
-                      </div>
-                    </div>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            {/* match password */}
-            <FormField
-              control={form.control}
-              name="confirm_password"
-              render={({ field }) => (
-                <FormItem className="col-span-2 md:col-span-1">
-                  <FormLabel>{t("confirm-password")}</FormLabel>
-                  <FormControl>
-                    <div className="relative">
-                      <Input
-                        type={showConfirmPassword ? "text" : "password"}
-                        placeholder={t("confirm-password")}
-                        {...field}
-                      />
-                      <div className="absolute inset-y-0 right-0 flex cursor-pointer items-center pr-3 text-gray-400">
-                        {showConfirmPassword ? (
-                          <EyeOffIcon
-                            className="size-5"
-                            onClick={toggleConfirmPasswordVisibility}
-                          />
-                        ) : (
-                          <EyeIcon
-                            className="size-5"
-                            onClick={toggleConfirmPasswordVisibility}
-                          />
-                        )}
-                      </div>
-                    </div>
+                    <PhoneInput placeholder={t("sign-up.phone")} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -359,23 +288,16 @@ export default function SignUpPage() {
                 </FormItem>
               )}
             />
-            <div className="col-span-2">
-              <Link
-                href="/sign-in"
-                className="block text-right text-sm text-primary hover:underline"
-              >
-                {t("have-account")}
-              </Link>
-            </div>
+
             <div className="col-span-2 flex items-center justify-center gap-2">
               <Button
                 type="submit"
                 variant="default"
                 className="w-full md:w-32"
-                disabled={signUpMutation.isPending}
+                disabled={updateUserMutation.isPending}
               >
-                {t("sign-up")}
-                {signUpMutation.isPending && (
+                {t("account.update-account")}
+                {updateUserMutation.isPending && (
                   <Loader2 className="ml-2 size-4 animate-spin" />
                 )}
               </Button>

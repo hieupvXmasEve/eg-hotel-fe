@@ -49,7 +49,7 @@ export default function SearchForm({ hotels }: SearchFormProps) {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      hotel_id: hotels[0].value,
+      hotel_id: hotels?.[0]?.value || "",
       check_in_date: {
         from: new Date(),
         to: addDays(new Date(), 1),

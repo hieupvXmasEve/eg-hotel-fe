@@ -14,19 +14,33 @@ export const convertNewsletter = (newsletter: string[]) => {
   if (newsletter.length === 1 && newsletter[0] === "Event") return 2;
   return 0;
 };
-export interface SignUpData {
-  Email: string;
-  Password: string;
+export interface UpdateUserData {
+  Password?: string;
+  DisplayName: string;
+  ContactName: string;
+  ContactTitle: string;
+  AvatarUrl: string;
   Gender: number;
+  Birthday: number;
   FirstName: string;
   LastName: string;
-  Birthday: number;
   Phone: string;
+  Fax: string;
+  Website: string;
+  CNIC: string;
+  NTN: string;
+  STRN: string;
+  VAT: string;
   Newsletter: number;
-  DisplayName: string;
+  RegionId: number;
+  CountryId: number;
+  StateId: number;
+  CityId: number;
+  Address: string;
+  PostalCode: string;
 }
 
-export const signUp = async (data: SignUpData) => {
-  const response = await axios.post(`${API_URL}/api/auth/create`, data);
+export const updateUser = async (data: UpdateUserData) => {
+  const response = await axios.post(`${API_URL}/api/user/update`, data);
   return response.data;
 };

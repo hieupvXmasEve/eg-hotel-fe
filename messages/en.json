@@ -188,5 +188,15 @@
     "forgot-password": "Forgot password?",
     "sign-in": "Sign in",
     "sign-up": "Sign up"
+  },
+  "account": {
+    "basic-info": "Basic information",
+    "description": "Manage your account and settings here.",
+    "update-account-success": "Update account successfully",
+    "update-account-error": "Update account error",
+    "logout": "Logout",
+    "update-account": "Update account",
+    "update-password-title": "Update password",
+    "update-password-btn": "Update password"
   }
 }

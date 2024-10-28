@@ -3,7 +3,7 @@ import { getAuthState } from "@/features/auth/utils";
 import { Link } from "@/i18n/routing";
 import { getTranslations } from "next-intl/server";
 import Image from "next/image";
-import Logout from "./logout";
+import LogoutComponent from "./logout";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,6 +11,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
+import { History, LogOut, User } from "lucide-react";
 
 export default async function UserButton() {
   const t = await getTranslations("auth");
@@ -38,17 +39,28 @@ export default async function UserButton() {
           <DropdownMenuContent className="w-56" align="end">
             <DropdownMenuGroup>
               <DropdownMenuItem>
-                <Link href="/my-account" className="block w-full">
+                <Link
+                  href="/my-account"
+                  className="inline-flex w-full items-center"
+                >
+                  <User className="mr-2 size-5" />
                   {t("profile")}
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <Link href="/my-account/order-history" className="block w-full">
+                <Link
+                  href="/my-account/order-history"
+                  className="inline-flex w-full items-center"
+                >
+                  <History className="mr-2 size-5" />
                   {t("order-history")}
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <Logout />
+                <div className="flex w-full flex-1 items-center">
+                  <LogOut className="mr-2 size-5" />
+                  <LogoutComponent />
+                </div>
               </DropdownMenuItem>
             </DropdownMenuGroup>
           </DropdownMenuContent>
