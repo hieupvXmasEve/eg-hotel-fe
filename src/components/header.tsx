@@ -13,7 +13,7 @@ import { getHotel } from "@/features/home/data/get-hotel";
 
 export default async function Header() {
   const t = await getTranslations("home");
-  const { data } = await getHotel();
+  const { data } = await getHotel({});
   // console.log("data", data);
   const hotels =
     data?.map((hotel) => ({
