@@ -1,8 +1,8 @@
 "use server";
 
-import { z } from "zod";
 import { setAuthCookies } from "@/features/auth/utils";
-import axiosInstance from "@/lib/axios";
+import axiosInstanceClient from "@/lib/axios-client";
+import { z } from "zod";
 
 const SignInSchema = z.object({
   email: z.string().email(),
@@ -33,25 +33,13 @@ export async function signInAction(
   const { email, password } = validatedFields.data;
 
   try {
-    const response = await axiosInstance.post("/api/auth/login", {
+    const response = await axiosInstanceClient.post("/api/auth/login", {
       Email: email,
       Password: password,
     });
     if (!response.data.success) return { error: response.data.message };
-    const {
-      access_token,
-      user_id,
-      display_name,
-      email: userEmail,
-      avatar_url,
-    } = response.data.data;
-
-    setAuthCookies(access_token, {
-      user_id,
-      display_name,
-      email: userEmail,
-      avatar_url,
-    });
+    const { access_token, ...userData } = response.data.data;
+    setAuthCookies(access_token, userData);
 
     return { success: true };
   } catch (error) {

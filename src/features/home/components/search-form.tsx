@@ -27,8 +27,8 @@ import { Hotel } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import PeopleBooking, { Room } from "./search-room/people-booking";
+import { convertNameToUrl } from "@/features/hotels/utils/convert-name-to-url";
 
-const listHotel = [{ id: "1", name: "eg-hotel" }];
 const FormSchema = z.object({
   hotel_id: z.string({
     required_error: "Please select an email to display.",
@@ -39,7 +39,11 @@ const FormSchema = z.object({
   }),
 });
 interface SearchFormProps {
-  hotels: { id: number; name: string; value: string }[];
+  hotels: Array<{
+    hotel_id: number;
+    hotel_name: string;
+    value: string;
+  }>;
 }
 export default function SearchForm({ hotels }: SearchFormProps) {
   const router = useRouter();
@@ -49,7 +53,7 @@ export default function SearchForm({ hotels }: SearchFormProps) {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      hotel_id: hotels?.[0]?.value || "",
+      hotel_id: hotels?.[0]?.hotel_id?.toString() || "",
       check_in_date: {
         from: new Date(),
         to: addDays(new Date(), 1),
@@ -58,8 +62,8 @@ export default function SearchForm({ hotels }: SearchFormProps) {
   });
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    const date_from = format(data.check_in_date.from, "dd-MM-yyyy");
-    const date_to = format(data.check_in_date.to, "dd-MM-yyyy");
+    const date_from = format(data.check_in_date.from, "yyyy-MM-dd");
+    const date_to = format(data.check_in_date.to, "yyyy-MM-dd");
 
     // Create URLSearchParams from the query object
     const params = new URLSearchParams();
@@ -71,11 +75,17 @@ export default function SearchForm({ hotels }: SearchFormProps) {
     console.log("params.toString()", params.toString());
     router.push({
       pathname: "/[hotelName]",
-      params: { hotelName: listHotel[0].name },
+      params: {
+        hotelName: convertNameToUrl(
+          hotels.find((hotel) => hotel.hotel_id === Number(data.hotel_id))
+            ?.hotel_name || "",
+        ),
+      },
       query: {
         date_from: date_from,
         date_to: date_to,
         rooms: params.toString(),
+        hotel_id: data.hotel_id,
       },
     });
   }
@@ -104,8 +114,11 @@ export default function SearchForm({ hotels }: SearchFormProps) {
                   </FormControl>
                   <SelectContent>
                     {hotels.map((hotel) => (
-                      <SelectItem key={hotel.id} value={hotel.value}>
-                        {hotel.name}
+                      <SelectItem
+                        key={hotel.hotel_id}
+                        value={hotel.hotel_id?.toString() || ""}
+                      >
+                        {hotel.hotel_name}
                       </SelectItem>
                     ))}
                   </SelectContent>

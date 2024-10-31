@@ -1,7 +1,10 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
-import { getAuthState } from "@/features/auth/utils";
+import { useUserInfo } from "@/features/auth/hooks/use-user-info";
 import { Link } from "@/i18n/routing";
-import { getTranslations } from "next-intl/server";
+import { History, LogOut, User } from "lucide-react";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import LogoutComponent from "./logout";
 import {
@@ -11,13 +14,17 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import { History, LogOut, User } from "lucide-react";
 
-export default async function UserButton() {
-  const t = await getTranslations("auth");
-  const { user, isAuthenticated } = getAuthState();
+export default function UserButton() {
+  const t = useTranslations("auth");
+  const { data: user, isLoading, error } = useUserInfo();
+  const isAuthenticated = !!user && !error;
 
-  if (user && isAuthenticated) {
+  if (isLoading) {
+    return <Button variant="ghost" size="icon" disabled />;
+  }
+
+  if (isAuthenticated && user) {
     return (
       <div className="relative">
         <DropdownMenu>

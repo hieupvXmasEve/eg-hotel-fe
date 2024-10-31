@@ -6,9 +6,9 @@ export default function MyAccountLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex h-full flex-grow flex-col md:flex-row">
+    <div className="flex h-full flex-grow flex-col gap-4 md:flex-row md:gap-6">
       <SidebarAccount />
-      <div className="flex-1 overflow-y-auto px-6">{children}</div>
+      <div className="flex-1 overflow-y-auto">{children}</div>
     </div>
   );
 }

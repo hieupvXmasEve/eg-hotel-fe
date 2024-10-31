@@ -1,7 +1,6 @@
 "use server";
 
-import axiosInstance from "@/lib/axios";
-import { AxiosResponse } from "axios";
+import { cookies } from "next/headers";
 
 export interface UserData {
   user_id: number;
@@ -29,17 +28,35 @@ export interface UserData {
   address: string;
   postal_code: string;
 }
+
 export async function getAccountDetail() {
-  try {
-    const response: AxiosResponse<{
-      success: boolean;
-      data: UserData;
-      message: string;
-    }> = await axiosInstance.get("/api/user/info");
-    if (!response.data.data) return { error: response.data.message };
-    return { success: true, data: response.data.data };
-  } catch (error) {
-    console.error("Sign-in failed:", error);
-    return { error: "Authentication failed" };
+  const cookieStore = cookies();
+  const accessToken = cookieStore.get("accessToken")?.value;
+
+  if (!accessToken) {
+    return { error: "No access token found" };
   }
+
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/user/info`,
+    {
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    },
+  );
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    return { error: data.message || "Failed to fetch user info" };
+  }
+
+  if (!data.data) {
+    return { error: data.message };
+  }
+
+  return { success: true, data: data.data };
 }

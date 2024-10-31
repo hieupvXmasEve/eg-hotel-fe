@@ -128,7 +128,7 @@ export default function UpdateAccount({ user }: UpdateAccountProps) {
   };
 
   return (
-    <Card className="container mx-auto">
+    <Card className="">
       <CardHeader>
         <CardTitle className="text-left text-2xl font-bold">
           {t("account.basic-info")}

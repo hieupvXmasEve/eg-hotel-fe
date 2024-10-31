@@ -22,7 +22,7 @@ export default function SidebarAccount() {
     await signOut();
   }
   return (
-    <aside className="w-full bg-white p-6 md:w-64 md:border-r">
+    <aside className="w-full rounded-lg border bg-white p-6 md:w-64">
       <h2 className="mb-6 text-2xl font-bold">My Account</h2>
       <nav className="space-y-2">
         {menuItems.map((item) => (
@@ -49,7 +49,7 @@ export default function SidebarAccount() {
           </Link>
         ))}
       </nav>
-      <Separator className="my-4" />
+      {/* <Separator className="my-4" />
       <Button
         variant="outline"
         className="w-full justify-start text-red-500 hover:bg-red-50 hover:text-red-700"
@@ -57,7 +57,7 @@ export default function SidebarAccount() {
       >
         <LogOut className="mr-2 h-4 w-4" />
         {t("logout")}
-      </Button>
+      </Button> */}
     </aside>
   );
 }

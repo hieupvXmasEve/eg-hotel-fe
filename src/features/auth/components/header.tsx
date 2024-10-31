@@ -1,7 +1,6 @@
 import LanguagesButton from "@/components/languages-button";
 import Logo from "@/components/logo";
 import { Button } from "@/components/ui/button";
-import UserButton from "@/components/user-button";
 import { Link } from "@/i18n/routing";
 import { Cross1Icon } from "@radix-ui/react-icons";
 import Image from "next/image";
@@ -30,7 +29,6 @@ export default function Header() {
         <div className="w-6 md:w-auto">
           <div className="hidden items-center gap-4 md:flex">
             <LanguagesButton />
-            <UserButton />
           </div>
         </div>
       </div>

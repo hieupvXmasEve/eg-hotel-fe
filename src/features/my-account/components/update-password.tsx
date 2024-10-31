@@ -56,7 +56,7 @@ export default function UpdatePassword() {
   });
 
   const updateUserMutation = useMutation({
-    mutationFn: (data: UpdateUserData) => updateUser(data),
+    mutationFn: (data: UpdateUserData) => updateUser({ data }),
     onSuccess: (data) => {
       if (data.success) {
         toast({
@@ -80,11 +80,22 @@ export default function UpdatePassword() {
   });
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+    if (values.Password !== values.confirm_password) {
+      form.setError("confirm_password", {
+        message: t("password-mismatch"),
+      });
+      form.setError("Password", {
+        message: t("password-mismatch"),
+      });
+      return;
+    }
+    updateUserMutation.mutate({
+      Password: values.Password,
+    });
   };
 
   return (
-    <Card className="container mx-auto mt-6">
+    <Card className="mt-6">
       <CardHeader>
         <CardTitle className="text-left text-2xl font-bold">
           {t("account.update-password-title")}

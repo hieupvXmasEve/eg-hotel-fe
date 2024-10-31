@@ -1,12 +1,11 @@
 import { jwtDecode } from "jwt-decode";
 import { cookies } from "next/headers";
-
-interface UserData {
-  user_id: number;
-  display_name: string;
-  email: string;
-  avatar_url: string;
-}
+import { QueryClient } from "@tanstack/react-query";
+import { USER_QUERY_KEY } from "./hooks/use-user-info";
+import {
+  getAccountDetail,
+  UserData,
+} from "@/features/my-account/data/get-user-info";
 
 interface AuthState {
   user: UserData | null;
@@ -30,15 +29,43 @@ export const setAuthCookies = (accessToken: string, userData: UserData) => {
   });
 };
 
-export const getAuthState = (): AuthState => {
+export const getAuthState = async (
+  queryClient?: QueryClient,
+): Promise<AuthState> => {
   const cookieStore = cookies();
+  console.log("getAuthState", cookieStore);
   const accessToken = cookieStore.get("accessToken")?.value ?? null;
-  const userDataCookie = cookieStore.get("userData")?.value;
-  const user = userDataCookie ? JSON.parse(userDataCookie) : null;
+  console.log("accessToken", !accessToken || isTokenExpired(accessToken));
 
-  const isAuthenticated =
-    accessToken !== null && user !== null && !isTokenExpired(accessToken);
-  return { user, accessToken, isAuthenticated };
+  if (!accessToken || isTokenExpired(accessToken)) {
+    return { user: null, accessToken: null, isAuthenticated: false };
+  }
+
+  // Try to get user from cache first
+  let userData: UserData | undefined;
+  if (queryClient) {
+    userData = queryClient.getQueryData(USER_QUERY_KEY);
+  }
+
+  // If no cached data, fetch fresh data
+  if (!userData) {
+    const { data: freshUserData, error } = await getAccountDetail();
+    if (error || !freshUserData) {
+      return { user: null, accessToken: null, isAuthenticated: false };
+    }
+    userData = freshUserData;
+
+    // Update cache if queryClient is available
+    if (queryClient) {
+      queryClient.setQueryData(USER_QUERY_KEY, userData);
+    }
+  }
+
+  return {
+    user: userData ?? null,
+    accessToken,
+    isAuthenticated: true,
+  };
 };
 
 export const clearAuthCookies = () => {

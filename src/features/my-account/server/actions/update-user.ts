@@ -1,5 +1,7 @@
+"use server";
+
 import { env } from "@/data/env/client";
-import axios from "axios";
+import axiosInstance from "@/lib/axios";
 
 const API_URL = env.NEXT_PUBLIC_API_URL;
 
@@ -16,31 +18,33 @@ export const convertNewsletter = (newsletter: string[]) => {
 };
 export interface UpdateUserData {
   Password?: string;
-  DisplayName: string;
-  ContactName: string;
-  ContactTitle: string;
-  AvatarUrl: string;
-  Gender: number;
-  Birthday: number;
-  FirstName: string;
-  LastName: string;
-  Phone: string;
-  Fax: string;
-  Website: string;
-  CNIC: string;
-  NTN: string;
-  STRN: string;
-  VAT: string;
-  Newsletter: number;
-  RegionId: number;
-  CountryId: number;
-  StateId: number;
-  CityId: number;
-  Address: string;
-  PostalCode: string;
+  DisplayName?: string;
+  ContactName?: string;
+  ContactTitle?: string;
+  AvatarUrl?: string;
+  Gender?: number;
+  Birthday?: number;
+  FirstName?: string;
+  LastName?: string;
+  Phone?: string;
+  Fax?: string;
+  Website?: string;
+  CNIC?: string;
+  NTN?: string;
+  STRN?: string;
+  VAT?: string;
+  Newsletter?: number;
+  RegionId?: number;
+  CountryId?: number;
+  StateId?: number;
+  CityId?: number;
+  Address?: string;
+  PostalCode?: string;
 }
 
-export const updateUser = async (data: UpdateUserData) => {
-  const response = await axios.post(`${API_URL}/api/user/update`, data);
+export const updateUser = async ({ data }: { data: UpdateUserData }) => {
+  const response = await axiosInstance.post(`${API_URL}/api/user/update`, {
+    data: data,
+  });
   return response.data;
 };

@@ -2,39 +2,34 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Link } from "@/i18n/routing";
 import Image from "next/image";
-import { IRoom } from "../data/use-get-rooms";
+import { IRoom } from "../data/search-room";
 
-// interface Room {
-//   id: number;
-//   image: string;
-//   name: string;
-//   price: number;
-//   address: string;
-//   hotelNameUrl: string;
-//   roomNameUrl: string;
-// }
+interface RoomProps {
+  room: IRoom;
+  hotelName: string;
+}
 
-export default function Room({ room }: { room: IRoom }) {
+export default function Room({ room, hotelName }: RoomProps) {
   return (
     <Link
       href={{
         pathname: "/[hotelName]/[roomName]",
         params: {
-          hotelName: room.room_type_name,
-          roomName: room.room_type_name,
+          hotelName: hotelName,
+          roomName: room.roomTypeName,
         },
       }}
-      key={room.room_id}
+      key={room.roomId}
       className="block"
     >
       <div className="flex h-32 rounded-lg bg-white shadow-md sm:h-36">
         <div className="relative w-28 sm:w-48">
-          {room.room_images.length > 0 ? (
-            room.room_images.map((roomImg) => (
+          {room.roomImages && room.roomImages.length > 0 ? (
+            room.roomImages.map((roomImg) => (
               <Image
                 key={roomImg.room_image_id}
                 src={roomImg.image}
-                alt={`${room.room_type_name} image`}
+                alt={`${room.roomTypeName} image`}
                 className="rounded-lg object-cover object-center"
                 fill
               />
@@ -45,7 +40,7 @@ export default function Room({ room }: { room: IRoom }) {
         </div>
         <div className="flex h-full flex-1 flex-col justify-between p-2">
           <div>
-            <h3 className="text-lg font-semibold">{room.room_type_name}</h3>
+            <h3 className="text-lg font-semibold">{room.roomTypeName}</h3>
             {/* <p className="text-sm text-slate-500">{room.address}</p> */}
             <Image
               src="/images/rooms/pool-icon.svg"
@@ -65,7 +60,7 @@ export default function Room({ room }: { room: IRoom }) {
               <span className="text-slate-500">Very good</span>
               <span className="text-slate-500">(123 reviews)</span>
             </div>
-            <span className="text-xl font-semibold">${room.base_price}</span>
+            <span className="text-xl font-semibold">${room.basePrice}</span>
           </div>
         </div>
       </div>

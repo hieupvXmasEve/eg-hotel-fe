@@ -14,14 +14,12 @@ import { getHotel } from "@/features/home/data/get-hotel";
 export default async function Header() {
   const t = await getTranslations("home");
   const { data } = await getHotel({});
-  // console.log("data", data);
   const hotels =
     data?.map((hotel) => ({
-      id: hotel.id,
-      name: hotel.hotel_name,
-      value: hotel.id.toString(),
+      hotel_id: hotel.hotel_id,
+      hotel_name: hotel.hotel_name,
+      value: hotel.hotel_id.toString(),
     })) || [];
-  console.log("hotels", hotels);
   return (
     <>
       <header className="relative pb-8">

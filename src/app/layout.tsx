@@ -1,10 +1,11 @@
-import QueryProviders from "@/components/query-provider";
+// import QueryProviders from "@/components/query-provider";
 import { Toaster } from "@/components/ui/toaster";
 import { routing } from "@/i18n/routing";
 import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 import { Inter } from "next/font/google";
 import { ReactNode } from "react";
 import "./globals.css";
+import { Providers } from "@/components/providers";
 
 const inter = Inter({ subsets: ["latin"] });
 // export const metadata: Metadata = {
@@ -49,7 +50,7 @@ export default async function RootLayout({
       <body
         className={`${inter.className} flex min-h-screen flex-col antialiased`}
       >
-        <QueryProviders>{children}</QueryProviders>
+        <Providers>{children}</Providers>
         <Toaster />
       </body>
     </html>
