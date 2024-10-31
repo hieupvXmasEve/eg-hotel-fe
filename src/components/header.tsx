@@ -1,25 +1,27 @@
 import UserButton from "@/components/user-button";
 import SearchForm from "@/features/home/components/search-form";
+import { getHotel } from "@/features/home/data/get-hotel";
 import { Link } from "@/i18n/routing";
 import { DownloadIcon, HamburgerMenuIcon } from "@radix-ui/react-icons";
+import { Loader } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import Image from "next/image";
+import { Suspense } from "react";
 import LanguagesButton from "./languages-button";
 import Logo from "./logo";
 import { Button } from "./ui/button";
-import { Suspense } from "react";
-import { Loader } from "lucide-react";
-import { getHotel } from "@/features/home/data/get-hotel";
 
 export default async function Header() {
   const t = await getTranslations("home");
   const { data } = await getHotel({});
+
   const hotels =
     data?.map((hotel) => ({
       hotel_id: hotel.hotel_id,
       hotel_name: hotel.hotel_name,
       value: hotel.hotel_id.toString(),
     })) || [];
+
   return (
     <>
       <header className="relative pb-8">
@@ -51,6 +53,8 @@ export default async function Header() {
                 <LanguagesButton />
               </Suspense>
               <UserButton />
+              {/* <HydrationBoundary state={dehydrate(queryClient)}>
+              </HydrationBoundary> */}
             </div>
           </div>
           <div className="relative py-4 text-white">

@@ -8,7 +8,7 @@ export const queryClient = new QueryClient({
     queries: {
       retry: 1,
       refetchOnWindowFocus: false,
-      staleTime: 30000, // 30 seconds
+      staleTime: 60 * 1000, // 1 minute
     },
   },
   queryCache: new QueryCache({

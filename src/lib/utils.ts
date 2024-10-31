@@ -1,5 +1,6 @@
 import { Occupancy } from "@/features/hotels/data/search-room";
 import { clsx, type ClassValue } from "clsx";
+import { jwtDecode } from "jwt-decode";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
@@ -41,3 +42,14 @@ export function convertQueryStringToJson(
 
   return result.rooms as Occupancy[] | [];
 }
+
+export const isTokenExpired = (token: string): boolean => {
+  try {
+    const decodedToken = jwtDecode<{ exp: number }>(token);
+    const currentTime = Date.now() / 1000;
+    console.log("decodedToken", new Date(decodedToken.exp * 1000));
+    return decodedToken.exp < currentTime;
+  } catch {
+    return true;
+  }
+};

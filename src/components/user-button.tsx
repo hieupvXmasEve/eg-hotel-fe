@@ -14,10 +14,21 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
+import { useAuth } from "@/lib/auth-context";
+import { isTokenExpired } from "@/lib/utils";
 
 export default function UserButton() {
   const t = useTranslations("auth");
-  const { data: user, isLoading, error } = useUserInfo();
+  const auth = useAuth();
+  console.log("auth.accessToken", auth.accessToken);
+  // const { data: user, isLoading, error } = useUserInfo();
+  const {
+    data: user,
+    isLoading,
+    error,
+  } = useUserInfo({
+    enabled: !!auth.accessToken && !isTokenExpired(auth.accessToken),
+  });
   const isAuthenticated = !!user && !error;
 
   if (isLoading) {

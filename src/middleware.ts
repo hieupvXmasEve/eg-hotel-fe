@@ -16,8 +16,8 @@ export default async function middleware(req: NextRequest) {
   // Apply intl middleware for all routes
   const response = intlMiddleware(req);
 
-  const authState = await getAuthState();
-  console.log("authState", authState);
+  const authState = getAuthState();
+  // console.log("authState middleware", authState);
   // Redirect authenticated users from public routes to home
   if (
     authState.isAuthenticated &&

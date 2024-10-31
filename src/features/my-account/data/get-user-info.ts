@@ -1,6 +1,4 @@
-"use server";
-
-import { cookies } from "next/headers";
+import axiosInstanceClient from "@/lib/axios-client";
 
 export interface UserData {
   user_id: number;
@@ -29,34 +27,7 @@ export interface UserData {
   postal_code: string;
 }
 
-export async function getAccountDetail() {
-  const cookieStore = cookies();
-  const accessToken = cookieStore.get("accessToken")?.value;
-
-  if (!accessToken) {
-    return { error: "No access token found" };
-  }
-
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/user/info`,
-    {
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
-      },
-    },
-  );
-
-  const data = await response.json();
-
-  if (!response.ok) {
-    return { error: data.message || "Failed to fetch user info" };
-  }
-
-  if (!data.data) {
-    return { error: data.message };
-  }
-
-  return { success: true, data: data.data };
+export async function getUserInfo(): Promise<UserData> {
+  const response = await axiosInstanceClient.get("/api/user/info");
+  return response.data.data;
 }

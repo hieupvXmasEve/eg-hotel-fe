@@ -42,6 +42,7 @@ export const SignInForm = () => {
     formData.append("password", data.password);
 
     const result = await signInAction(formData);
+    console.log("result", result);
     if (result?.success) {
       router.push("/"); // Redirect to dashboard on success
     } else {

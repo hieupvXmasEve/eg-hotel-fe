@@ -14,7 +14,8 @@
           "src/lib/**/*",
           "src/i18n/**/*",
           "src/api/**/*",
-          "src/features/**/*"
+          "src/features/**/*",
+          "src/services/**/*"
         ]
       },
       {

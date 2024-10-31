@@ -1,6 +1,7 @@
 "use server";
-import axios, { AxiosError, AxiosResponse } from "axios";
+import https from "https";
 import { env } from "@/data/env/client";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import { cookies } from "next/headers";
 
 const axiosInstance = axios.create({
@@ -10,6 +11,9 @@ const axiosInstance = axios.create({
     "Content-Type": "application/json",
   },
   timeout: 10000,
+  httpsAgent: new https.Agent({
+    rejectUnauthorized: false,
+  }),
 });
 
 // Request interceptor
@@ -28,7 +32,7 @@ axiosInstance.interceptors.request.use(
 // Response interceptor
 axiosInstance.interceptors.response.use(
   (response: AxiosResponse) => {
-    return response.data; // Automatically extract data
+    return response; // Automatically extract data
   },
   async (error: AxiosError) => {
     return Promise.reject({
