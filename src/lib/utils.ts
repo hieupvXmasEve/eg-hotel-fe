@@ -47,9 +47,19 @@ export const isTokenExpired = (token: string): boolean => {
   try {
     const decodedToken = jwtDecode<{ exp: number }>(token);
     const currentTime = Date.now() / 1000;
-    console.log("decodedToken", new Date(decodedToken.exp * 1000));
     return decodedToken.exp < currentTime;
   } catch {
     return true;
   }
+};
+export const convertNewsletter = (newsletter: string[]) => {
+  //if no newsletter, return 0
+  // if newsletter has 2 items return 4
+  // if newsletter has 1 item and item is promotion return 1
+  // if newsletter has 1 item and item is event return 2
+  if (newsletter.length === 0) return 0;
+  if (newsletter.length === 2) return 4;
+  if (newsletter.length === 1 && newsletter[0] === "Promotion") return 1;
+  if (newsletter.length === 1 && newsletter[0] === "Event") return 2;
+  return 0;
 };

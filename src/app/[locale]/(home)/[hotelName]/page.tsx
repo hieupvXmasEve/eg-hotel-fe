@@ -31,11 +31,11 @@ export default async function HotelPage({
   const isLoading = false;
 
   if (isLoading) return <Room.Skeleton />;
-  if (!data.data?.length) return <div>No data</div>;
+  if (!data.data?.length) return <div className="text-center">No data</div>;
   return (
     <div className="space-y-3">
       {data.data.map((room) => (
-        <Room key={room.roomId} room={room} hotelName={params.hotelName} />
+        <Room key={room.room_id} room={room} hotelName={params.hotelName} />
       ))}
     </div>
   );

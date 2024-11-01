@@ -1,3 +1,4 @@
+"use client";
 import { toast } from "@/hooks/use-toast";
 import { QueryClient, QueryCache, MutationCache } from "@tanstack/react-query";
 
@@ -13,7 +14,6 @@ export const queryClient = new QueryClient({
   },
   queryCache: new QueryCache({
     onError: (error, query) => {
-      console.log("error", error);
       if (axios.isAxiosError(error) && query.meta?.ERROR_SOURCE) {
         toast({
           title: `${query.meta.ERROR_SOURCE}: ${error.response?.data?.message}`,

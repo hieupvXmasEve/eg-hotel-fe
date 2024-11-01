@@ -13,18 +13,17 @@ let authToken: string | null = null;
 export const setAuthToken = (token: string | null) => {
   authToken = token;
 };
-
-export const client = (() => {
-  return axios.create({
-    baseURL: env.NEXT_PUBLIC_API_URL,
-    headers: {
-      Accept: "application/json, text/plain, */*",
-    },
-    httpsAgent: new https.Agent({
-      rejectUnauthorized: false,
-    }),
-  });
-})();
+export const client = axios.create({
+  baseURL: env.NEXT_PUBLIC_API_URL,
+  headers: {
+    // Accept: "application/json, text/plain, */*",
+    "Content-Type": "application/json",
+  },
+  timeout: 10000,
+  httpsAgent: new https.Agent({
+    rejectUnauthorized: false,
+  }),
+});
 client.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
     if (authToken) {
@@ -43,7 +42,7 @@ client.interceptors.response.use(
   },
   async (error: AxiosError) => {
     const status = error.response ? error.response.status : null;
-
+    console.log("error", error);
     if (status === 401) {
       try {
         // const refreshTokenFromStorage = localStorage.getItem(

@@ -1,13 +1,17 @@
 import { isTokenExpired } from "@/lib/utils";
 import { cookies } from "next/headers";
-import { UserData } from "../my-account/data/get-user-info";
 
 interface AuthState {
   user: UserData | null;
   accessToken: string | null;
   isAuthenticated: boolean;
 }
-
+export interface UserData {
+  user_id: number;
+  email: string;
+  display_name: string;
+  avatar_url: string;
+}
 export const setAuthCookies = (accessToken: string, userData: UserData) => {
   const cookieStore = cookies();
   cookieStore.set("accessToken", accessToken, {

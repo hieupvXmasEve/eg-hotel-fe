@@ -1,9 +1,11 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { useUserInfo } from "@/features/auth/hooks/use-user-info";
+import { useUserInfo } from "@/features/my-account/data/use-user-info";
 import { Link } from "@/i18n/routing";
-import { History, LogOut, User } from "lucide-react";
+import { useAuth } from "@/stores/auth/auth-context";
+import { isTokenExpired } from "@/lib/utils";
+import { History, Loader, LogOut, User } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import LogoutComponent from "./logout";
@@ -14,14 +16,10 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import { useAuth } from "@/lib/auth-context";
-import { isTokenExpired } from "@/lib/utils";
 
 export default function UserButton() {
   const t = useTranslations("auth");
   const auth = useAuth();
-  console.log("auth.accessToken", auth.accessToken);
-  // const { data: user, isLoading, error } = useUserInfo();
   const {
     data: user,
     isLoading,
@@ -29,10 +27,15 @@ export default function UserButton() {
   } = useUserInfo({
     enabled: !!auth.accessToken && !isTokenExpired(auth.accessToken),
   });
+
   const isAuthenticated = !!user && !error;
 
   if (isLoading) {
-    return <Button variant="ghost" size="icon" disabled />;
+    return (
+      <Button variant="ghost" size="icon" disabled>
+        <Loader className="size-4 animate-spin" />
+      </Button>
+    );
   }
 
   if (isAuthenticated && user) {

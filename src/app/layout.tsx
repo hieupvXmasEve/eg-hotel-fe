@@ -3,7 +3,7 @@ import { Providers } from "@/components/providers";
 import { Toaster } from "@/components/ui/toaster";
 import { getAuthState } from "@/features/auth/utils";
 import { routing } from "@/i18n/routing";
-import { AuthProvider } from "@/lib/auth-provider";
+import { AuthProvider } from "@/stores/auth/auth-provider";
 import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 import { Inter } from "next/font/google";
 import { ReactNode } from "react";

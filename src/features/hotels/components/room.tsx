@@ -3,6 +3,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Link } from "@/i18n/routing";
 import Image from "next/image";
 import { IRoom } from "../data/search-room";
+import { convertNameToUrl } from "../utils/convert-name-to-url";
 
 interface RoomProps {
   room: IRoom;
@@ -16,22 +17,27 @@ export default function Room({ room, hotelName }: RoomProps) {
         pathname: "/[hotelName]/[roomName]",
         params: {
           hotelName: hotelName,
-          roomName: room.roomTypeName,
+          roomName: convertNameToUrl(room.room_type_name),
         },
       }}
-      key={room.roomId}
+      key={room.room_id}
       className="block"
     >
       <div className="flex h-32 rounded-lg bg-white shadow-md sm:h-36">
         <div className="relative w-28 sm:w-48">
-          {room.roomImages && room.roomImages.length > 0 ? (
-            room.roomImages.map((roomImg) => (
+          {room.room_images && room.room_images.length > 0 ? (
+            room.room_images.map((roomImg) => (
               <Image
-                key={roomImg.room_image_id}
-                src={roomImg.image}
-                alt={`${room.roomTypeName} image`}
-                className="rounded-lg object-cover object-center"
-                fill
+                key={roomImg.image_url}
+                src={
+                  roomImg.image_url.startsWith("https")
+                    ? roomImg.image_url
+                    : "/images/room-type-1.jpg"
+                }
+                alt={`${room.room_type_name} image`}
+                className="h-full rounded-lg object-cover object-center"
+                width={300}
+                height={200}
               />
             ))
           ) : (
@@ -40,7 +46,7 @@ export default function Room({ room, hotelName }: RoomProps) {
         </div>
         <div className="flex h-full flex-1 flex-col justify-between p-2">
           <div>
-            <h3 className="text-lg font-semibold">{room.roomTypeName}</h3>
+            <h3 className="text-lg font-semibold">{room.room_type_name}</h3>
             {/* <p className="text-sm text-slate-500">{room.address}</p> */}
             <Image
               src="/images/rooms/pool-icon.svg"
@@ -60,7 +66,7 @@ export default function Room({ room, hotelName }: RoomProps) {
               <span className="text-slate-500">Very good</span>
               <span className="text-slate-500">(123 reviews)</span>
             </div>
-            <span className="text-xl font-semibold">${room.basePrice}</span>
+            <span className="text-xl font-semibold">${room.base_price}</span>
           </div>
         </div>
       </div>

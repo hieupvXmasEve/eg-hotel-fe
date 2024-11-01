@@ -15,7 +15,8 @@
           "src/i18n/**/*",
           "src/api/**/*",
           "src/features/**/*",
-          "src/services/**/*"
+          "src/services/**/*",
+          "src/stores/**/*"
         ]
       },
       {

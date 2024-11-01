@@ -2,8 +2,9 @@
 
 import { ReactNode, useEffect } from "react";
 import { AuthContext } from "./auth-context";
-import { UserData } from "@/features/my-account/data/get-user-info";
-import { setAuthToken } from "./axios-client";
+
+import { setAuthToken } from "../../lib/axios-client";
+import { UserData } from "@/features/auth/utils";
 
 interface AuthProviderProps {
   accessToken: string | null;

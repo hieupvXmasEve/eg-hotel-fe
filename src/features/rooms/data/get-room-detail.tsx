@@ -1,7 +1,6 @@
-import axiosInstance from "@/lib/axios";
-import client from "@/lib/axios-client";
+import axiosInstance from "@/lib/axios-client";
 
-export interface UserData {
+export interface RoomDetail {
   user_id: number;
   display_name: string;
   email: string;
@@ -28,15 +27,7 @@ export interface UserData {
   postal_code: string;
 }
 
-export async function getUserInfo(): Promise<UserData> {
-  const response = await client.get("/api/user/info");
+export async function getRoomDetail(roomName: string): Promise<RoomDetail> {
+  const response = await axiosInstance.get(`/api/room/detail/${roomName}`);
   return response.data.data;
-}
-export async function getUserInfoServer(): Promise<{
-  data: UserData;
-  success: boolean;
-  status: number;
-}> {
-  const response = await axiosInstance.get("/api/user/info");
-  return response.data;
 }

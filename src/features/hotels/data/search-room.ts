@@ -2,9 +2,7 @@ import axiosInstance from "@/lib/axios";
 import { AxiosResponse } from "axios";
 
 interface RoomImage {
-  room_image_id: number;
-  image: string;
-  cover: boolean;
+  image_url: string;
 }
 
 interface RoomFeature {
@@ -15,16 +13,16 @@ interface RoomFeature {
 }
 
 export interface IRoom {
-  roomId: number;
-  roomTypeId: number;
-  roomTypeName: string;
-  roomImages: RoomImage[] | null;
-  roomFeatures: RoomFeature[] | null;
+  room_id: number;
+  room_type_id: number;
+  room_type_name: string;
+  room_images: RoomImage[] | null;
+  room_features: RoomFeature[] | null;
   review: string;
   rate: number;
-  countryId: number;
-  countryName: string | null;
-  basePrice: number;
+  country_id: number;
+  country_name: string | null;
+  base_price: number;
 }
 export interface Occupancy {
   adults: number;
@@ -52,7 +50,7 @@ export async function searchRoom({
         rooms: IRoom[];
       };
       message: string;
-    }> = await axiosInstance.get("/api/room/list", {
+    }> = await axiosInstance.get("/api/room/search", {
       headers: {
         Language: lang,
         Currency: currency,

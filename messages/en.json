@@ -192,11 +192,17 @@
   "account": {
     "basic-info": "Basic information",
     "description": "Manage your account and settings here.",
-    "update-account-success": "Update account successfully",
-    "update-account-error": "Update account error",
+    "update-password-success": "Update password successfully",
+    "update-password-error": "Update password error",
     "logout": "Logout",
     "update-account": "Update account",
     "update-password-title": "Update password",
-    "update-password-btn": "Update password"
+    "update-password-btn": "Update password",
+    "old-password": "Old password",
+    "new-password": "New password",
+    "password-mismatch": "Password mismatch",
+    "confirm-password": "Confirm password",
+    "update-account-success": "Update account successfully",
+    "update-account-error": "Update account error"
   }
 }
