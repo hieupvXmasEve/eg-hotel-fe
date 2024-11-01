@@ -1,8 +1,11 @@
 import axiosInstance from "@/lib/axios";
 import { AxiosResponse } from "axios";
 
+interface HotelImage {
+  image_url: string;
+}
 export interface Hotel {
-  id: number;
+  hotel_id: number;
   hotel_name: string;
   description: string | null;
   phone: string;
@@ -15,6 +18,7 @@ export interface Hotel {
   city_id: number;
   state_id: number;
   zip_code: string;
+  hotel_images: HotelImage[];
 }
 export async function getHotel({
   lang = "en",
@@ -41,9 +45,10 @@ export async function getHotel({
       },
     });
     if (!response.data.success) return { error: response.data.message };
+    console.log("response", response.data.data.hotels.length);
     return { success: true, data: response.data.data.hotels };
   } catch (error) {
-    console.error("Sign-in failed:", error);
+    console.error("Sign-in failed ---:", error);
     return { error: "Authentication failed" };
   }
 }

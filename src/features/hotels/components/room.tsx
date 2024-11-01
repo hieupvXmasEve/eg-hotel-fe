@@ -2,26 +2,22 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Link } from "@/i18n/routing";
 import Image from "next/image";
-import { IRoom } from "../data/use-get-rooms";
+import { IRoom } from "../data/search-room";
+import { convertNameToUrl } from "../utils/convert-name-to-url";
 
-// interface Room {
-//   id: number;
-//   image: string;
-//   name: string;
-//   price: number;
-//   address: string;
-//   hotelNameUrl: string;
-//   roomNameUrl: string;
-// }
+interface RoomProps {
+  room: IRoom;
+  hotelName: string;
+}
 
-export default function Room({ room }: { room: IRoom }) {
+export default function Room({ room, hotelName }: RoomProps) {
   return (
     <Link
       href={{
         pathname: "/[hotelName]/[roomName]",
         params: {
-          hotelName: room.room_type_name,
-          roomName: room.room_type_name,
+          hotelName: hotelName,
+          roomName: convertNameToUrl(room.room_type_name),
         },
       }}
       key={room.room_id}
@@ -29,14 +25,19 @@ export default function Room({ room }: { room: IRoom }) {
     >
       <div className="flex h-32 rounded-lg bg-white shadow-md sm:h-36">
         <div className="relative w-28 sm:w-48">
-          {room.room_images.length > 0 ? (
+          {room.room_images && room.room_images.length > 0 ? (
             room.room_images.map((roomImg) => (
               <Image
-                key={roomImg.room_image_id}
-                src={roomImg.image}
+                key={roomImg.image_url}
+                src={
+                  roomImg.image_url.startsWith("https")
+                    ? roomImg.image_url
+                    : "/images/room-type-1.jpg"
+                }
                 alt={`${room.room_type_name} image`}
-                className="rounded-lg object-cover object-center"
-                fill
+                className="h-full rounded-lg object-cover object-center"
+                width={300}
+                height={200}
               />
             ))
           ) : (

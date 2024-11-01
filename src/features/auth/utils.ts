@@ -1,19 +1,17 @@
-import { jwtDecode } from "jwt-decode";
+import { isTokenExpired } from "@/lib/utils";
 import { cookies } from "next/headers";
-
-interface UserData {
-  user_id: number;
-  display_name: string;
-  email: string;
-  avatar_url: string;
-}
 
 interface AuthState {
   user: UserData | null;
   accessToken: string | null;
   isAuthenticated: boolean;
 }
-
+export interface UserData {
+  user_id: number;
+  email: string;
+  display_name: string;
+  avatar_url: string;
+}
 export const setAuthCookies = (accessToken: string, userData: UserData) => {
   const cookieStore = cookies();
   cookieStore.set("accessToken", accessToken, {
@@ -45,15 +43,4 @@ export const clearAuthCookies = () => {
   const cookieStore = cookies();
   cookieStore.delete("accessToken");
   cookieStore.delete("userData");
-};
-
-export const isTokenExpired = (token: string): boolean => {
-  try {
-    const decodedToken = jwtDecode<{ exp: number }>(token);
-    const currentTime = Date.now() / 1000;
-    console.log("decodedToken", new Date(decodedToken.exp * 1000));
-    return decodedToken.exp < currentTime;
-  } catch {
-    return true;
-  }
 };

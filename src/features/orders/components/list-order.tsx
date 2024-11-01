@@ -24,7 +24,7 @@ export default function ListOrder({ data }: { data: OrderHistory[] }) {
     null,
   );
 
-  if (data.length === 0) return <div>No data</div>;
+  if (data.length === 0) return <div className="text-center">No data</div>;
   return (
     <div className="space-y-4">
       {data?.map((booking) => (

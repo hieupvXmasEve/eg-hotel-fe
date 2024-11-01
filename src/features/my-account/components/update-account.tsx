@@ -27,10 +27,10 @@ import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import { convertNewsletter } from "@/features/auth/server/actions/sign-up";
 import { toast } from "@/hooks/use-toast";
 import { UserData } from "../data/get-user-info";
 import { updateUser, UpdateUserData } from "../server/actions/update-user";
+import { convertNewsletter } from "@/lib/utils";
 
 const itemsNewsletter = [
   {
@@ -44,10 +44,7 @@ const itemsNewsletter = [
 ] as const;
 
 const formSchema = z.object({
-  Email: z.string().min(1, "Email is required.").email("Email is invalid."),
-  confirm_password: z.string().min(4, {
-    message: "Password must be at least 4 characters.",
-  }),
+  Email: z.string(),
   Gender: z.enum(["1", "0"]),
   FirstName: z.string().min(1, "First name is required."),
   LastName: z.string().min(1, "Last name is required."),
@@ -101,34 +98,20 @@ export default function UpdateAccount({ user }: UpdateAccountProps) {
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     const updateData: UpdateUserData = {
-      DisplayName: values.FirstName + " " + values.LastName,
-      ContactName: "",
-      ContactTitle: "",
-      AvatarUrl: "",
       Gender: Number(values.Gender),
       Birthday: Math.floor(values.Birthday.getTime() / 1000),
       FirstName: values.FirstName,
       LastName: values.LastName,
       Phone: values.Phone,
-      Fax: "",
-      Website: "",
-      CNIC: "",
-      NTN: "",
-      STRN: "",
-      VAT: "",
       Newsletter: convertNewsletter(values.Newsletter),
-      RegionId: 0,
-      CountryId: 0,
-      StateId: 0,
-      CityId: 0,
-      Address: "",
-      PostalCode: "",
+      DisplayName: values.FirstName + " " + values.LastName,
     };
+    console.log("updateData", updateData);
     updateUserMutation.mutate(updateData);
   };
 
   return (
-    <Card className="container mx-auto">
+    <Card className="">
       <CardHeader>
         <CardTitle className="text-left text-2xl font-bold">
           {t("account.basic-info")}
@@ -225,7 +208,11 @@ export default function UpdateAccount({ user }: UpdateAccountProps) {
                 <FormItem className="col-span-2 md:col-span-1">
                   <FormLabel>{t("sign-up.email")}</FormLabel>
                   <FormControl>
-                    <Input placeholder={t("sign-up.email")} {...field} />
+                    <Input
+                      placeholder={t("sign-up.email")}
+                      {...field}
+                      disabled
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

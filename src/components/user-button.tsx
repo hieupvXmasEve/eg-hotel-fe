@@ -1,7 +1,12 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
-import { getAuthState } from "@/features/auth/utils";
+import { useUserInfo } from "@/features/my-account/data/use-user-info";
 import { Link } from "@/i18n/routing";
-import { getTranslations } from "next-intl/server";
+import { useAuth } from "@/stores/auth/auth-context";
+import { isTokenExpired } from "@/lib/utils";
+import { History, Loader, LogOut, User } from "lucide-react";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import LogoutComponent from "./logout";
 import {
@@ -11,13 +16,29 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import { History, LogOut, User } from "lucide-react";
 
-export default async function UserButton() {
-  const t = await getTranslations("auth");
-  const { user, isAuthenticated } = getAuthState();
+export default function UserButton() {
+  const t = useTranslations("auth");
+  const auth = useAuth();
+  const {
+    data: user,
+    isLoading,
+    error,
+  } = useUserInfo({
+    enabled: !!auth.accessToken && !isTokenExpired(auth.accessToken),
+  });
 
-  if (user && isAuthenticated) {
+  const isAuthenticated = !!user && !error;
+
+  if (isLoading) {
+    return (
+      <Button variant="ghost" size="icon" disabled>
+        <Loader className="size-4 animate-spin" />
+      </Button>
+    );
+  }
+
+  if (isAuthenticated && user) {
     return (
       <div className="relative">
         <DropdownMenu>
