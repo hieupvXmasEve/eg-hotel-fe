@@ -1,7 +1,8 @@
-import { env } from "@/lib/env";
-import axios from "axios";
+"use server";
 
-const API_URL = env.NEXT_PUBLIC_API_URL;
+import ApiClient from "@/lib/client";
+
+const api = new ApiClient();
 
 export interface SignUpData {
   Email: string;
@@ -16,6 +17,16 @@ export interface SignUpData {
 }
 
 export const signUp = async (data: SignUpData) => {
-  const response = await axios.post(`${API_URL}/api/auth/create`, data);
-  return response.data;
+  const response = await api.fetch<{
+    success: boolean;
+    message: string;
+  }>("/api/auth/create", {
+    method: "POST",
+    data,
+  });
+  console.log("response", response);
+  return {
+    success: response.success,
+    message: response.message,
+  };
 };

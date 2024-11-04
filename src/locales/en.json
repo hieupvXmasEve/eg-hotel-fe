@@ -179,7 +179,8 @@
     "sign-in": "Sign in",
     "sign-up": "Sign up",
     "sign-up-success": "Sign up successfully",
-    "sign-up-error": "Sign up error"
+    "sign-up-error": "Sign up error",
+    "password-mismatch": "Password mismatch"
   },
   "sign-in": {
     "title": "Sign in",

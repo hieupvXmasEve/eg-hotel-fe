@@ -1,7 +1,9 @@
 "use client";
 import { DatePicker } from "@/components/datepicker";
+import PhoneInput from "@/components/phone-input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Form,
   FormControl,
@@ -12,20 +14,17 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Link, useRouter } from "@/i18n/routing";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { EyeIcon, EyeOffIcon, Loader2 } from "lucide-react";
-import { Link, useRouter } from "@/i18n/routing";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import PhoneInput from "@/components/phone-input";
-import { useTranslations } from "next-intl";
-import { Checkbox } from "@/components/ui/checkbox";
-import { useMutation } from "@tanstack/react-query";
 
 import { signUp, SignUpData } from "@/features/auth/actions/sign-up";
-import { toast } from "@/hooks/use-toast";
 import { convertNewsletter } from "@/lib/utils";
+import { toast } from "@/hooks/use-toast";
 
 const itemsNewsletter = [
   {
@@ -81,32 +80,7 @@ export default function SignUpPage() {
     },
   });
 
-  const signUpMutation = useMutation({
-    mutationFn: (data: SignUpData) => signUp(data),
-    onSuccess: (data) => {
-      if (data.success) {
-        toast({
-          title: t("sign-up-success"),
-        });
-        router.push("/sign-in");
-      } else {
-        toast({
-          title: t("sign-up-error"),
-          description: data.message,
-          variant: "destructive",
-        });
-      }
-    },
-    onError: (error) => {
-      toast({
-        title: t("sign-up-error"),
-        variant: "destructive",
-      });
-      console.error("Sign-up error:", error);
-    },
-  });
-
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
     if (values.Password !== values.confirm_password) {
       form.setError("confirm_password", {
         message: t("password-mismatch"),
@@ -127,7 +101,18 @@ export default function SignUpPage() {
       Newsletter: convertNewsletter(values.Newsletter),
       DisplayName: values.FirstName + " " + values.LastName,
     };
-    signUpMutation.mutate(signUpData);
+    const result = await signUp(signUpData);
+    if (!result.success) {
+      toast({
+        title: result.message,
+        variant: "destructive",
+      });
+    } else {
+      toast({
+        title: t("sign-up-success"),
+      });
+    }
+    router.push("/sign-in");
   };
 
   return (
@@ -369,10 +354,10 @@ export default function SignUpPage() {
                 type="submit"
                 variant="default"
                 className="w-full md:w-32"
-                disabled={signUpMutation.isPending}
+                disabled={form.formState.isSubmitting}
               >
                 {t("sign-up")}
-                {signUpMutation.isPending && (
+                {form.formState.isSubmitting && (
                   <Loader2 className="ml-2 size-4 animate-spin" />
                 )}
               </Button>

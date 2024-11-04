@@ -40,9 +40,9 @@ export default function PeopleBooking({
   ) => {
     const newRooms = [...rooms];
     if (field === "adults") {
-      newRooms[index][field] = Math.max(1, Math.min(value, 10));
+      newRooms[index]!.adults = Math.max(1, Math.min(value, 10));
     } else {
-      newRooms[index][field] = Math.max(0, Math.min(value, 3));
+      newRooms[index]!.children = Math.max(0, Math.min(value, 3));
     }
     setRooms(newRooms);
   };

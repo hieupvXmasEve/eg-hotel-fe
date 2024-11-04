@@ -46,7 +46,7 @@ export default async function RootLayout({
 
   // Providing all messages to the client
   // side is the easiest way to get started
-  const { accessToken, user } = getAuthCookies();
+  const { accessToken, user } = await getAuthCookies();
   return (
     <html lang={locale} suppressHydrationWarning={true}>
       <body

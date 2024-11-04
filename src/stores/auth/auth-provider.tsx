@@ -4,11 +4,11 @@ import { ReactNode, useEffect } from "react";
 import { AuthContext } from "./auth-context";
 
 import { setAuthToken } from "../../lib/axios-client";
-import { UserData } from "@/features/auth/utils";
+import { UserAuth } from "@/features/auth/utils";
 
 interface AuthProviderProps {
   accessToken: string | null;
-  user: UserData | null;
+  user: UserAuth | null;
   children: ReactNode;
 }
 

@@ -187,6 +187,23 @@
     "sign-up": "Đăng ký",
     "sign-up-error": "Đăng ký lỗi",
     "sign-up-success": "Đăng ký thành công",
-    "title": "Đăng ký"
+    "title": "Đăng ký",
+    "password-mismatch": "Mật khẩu không khớp"
+  },
+  "account": {
+    "basic-info": "Thông tin cơ bản",
+    "confirm-password": "Xác nhận mật khẩu",
+    "description": "Quản lý tài khoản và cài đặt của bạn tại đây.",
+    "logout": "Đăng xuất",
+    "new-password": "Mật khẩu mới",
+    "old-password": "Mật khẩu cũ",
+    "password-mismatch": "Mật khẩu không khớp",
+    "update-account": "Cập nhật tài khoản",
+    "update-account-error": "Lỗi cập nhật tài khoản",
+    "update-account-success": "Cập nhật tài khoản thành công",
+    "update-password-btn": "Cập nhật mật khẩu",
+    "update-password-error": "Cập nhật lỗi mật khẩu",
+    "update-password-success": "Cập nhật mật khẩu thành công",
+    "update-password-title": "Cập nhật mật khẩu"
   }
 }

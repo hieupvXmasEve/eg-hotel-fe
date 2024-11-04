@@ -1,4 +1,3 @@
-"server-only";
 import { cookies } from "next/headers";
 import { env } from "./env";
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios";

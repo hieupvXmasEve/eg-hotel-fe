@@ -50,7 +50,6 @@ export const SignInForm = () => {
         title: result?.error,
         variant: "destructive",
       });
-      console.error(result.error);
     }
   };
 
