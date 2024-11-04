@@ -16,7 +16,9 @@
           "src/api/**/*",
           "src/features/**/*",
           "src/services/**/*",
-          "src/stores/**/*"
+          "src/stores/**/*",
+          "src/types/**/*",
+          "src/utils/**/*"
         ]
       },
       {

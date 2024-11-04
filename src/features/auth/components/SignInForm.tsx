@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { signInAction } from "@/features/auth/server/actions/sign-in-action";
+import { signInAction } from "@/features/auth/actions/sign-in-action";
 import { Link, useRouter } from "@/i18n/routing";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";

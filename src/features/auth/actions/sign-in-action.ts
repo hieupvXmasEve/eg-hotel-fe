@@ -1,8 +1,10 @@
 "use server";
 
 import { setAuthCookies } from "@/features/auth/utils";
-import axiosInstanceClient from "@/lib/axios-client";
 import { z } from "zod";
+import ApiClient from "@/lib/client";
+
+const api = new ApiClient("en", "usd");
 
 const SignInSchema = z.object({
   email: z.string().email(),
@@ -33,12 +35,28 @@ export async function signInAction(
   const { email, password } = validatedFields.data;
 
   try {
-    const response = await axiosInstanceClient.post("/api/auth/login", {
-      Email: email,
-      Password: password,
+    const response = await api.fetch<{
+      success: boolean;
+      status: string;
+      data?: {
+        access_token: string;
+        user_id: number;
+        email: string;
+        display_name: string;
+        avatar_url: string;
+      };
+      message?: string;
+    }>("/api/auth/login", {
+      method: "POST",
+      data: {
+        Email: email,
+        Password: password,
+      },
     });
-    if (!response.data.success) return { error: response.data.message };
-    const { access_token, ...userData } = response.data.data;
+    if (!response.success)
+      return { error: response.message ?? "Unknown error" };
+    console.log(response.data);
+    const { access_token, ...userData } = response.data!;
     setAuthCookies(access_token, userData);
 
     return { success: true };

@@ -23,7 +23,7 @@ import { useTranslations } from "next-intl";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useMutation } from "@tanstack/react-query";
 
-import { signUp, SignUpData } from "@/features/auth/server/actions/sign-up";
+import { signUp, SignUpData } from "@/features/auth/actions/sign-up";
 import { toast } from "@/hooks/use-toast";
 import { convertNewsletter } from "@/lib/utils";
 

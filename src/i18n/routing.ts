@@ -1,12 +1,13 @@
 import { defineRouting } from "next-intl/routing";
 import { createLocalizedPathnamesNavigation } from "next-intl/navigation";
+import { AppConfig } from "@/utils/app-config";
 
 export const routing = defineRouting({
   // A list of all locales that are supported
-  locales: ["en", "vi"],
+  locales: AppConfig.locales,
 
   // Used when no locale matches
-  defaultLocale: "vi",
+  defaultLocale: AppConfig.defaultLocale,
   pathnames: {
     "/": "/",
     "/sign-in": "/sign-in",

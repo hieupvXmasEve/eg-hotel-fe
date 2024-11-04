@@ -1,12 +1,8 @@
-"use client";
-
 import { Button } from "@/components/ui/button";
-import { useUserInfo } from "@/features/my-account/data/use-user-info";
+import { getAuthCookies } from "@/features/auth/utils";
 import { Link } from "@/i18n/routing";
-import { useAuth } from "@/stores/auth/auth-context";
-import { isTokenExpired } from "@/lib/utils";
-import { History, Loader, LogOut, User } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { History, LogOut, User } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 import LogoutComponent from "./logout";
 import {
@@ -17,27 +13,9 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 
-export default function UserButton() {
-  const t = useTranslations("auth");
-  const auth = useAuth();
-  const {
-    data: user,
-    isLoading,
-    error,
-  } = useUserInfo({
-    enabled: !!auth.accessToken && !isTokenExpired(auth.accessToken),
-  });
-
-  const isAuthenticated = !!user && !error;
-
-  if (isLoading) {
-    return (
-      <Button variant="ghost" size="icon" disabled>
-        <Loader className="size-4 animate-spin" />
-      </Button>
-    );
-  }
-
+export default async function UserButton() {
+  const t = await getTranslations("auth");
+  const { user, isAuthenticated } = await getAuthCookies();
   if (isAuthenticated && user) {
     return (
       <div className="relative">

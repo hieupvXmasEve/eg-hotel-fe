@@ -1,7 +1,7 @@
 // import QueryProviders from "@/components/query-provider";
 import { Providers } from "@/components/providers";
 import { Toaster } from "@/components/ui/toaster";
-import { getAuthState } from "@/features/auth/utils";
+import { getAuthCookies } from "@/features/auth/utils";
 import { routing } from "@/i18n/routing";
 import { AuthProvider } from "@/stores/auth/auth-provider";
 import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
@@ -46,7 +46,7 @@ export default async function RootLayout({
 
   // Providing all messages to the client
   // side is the easiest way to get started
-  const { accessToken, user } = getAuthState();
+  const { accessToken, user } = getAuthCookies();
   return (
     <html lang={locale} suppressHydrationWarning={true}>
       <body

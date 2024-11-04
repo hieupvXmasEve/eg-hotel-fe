@@ -16,8 +16,6 @@ export default async function HotelPage({
 }) {
   let occupanciesRoom: Occupancy[] = [];
   occupanciesRoom = convertQueryStringToJson(searchParams.rooms);
-  console.log("occupanciesRoom", occupanciesRoom, params);
-  console.log("searchParams.hotel_id", searchParams);
   const data = await searchRoom({
     dataBody: {
       hotelid: searchParams.hotel_id,
@@ -27,7 +25,6 @@ export default async function HotelPage({
     },
   });
 
-  console.log("data", data);
   const isLoading = false;
 
   if (isLoading) return <Room.Skeleton />;

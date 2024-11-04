@@ -45,7 +45,6 @@ export async function getHotel({
       },
     });
     if (!response.data.success) return { error: response.data.message };
-    console.log("response", response.data.data.hotels.length);
     return { success: true, data: response.data.data.hotels };
   } catch (error) {
     console.error("Sign-in failed ---:", error);

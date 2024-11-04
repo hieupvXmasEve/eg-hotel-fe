@@ -1,6 +1,6 @@
 "use server";
 import https from "https";
-import { env } from "@/data/env/client";
+import { env } from "@/lib/env";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { cookies } from "next/headers";
 

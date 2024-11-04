@@ -1,4 +1,4 @@
-import { env } from "@/data/env/client";
+import { env } from "@/lib/env";
 import axios, {
   AxiosError,
   AxiosResponse,

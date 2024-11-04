@@ -1,6 +1,6 @@
 "use client";
 
-import { signOut } from "@/features/auth/server/actions/sign-out";
+import { signOut } from "@/features/auth/actions/sign-out";
 import { useTranslations } from "next-intl";
 
 export default function Logout() {

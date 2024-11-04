@@ -1,5 +1,7 @@
-import axiosInstance from "@/lib/axios";
+import ApiClient from "@/lib/client";
 import { AxiosResponse } from "axios";
+
+const api = new ApiClient("en", "usd");
 
 interface RoomImage {
   image_url: string;
@@ -43,14 +45,10 @@ export async function searchRoom({
   };
 }) {
   try {
-    console.log("dataBody", dataBody);
     const response: AxiosResponse<{
-      success: boolean;
-      data: {
-        rooms: IRoom[];
-      };
-      message: string;
-    }> = await axiosInstance.get("/api/room/search", {
+      rooms: IRoom[];
+    }> = await api.fetch("/api/room/search", {
+      method: "POST",
       headers: {
         Language: lang,
         Currency: currency,
@@ -58,8 +56,7 @@ export async function searchRoom({
       },
       data: dataBody,
     });
-    if (!response.data.success) return { error: response.data.message };
-    return { success: true, data: response.data.data.rooms };
+    return { success: true, data: response.data.rooms };
   } catch (error) {
     console.error("Sign-in failed:", error);
     return { error: "Authentication failed" };

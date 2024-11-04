@@ -1,6 +1,6 @@
 import UserButton from "@/components/user-button";
 import SearchForm from "@/features/home/components/search-form";
-import { getHotel } from "@/features/home/data/get-hotel";
+import { getHotels } from "@/features/hotels/data/get-hotels";
 import { Link } from "@/i18n/routing";
 import { DownloadIcon, HamburgerMenuIcon } from "@radix-ui/react-icons";
 import { Loader } from "lucide-react";
@@ -13,10 +13,11 @@ import { Button } from "./ui/button";
 
 export default async function Header() {
   const t = await getTranslations("home");
-  const { data } = await getHotel({});
+  const hotels_data = await getHotels();
+  console.log("-------", hotels_data.length);
 
   const hotels =
-    data?.map((hotel) => ({
+    hotels_data?.map((hotel) => ({
       hotel_id: hotel.hotel_id,
       hotel_name: hotel.hotel_name,
       value: hotel.hotel_id.toString(),
@@ -52,9 +53,9 @@ export default async function Header() {
               <Suspense fallback={<Loader className="h-6 w-6" />}>
                 <LanguagesButton />
               </Suspense>
-              <UserButton />
-              {/* <HydrationBoundary state={dehydrate(queryClient)}>
-              </HydrationBoundary> */}
+              <Suspense fallback={<Loader className="h-6 w-6" />}>
+                <UserButton />
+              </Suspense>
             </div>
           </div>
           <div className="relative py-4 text-white">

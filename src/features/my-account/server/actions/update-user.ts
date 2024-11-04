@@ -1,6 +1,6 @@
 "use server";
 
-import { env } from "@/data/env/client";
+import { env } from "@/lib/env";
 import axiosInstance from "@/lib/axios";
 import { revalidatePath } from "next/cache";
 

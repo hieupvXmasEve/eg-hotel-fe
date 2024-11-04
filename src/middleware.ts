@@ -1,7 +1,7 @@
 import { routing } from "@/i18n/routing";
 import createMiddleware from "next-intl/middleware";
 import { NextRequest, NextResponse } from "next/server";
-import { getAuthState } from "./features/auth/utils";
+import { getAuthCookies } from "./features/auth/utils";
 
 const intlMiddleware = createMiddleware(routing);
 
@@ -16,7 +16,7 @@ export default async function middleware(req: NextRequest) {
   // Apply intl middleware for all routes
   const response = intlMiddleware(req);
 
-  const authState = getAuthState();
+  const authState = await getAuthCookies();
   // console.log("authState middleware", authState);
   // Redirect authenticated users from public routes to home
   if (

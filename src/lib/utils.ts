@@ -27,7 +27,7 @@ export function convertQueryStringToJson(
   paramsString.forEach((value, key) => {
     const match = key.match(/rooms\[(\d+)\]\[(.+)\]/);
     if (match) {
-      const index = parseInt(match[1]);
+      const index = parseInt(match[1]!);
       const field = match[2];
 
       // Ensure the rooms array has an object for the index

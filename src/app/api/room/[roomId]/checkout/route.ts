@@ -1,6 +1,6 @@
 import Stripe from "stripe";
 import { NextRequest, NextResponse } from "next/server";
-import { env } from "@/data/env/server";
+import { env } from "@/lib/env";
 
 const stripe = new Stripe(env.STRIPE_SECRET_KEY, {
   typescript: true,

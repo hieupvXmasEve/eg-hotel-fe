@@ -1,4 +1,4 @@
-import { env } from "@/data/env/client";
+import { env } from "@/lib/env";
 import axios from "axios";
 
 const API_URL = env.NEXT_PUBLIC_API_URL;
