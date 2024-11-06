@@ -1,0 +1,10 @@
+{
+  "name": "EG Paradise Angkor Villa Hotel",
+  "short_name": "EG Hotel",
+  "description": "Luxury hotel in Siem Reap, Cambodia",
+  "icons": [],
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "start_url": "/"
+}

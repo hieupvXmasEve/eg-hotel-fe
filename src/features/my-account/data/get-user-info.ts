@@ -1,5 +1,6 @@
-import axiosInstance from "@/lib/axios";
-import client from "@/lib/axios-client";
+import ApiClient from "@/lib/client";
+
+const api = new ApiClient("en", "usd");
 
 export interface UserData {
   user_id: number;
@@ -27,16 +28,12 @@ export interface UserData {
   address: string;
   postal_code: string;
 }
-
-export async function getUserInfo(): Promise<UserData> {
-  const response = await client.get("/api/user/info");
-  return response.data.data;
-}
-export async function getUserInfoServer(): Promise<{
-  data: UserData;
+export interface GetUserInfoResponse {
   success: boolean;
-  status: number;
-}> {
-  const response = await axiosInstance.get("/api/user/info");
-  return response.data;
+  data: UserData;
+  status: string;
+}
+export async function getUserInfo() {
+  const response = await api.fetch<GetUserInfoResponse>("/api/user/info");
+  return response;
 }

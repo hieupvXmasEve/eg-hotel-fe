@@ -30,7 +30,7 @@ class ApiClient {
     // Thêm interceptor để xử lý token
     this.axiosInstance.interceptors.request.use((config) => {
       const cookieStore = cookies();
-      const accessToken = cookieStore.get("access_token")?.value;
+      const accessToken = cookieStore.get("accessToken")?.value;
       if (accessToken) {
         config.headers.Authorization = `Bearer ${accessToken}`;
       }

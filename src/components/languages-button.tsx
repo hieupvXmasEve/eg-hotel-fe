@@ -36,7 +36,7 @@ export default function LanguagesButton() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon">
+        <Button variant="link" size="icon">
           <Image
             src={`/images/locales/${locale}.png`}
             alt={locale === "en" ? "English" : "Vietnamese"}

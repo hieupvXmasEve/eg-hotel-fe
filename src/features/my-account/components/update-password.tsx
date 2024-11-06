@@ -17,7 +17,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
 import { EyeIcon, EyeOffIcon, Loader2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
@@ -25,10 +24,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { toast } from "@/hooks/use-toast";
-import {
-  changePassword,
-  ChangePasswordProps,
-} from "../server/actions/change-password";
+import { changePassword } from "../actions/change-password";
 
 const formSchema = z.object({
   Password: z.string().min(4, {
@@ -49,6 +45,7 @@ export default function UpdatePassword() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [showOldPassword, setShowOldPassword] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
   const toggleConfirmPasswordVisibility = () =>
@@ -65,46 +62,36 @@ export default function UpdatePassword() {
     },
   });
 
-  const updateUserMutation = useMutation({
-    mutationFn: (data: ChangePasswordProps) => changePassword({ data }),
-    onSuccess: (data) => {
-      if (data.success && !data?.message) {
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      setIsSubmitting(true);
+      if (values.Password !== values.confirm_password) {
+        form.setError("confirm_password", {
+          message: t("password-mismatch"),
+        });
+        form.setError("Password", {
+          message: t("password-mismatch"),
+        });
+        return;
+      }
+      const result = await changePassword({
+        OldPassword: values.OldPassword,
+        NewPassword: values.Password,
+      });
+      if (result) {
         toast({
           title: t("update-password-success"),
+          className: "bg-green-500 text-white",
         });
-        // refresh form data
-        form.reset();
       } else {
         toast({
           title: t("update-password-error"),
-          description: data.message,
           variant: "destructive",
         });
       }
-    },
-    onError: (error) => {
-      toast({
-        title: t("update-password-error"),
-        variant: "destructive",
-      });
-      console.error("Sign-up error:", error);
-    },
-  });
-
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    if (values.Password !== values.confirm_password) {
-      form.setError("confirm_password", {
-        message: t("password-mismatch"),
-      });
-      form.setError("Password", {
-        message: t("password-mismatch"),
-      });
-      return;
+    } finally {
+      setIsSubmitting(false);
     }
-    updateUserMutation.mutate({
-      OldPassword: values.OldPassword,
-      NewPassword: values.Password,
-    });
   };
 
   return (
@@ -224,11 +211,11 @@ export default function UpdatePassword() {
               <Button
                 type="submit"
                 variant="default"
-                className="w-full md:w-32"
-                disabled={updateUserMutation.isPending}
+                className=""
+                disabled={isSubmitting}
               >
                 {t("update-password-btn")}
-                {updateUserMutation.isPending && (
+                {isSubmitting && (
                   <Loader2 className="ml-2 size-4 animate-spin" />
                 )}
               </Button>

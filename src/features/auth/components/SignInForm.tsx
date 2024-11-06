@@ -10,13 +10,14 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { signInAction } from "@/features/auth/actions/sign-in-action";
-import { Link, useRouter } from "@/i18n/routing";
+import { Link } from "@/i18n/routing";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
 import { Loader2 } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import { useRouter } from "nextjs-toploader/app";
 
 const SignInSchema = z.object({
   email: z.string().email(),
@@ -42,9 +43,16 @@ export const SignInForm = () => {
     formData.append("password", data.password);
 
     const result = await signInAction(formData);
-    console.log("result", result);
     if (result?.success) {
-      router.push("/"); // Redirect to dashboard on success
+      const callbackUrl = new URLSearchParams(window.location.search).get(
+        "callbackUrl",
+      );
+      console.log("callbackUrl", callbackUrl);
+      if (callbackUrl) {
+        router.push(callbackUrl);
+      } else {
+        router.push("/"); // Redirect to dashboard on success
+      }
     } else {
       toast({
         title: result?.error,

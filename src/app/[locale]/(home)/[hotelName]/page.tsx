@@ -1,8 +1,8 @@
-import Room from "@/features/hotels/components/room";
-import { Occupancy, searchRoom } from "@/features/hotels/data/search-room";
-import { convertQueryStringToJson } from "@/lib/utils";
+import { RoomSkeleton } from "@/features/hotels/components/room";
+import RoomList from "@/features/hotels/components/room-list";
+import { Suspense } from "react";
 
-export default async function HotelPage({
+export default function HotelPage({
   params,
   searchParams,
 }: {
@@ -12,28 +12,12 @@ export default async function HotelPage({
     date_to: string;
     rooms: string;
     hotel_id: string;
+    timestamp?: string;
   };
 }) {
-  let occupanciesRoom: Occupancy[] = [];
-  occupanciesRoom = convertQueryStringToJson(searchParams.rooms);
-  const data = await searchRoom({
-    dataBody: {
-      hotelid: searchParams.hotel_id,
-      checkintime: searchParams.date_from,
-      checkouttime: searchParams.date_to,
-      occupancy: occupanciesRoom,
-    },
-  });
-
-  const isLoading = false;
-
-  if (isLoading) return <Room.Skeleton />;
-  if (!data.data?.length) return <div className="text-center">No data</div>;
   return (
-    <div className="space-y-3">
-      {data.data.map((room) => (
-        <Room key={room.room_id} room={room} hotelName={params.hotelName} />
-      ))}
-    </div>
+    <Suspense fallback={<RoomSkeleton />}>
+      <RoomList hotelName={params.hotelName} searchParams={searchParams} />
+    </Suspense>
   );
 }

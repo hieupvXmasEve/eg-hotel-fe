@@ -19,6 +19,9 @@ export default function Room({ room, hotelName }: RoomProps) {
           hotelName: hotelName,
           roomName: convertNameToUrl(room.room_type_name),
         },
+        query: {
+          room_id: room.room_id,
+        },
       }}
       key={room.room_id}
       className="block"
@@ -73,11 +76,13 @@ export default function Room({ room, hotelName }: RoomProps) {
     </Link>
   );
 }
-Room.Skeleton = function RoomSkeleton() {
+export function RoomSkeleton() {
   return (
     <div className="space-y-3">
       <Skeleton className="h-[144px] w-full rounded-lg bg-secondary" />
       <Skeleton className="h-[144px] w-full rounded-lg bg-secondary" />
+      <Skeleton className="h-[144px] w-full rounded-lg bg-secondary" />
+      <Skeleton className="h-[144px] w-full rounded-lg bg-secondary" />
     </div>
   );
-};
+}

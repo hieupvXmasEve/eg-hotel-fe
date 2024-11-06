@@ -31,8 +31,13 @@
       "age-0-to-17": "Age 0 to 17"
     }
   },
-  "LocaleLayout": {
-    "title": "EG Paradise Angkor Villa Hotel"
+  "Metadata": {
+    "title": "EG Paradise Angkor Villa Hotel",
+    "description": "Luxury hotel in Siem Reap, Cambodia offering comfortable stays with modern amenities",
+    "keywords": "hotel,luxury hotel,Siem Reap,Cambodia,accommodation,booking",
+    "author": "EG Paradise Angkor Villa Hotel",
+    "creator": "EG Paradise Angkor Villa Hotel",
+    "ogImageAlt": "EG Paradise Angkor Villa Hotel - Luxury Accommodation in Siem Reap"
   },
   "btn": {
     "cancel": "Cancel",

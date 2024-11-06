@@ -8,8 +8,13 @@
     "order-history": "Lịch sử đặt hàng",
     "profile": "Tài khoản của tôi"
   },
-  "LocaleLayout": {
-    "title": "Khách sạn biệt thự EG Paradise Angkor"
+  "Metadata": {
+    "title": "Khách sạn EG Paradise Angkor Villa",
+    "description": "Khách sạn sang trọng tại Siem Reap, Campuchia cung cấp kỳ nghỉ thoải mái với tiện nghi hiện đại",
+    "keywords": "khách sạn,khách sạn sang trọng,Siem Reap,Campuchia,chỗ ở,đặt phòng",
+    "author": "Khách sạn EG Paradise Angkor Villa",
+    "creator": "Khách sạn EG Paradise Angkor Villa",
+    "ogImageAlt": "Khách sạn EG Paradise Angkor Villa - Chỗ ở sang trọng tại Siem Reap"
   },
   "home": {
     "btn-language": "Ngôn ngữ",

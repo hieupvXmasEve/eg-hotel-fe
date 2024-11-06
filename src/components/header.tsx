@@ -14,8 +14,6 @@ import { Button } from "./ui/button";
 export default async function Header() {
   const t = await getTranslations("home");
   const hotels_data = await getHotels();
-  console.log("-------", hotels_data.length);
-
   const hotels =
     hotels_data?.map((hotel) => ({
       hotel_id: hotel.hotel_id,

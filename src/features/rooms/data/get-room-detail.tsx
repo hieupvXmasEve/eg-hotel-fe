@@ -1,33 +1,38 @@
-import axiosInstance from "@/lib/axios-client";
-
+import ApiClient from "@/lib/client";
+const api = new ApiClient();
 export interface RoomDetail {
-  user_id: number;
-  display_name: string;
-  email: string;
-  contact_name: string | null;
-  contact_title: string | null;
-  avatar_url: string;
-  gender: number;
-  birthday: string; // Consider using Date if you want to handle it as a date object
-  first_name: string;
-  last_name: string;
-  phone: string;
-  fax: string | null;
-  website: string | null;
-  cnic: string | null;
-  ntn: string | null;
-  strn: string | null;
-  vat: string | null;
-  newsletter: number;
-  region_id: string | null;
-  country_id: string | null;
-  state_id: string | null;
-  city_id: string | null;
+  room_id: number;
+  room_name: string;
+  room_type_id: number;
+  room_type_name: string;
+  hotel_id: number;
+  hotel_name: string;
   address: string;
-  postal_code: string;
+  room_description: string | null;
+  member_price: number;
+  non_member_price: number;
+  adults: number;
+  children: number | null;
+  stars: number | null;
+  bed_number: number;
+  bed_type_id: number;
+  bed_type_name: string;
+  hotel_policies: string;
+  refund_policies: string;
+  quantity_room: number;
+  longitude: number;
+  latitude: number;
+  check_in: string;
+  check_out: string;
+  rate: number | null;
+  room_images: [];
+  room_facilities: [];
 }
-
-export async function getRoomDetail(roomName: string): Promise<RoomDetail> {
-  const response = await axiosInstance.get(`/api/room/detail/${roomName}`);
-  return response.data.data;
+export interface RoomDetailResponse {
+  success: boolean;
+  data: RoomDetail;
+}
+export async function getRoomDetail(roomId: string) {
+  const response = await api.fetch<RoomDetailResponse>(`/api/room/${roomId}`);
+  return response;
 }

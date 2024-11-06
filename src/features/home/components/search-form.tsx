@@ -21,10 +21,11 @@ import {
 
 import { DatePickerWithRange } from "@/components/date-picker-with-range";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "@/i18n/routing";
+import { useRouter } from "nextjs-toploader/app";
+
 import { addDays, format } from "date-fns";
 import { Hotel } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
 import PeopleBooking, { Room } from "./search-room/people-booking";
 import { convertNameToUrl } from "@/features/hotels/utils/convert-name-to-url";
@@ -47,7 +48,7 @@ interface SearchFormProps {
 }
 export default function SearchForm({ hotels }: SearchFormProps) {
   const router = useRouter();
-
+  const locale = useLocale();
   const [rooms, setRooms] = useState<Room[]>([{ adults: 1, children: 0 }]);
   const t = useTranslations("home");
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -67,27 +68,17 @@ export default function SearchForm({ hotels }: SearchFormProps) {
 
     // Create URLSearchParams from the query object
     const params = new URLSearchParams();
-    console.log("rooms", rooms);
     rooms.forEach((room, index) => {
       params.append(`rooms[${index}][adults]`, room.adults.toString());
       params.append(`rooms[${index}][children]`, room.children.toString());
     });
-    console.log("params.toString()", params.toString());
-    router.push({
-      pathname: "/[hotelName]",
-      params: {
-        hotelName: convertNameToUrl(
-          hotels.find((hotel) => hotel.hotel_id === Number(data.hotel_id))
-            ?.hotel_name || "",
-        ),
-      },
-      query: {
-        date_from: date_from,
-        date_to: date_to,
-        rooms: params.toString(),
-        hotel_id: data.hotel_id,
-      },
-    });
+    const roomName = convertNameToUrl(
+      hotels.find((hotel) => hotel.hotel_id === Number(data.hotel_id))
+        ?.hotel_name || "",
+    );
+    router.push(
+      `${locale}/${roomName}?date_from=${date_from}&date_to=${date_to}&rooms=${params.toString()}&hotel_id=${data.hotel_id}&timestamp=${Date.now().toString()}`,
+    );
   }
   return (
     <div className="rounded-md border-2 border-primary bg-white p-2">

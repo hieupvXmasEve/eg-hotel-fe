@@ -4,7 +4,8 @@ const localePrefix: LocalePrefix = "as-needed";
 
 // FIXME: Update this configuration file based on your project information
 export const AppConfig = {
-  name: "Eg hotel",
+  name: "EG Paradise Angkor Villa Hotel",
+  description: "Luxury hotel in Siem Reap, Cambodia",
   locales: ["en", "vi"],
   defaultLocale: "en",
   localePrefix,

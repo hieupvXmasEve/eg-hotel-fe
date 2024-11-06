@@ -1,13 +1,14 @@
+import FormAccountUpdateSkeleton from "@/features/my-account/components/form-account-update-skeleton";
 import UpdateAccount from "@/features/my-account/components/update-account";
 import UpdatePassword from "@/features/my-account/components/update-password";
-import { getUserInfoServer } from "@/features/my-account/data/get-user-info";
+import { Suspense } from "react";
 
 export default async function AccountPage() {
-  const { data, success } = await getUserInfoServer();
-  if (!success) return <div>Error</div>;
   return (
-    <div className="">
-      <UpdateAccount user={data} />
+    <div className="mb-20 md:mb-0">
+      <Suspense fallback={<FormAccountUpdateSkeleton />}>
+        <UpdateAccount />
+      </Suspense>
       <UpdatePassword />
     </div>
   );
