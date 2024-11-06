@@ -8,6 +8,12 @@ export async function getHotels() {
     data: {
       hotels: Hotel[];
     };
-  }>("/api/hotels/all");
+  }>("/api/hotels/all", {
+    data: {
+      pageNumb: null,
+      pageSize: null,
+      sorts: null,
+    },
+  });
   return hotels.data.hotels;
 }

@@ -10,9 +10,12 @@ import { Suspense } from "react";
 import LanguagesButton from "./languages-button";
 import Logo from "./logo";
 import { Button } from "./ui/button";
+import { headers } from "next/headers";
 
 export default async function Header() {
   const t = await getTranslations("home");
+  const header = await headers();
+  const hotelId = header.get("hotel_id");
   const hotels_data = await getHotels();
   const hotels =
     hotels_data?.map((hotel) => ({
@@ -61,7 +64,7 @@ export default async function Header() {
             <p className="mt-2">{t("hotel-address")}</p>
           </div>
           <div className="absolute bottom-0 left-0 w-full translate-y-full px-2 md:px-5">
-            <SearchForm hotels={hotels} />
+            <SearchForm hotels={hotels} hotelId={hotelId || ""} />
           </div>
         </div>
       </header>

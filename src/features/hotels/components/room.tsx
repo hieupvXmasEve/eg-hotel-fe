@@ -8,9 +8,10 @@ import { convertNameToUrl } from "../utils/convert-name-to-url";
 interface RoomProps {
   room: IRoom;
   hotelName: string;
+  hotelId: string;
 }
 
-export default function Room({ room, hotelName }: RoomProps) {
+export default function Room({ room, hotelName, hotelId }: RoomProps) {
   return (
     <Link
       href={{
@@ -21,6 +22,7 @@ export default function Room({ room, hotelName }: RoomProps) {
         },
         query: {
           room_id: room.room_id,
+          hotel_id: hotelId,
         },
       }}
       key={room.room_id}

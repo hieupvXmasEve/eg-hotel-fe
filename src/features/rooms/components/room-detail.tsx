@@ -4,25 +4,26 @@ import Accessibility from "@/features/rooms/components/accessibility";
 import Amenities from "@/features/rooms/components/amenities";
 import BookNow from "@/features/rooms/components/book-now";
 
+import { Skeleton } from "@/components/ui/skeleton";
 import Overview from "@/features/rooms/components/overview";
 import Photos from "@/features/rooms/components/photos";
 import Policies from "@/features/rooms/components/policies";
 import { cn } from "@/lib/utils";
-import { Loader } from "lucide-react";
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
-
+import { RoomDetail } from "../data/get-room-detail";
 const MapComponent = dynamic(() => import("@/features/rooms/components/map"), {
   ssr: false,
   loading: () => (
     <div className="flex items-center justify-center">
-      <Loader className="animate-spin" />
+      <Skeleton className="h-64 w-full" />
     </div>
   ),
 });
 type Section = "overview" | "accessibility" | "policies" | "amenities";
 
-export default function RoomDetail() {
+export default function RoomDetailComponent({ data }: { data: RoomDetail }) {
+  console.log("data", data);
   const [activeSection, setActiveSection] = useState<Section>("overview");
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const sectionRefs: Record<Section, React.RefObject<HTMLElement>> = {

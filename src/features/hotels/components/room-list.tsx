@@ -28,13 +28,17 @@ export default async function RoomList({
       occupancy: occupanciesRoom,
     },
   });
-
   if (!data.data?.length) return <div className="text-center">No data</div>;
 
   return (
     <div className="space-y-3">
       {data.data.map((room) => (
-        <Room key={room.room_id} room={room} hotelName={hotelName} />
+        <Room
+          key={room.room_id}
+          room={room}
+          hotelName={hotelName}
+          hotelId={searchParams.hotel_id}
+        />
       ))}
     </div>
   );

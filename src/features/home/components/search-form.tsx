@@ -45,8 +45,9 @@ interface SearchFormProps {
     hotel_name: string;
     value: string;
   }>;
+  hotelId: string;
 }
-export default function SearchForm({ hotels }: SearchFormProps) {
+export default function SearchForm({ hotels, hotelId }: SearchFormProps) {
   const router = useRouter();
   const locale = useLocale();
   const [rooms, setRooms] = useState<Room[]>([{ adults: 1, children: 0 }]);
@@ -54,7 +55,7 @@ export default function SearchForm({ hotels }: SearchFormProps) {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      hotel_id: hotels?.[0]?.hotel_id?.toString() || "",
+      hotel_id: hotelId || hotels?.[0]?.hotel_id?.toString() || "",
       check_in_date: {
         from: new Date(),
         to: addDays(new Date(), 1),
@@ -77,7 +78,7 @@ export default function SearchForm({ hotels }: SearchFormProps) {
         ?.hotel_name || "",
     );
     router.push(
-      `${locale}/${roomName}?date_from=${date_from}&date_to=${date_to}&rooms=${params.toString()}&hotel_id=${data.hotel_id}&timestamp=${Date.now().toString()}`,
+      `/${locale}/${roomName}?date_from=${date_from}&date_to=${date_to}&rooms=${params.toString()}&hotel_id=${data.hotel_id}&timestamp=${Date.now().toString()}`,
     );
   }
   return (
