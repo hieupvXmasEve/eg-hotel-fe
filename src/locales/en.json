@@ -114,7 +114,8 @@
       "title": "Book now",
       "number-of-rooms": "Number of rooms",
       "rooms": "rooms",
-      "book-now": "BOOK NOW"
+      "book-now": "BOOK NOW",
+      "booking-details": "Booking details"
     }
   },
   "contact": {
