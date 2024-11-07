@@ -1,38 +1,21 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import {
-  useStripe,
-  useElements,
-  PaymentElement,
-} from "@stripe/react-stripe-js";
-import { convertToSubcurrency } from "@/lib/convertToSubcurrency";
 import { Button } from "@/components/ui/button";
+import { env } from "@/lib/env";
+import {
+  PaymentElement,
+  useElements,
+  useStripe,
+} from "@stripe/react-stripe-js";
+import { useLocale } from "next-intl";
+import React, { useState } from "react";
 
-const CheckoutPage = ({
-  amount,
-  roomId,
-}: {
-  amount: number;
-  roomId: number;
-}) => {
+const CheckoutPage = ({ amount }: { amount: number }) => {
   const stripe = useStripe();
   const elements = useElements();
+  const locale = useLocale();
   const [errorMessage, setErrorMessage] = useState<string>();
-  const [clientSecret, setClientSecret] = useState("");
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    fetch(`/api/room/${roomId}/checkout`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ amount: convertToSubcurrency(amount) }),
-    })
-      .then((res) => res.json())
-      .then((data) => setClientSecret(data.clientSecret));
-  }, [amount, roomId]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -52,9 +35,8 @@ const CheckoutPage = ({
 
     const { error } = await stripe.confirmPayment({
       elements,
-      clientSecret,
       confirmParams: {
-        return_url: `http://www.localhost:3000/payment-success?amount=${amount}`,
+        return_url: `${env.NEXT_PUBLIC_FRONTEND_URL}/${locale}/payment-success?amount=${amount}`,
       },
     });
 
@@ -70,7 +52,7 @@ const CheckoutPage = ({
     setLoading(false);
   };
 
-  if (!clientSecret || !stripe || !elements) {
+  if (!stripe || !elements) {
     return (
       <div className="flex items-center justify-center">
         <div
@@ -87,7 +69,7 @@ const CheckoutPage = ({
 
   return (
     <form onSubmit={handleSubmit} className="rounded-md bg-white p-2">
-      {clientSecret && <PaymentElement />}
+      <PaymentElement />
 
       {errorMessage && <div>{errorMessage}</div>}
 

@@ -9,9 +9,17 @@ interface RoomProps {
   room: IRoom;
   hotelName: string;
   hotelId: string;
+  date_from: string;
+  date_to: string;
 }
 
-export default function Room({ room, hotelName, hotelId }: RoomProps) {
+export default function Room({
+  room,
+  hotelName,
+  hotelId,
+  date_from,
+  date_to,
+}: RoomProps) {
   return (
     <Link
       href={{
@@ -23,6 +31,8 @@ export default function Room({ room, hotelName, hotelId }: RoomProps) {
         query: {
           room_id: room.room_id,
           hotel_id: hotelId,
+          date_from: date_from,
+          date_to: date_to,
         },
       }}
       key={room.room_id}

@@ -87,7 +87,7 @@ export default function ListOrder({ data }: { data: OrderHistory[] }) {
           </DialogHeader>
           {selectedBooking && (
             <div className="flex-grow overflow-y-auto px-4">
-              <div className="mb-4 rounded-lg bg-purple-500 p-4 text-white">
+              <div className="mb-4 rounded-lg bg-gradient-to-b from-[#8664E2] to-[#6558CD] p-4 text-white">
                 <h3 className="font-semibold">{selectedBooking.hotelName}</h3>
                 <div className="flex items-center">
                   <Rating value={4.5} />

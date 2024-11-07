@@ -114,7 +114,8 @@
       "book-now": "ĐẶT NGAY",
       "number-of-rooms": "Số phòng",
       "rooms": "phòng",
-      "title": "Đặt ngay"
+      "title": "Đặt ngay",
+      "booking-details": "Chi tiết đặt chỗ"
     }
   },
   "contact": {
@@ -210,5 +211,8 @@
     "update-password-error": "Cập nhật lỗi mật khẩu",
     "update-password-success": "Cập nhật mật khẩu thành công",
     "update-password-title": "Cập nhật mật khẩu"
+  },
+  "not-found": {
+    "title": "404 Không tìm thấy"
   }
 }

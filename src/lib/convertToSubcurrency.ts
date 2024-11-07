@@ -1,3 +1,5 @@
-export function convertToSubcurrency(amount: number, factor = 100) {
+"use client";
+
+export function convertToSubCurrency(amount: number, factor = 100) {
   return Math.round(amount * factor);
 }

@@ -210,5 +210,8 @@
     "confirm-password": "Confirm password",
     "update-account-success": "Update account successfully",
     "update-account-error": "Update account error"
+  },
+  "not-found": {
+    "title": "404 Not found"
   }
 }

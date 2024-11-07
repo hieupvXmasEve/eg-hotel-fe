@@ -8,6 +8,7 @@ export const env = createEnv({
     NEXT_PUBLIC_SERVER_URL: z.string().url(),
     NEXT_PUBLIC_STRIPE_PUBLIC_KEY: z.string(),
     NEXT_PUBLIC_API_URL: z.string().url(),
+    NEXT_PUBLIC_FRONTEND_URL: z.string().url(),
   },
   server: {
     STRIPE_SECRET_KEY: z.string(),
@@ -16,6 +17,7 @@ export const env = createEnv({
     NEXT_PUBLIC_SERVER_URL: process.env.NEXT_PUBLIC_SERVER_URL,
     NEXT_PUBLIC_STRIPE_PUBLIC_KEY: process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY,
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
+    NEXT_PUBLIC_FRONTEND_URL: process.env.NEXT_PUBLIC_FRONTEND_URL,
   },
   shared: {
     // NODE_ENV: z.enum(["test", "development", "production"]).optional(),

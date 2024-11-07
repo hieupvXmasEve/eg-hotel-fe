@@ -14,7 +14,6 @@ export default async function middleware(req: NextRequest) {
   const pathname = `/${segments.join("/")}`;
   // get query params from url
   const queryParams = req.nextUrl.searchParams;
-  console.log("queryParams", queryParams.has("hotel_id"));
   // check if query params has hotel_id then add it to headers
   if (queryParams.has("hotel_id")) {
     req.headers.set("hotel_id", queryParams.get("hotel_id") || "");

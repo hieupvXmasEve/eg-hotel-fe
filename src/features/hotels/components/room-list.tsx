@@ -38,6 +38,8 @@ export default async function RoomList({
           room={room}
           hotelName={hotelName}
           hotelId={searchParams.hotel_id}
+          date_from={searchParams.date_from}
+          date_to={searchParams.date_to}
         />
       ))}
     </div>

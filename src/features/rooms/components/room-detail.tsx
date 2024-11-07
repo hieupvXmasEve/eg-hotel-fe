@@ -3,7 +3,6 @@
 import Accessibility from "@/features/rooms/components/accessibility";
 import Amenities from "@/features/rooms/components/amenities";
 import BookNow from "@/features/rooms/components/book-now";
-
 import { Skeleton } from "@/components/ui/skeleton";
 import Overview from "@/features/rooms/components/overview";
 import Photos from "@/features/rooms/components/photos";
@@ -12,6 +11,8 @@ import { cn } from "@/lib/utils";
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 import { RoomDetail } from "../data/get-room-detail";
+import { useRoomDetail } from "../stores/use-room-detail";
+
 const MapComponent = dynamic(() => import("@/features/rooms/components/map"), {
   ssr: false,
   loading: () => (
@@ -20,18 +21,35 @@ const MapComponent = dynamic(() => import("@/features/rooms/components/map"), {
     </div>
   ),
 });
+
 type Section = "overview" | "accessibility" | "policies" | "amenities";
 
-export default function RoomDetailComponent({ data }: { data: RoomDetail }) {
-  console.log("data", data);
+export default function RoomDetailComponent({
+  data,
+  date_from,
+  date_to,
+}: {
+  data: RoomDetail;
+  date_from: string;
+  date_to: string;
+}) {
   const [activeSection, setActiveSection] = useState<Section>("overview");
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const sectionRefs: Record<Section, React.RefObject<HTMLElement>> = {
     overview: useRef(null),
     accessibility: useRef(null),
     policies: useRef(null),
     amenities: useRef(null),
   };
+
+  // Reset and initialize store on component mount
+  useEffect(() => {
+    useRoomDetail.getState().reset();
+    useRoomDetail.setState({
+      roomDetail: data,
+      dateFrom: date_from,
+      dateTo: date_to,
+    });
+  }, [data, date_from, date_to]);
 
   useEffect(() => {
     const observers = Object.entries(sectionRefs).map(([id, ref]) => {
