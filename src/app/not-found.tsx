@@ -1,8 +1,10 @@
 export const dynamic = "force-dynamic";
-import { useTranslations } from "next-intl";
 
-export default function NotFound() {
-  const t = useTranslations("NotFoundPage");
+import { getTranslations } from "next-intl/server";
+
+export default async function NotFound() {
+  const t = await getTranslations("not-found");
+
   return (
     <>
       <h1>{t("title")}</h1>

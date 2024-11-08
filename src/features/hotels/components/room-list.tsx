@@ -1,6 +1,7 @@
 import { convertQueryStringToJson } from "@/lib/utils";
 import { Occupancy, searchRoom } from "../data/search-room";
 import Room from "./room";
+import { notFound } from "next/navigation";
 
 interface RoomListProps {
   hotelName: string;
@@ -19,6 +20,8 @@ export default async function RoomList({
 }: RoomListProps) {
   let occupanciesRoom: Occupancy[] = [];
   occupanciesRoom = convertQueryStringToJson(searchParams.rooms);
+
+  if (!searchParams.hotel_id) return notFound();
 
   const data = await searchRoom({
     dataBody: {

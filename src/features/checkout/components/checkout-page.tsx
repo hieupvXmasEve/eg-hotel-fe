@@ -47,6 +47,17 @@ const CheckoutPage = ({ amount }: { amount: number }) => {
     } else {
       // The payment UI automatically closes with a success animation.
       // Your customer is redirected to your `return_url`.
+      // First make the booking payment API call
+      // const bookingResponse = await fetch('/api/booking/payment', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify({ amount }),
+      // });
+      // if (!bookingResponse.ok) {
+      //   throw new Error('Failed to process booking');
+      // }
     }
 
     setLoading(false);
