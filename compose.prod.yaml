@@ -1,0 +1,22 @@
+services:
+  next-app:
+    container_name: next-app
+    build:
+      context: .
+      dockerfile: prod.Dockerfile
+      args:
+        STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY}
+        NEXT_PUBLIC_STRIPE_PUBLIC_KEY: ${NEXT_PUBLIC_STRIPE_PUBLIC_KEY}
+        NEXT_PUBLIC_SERVER_URL: ${NEXT_PUBLIC_SERVER_URL}
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL}
+        NEXT_PUBLIC_FRONTEND_URL: ${NEXT_PUBLIC_FRONTEND_URL}
+    restart: always
+    ports:
+      - 3000:3000
+    networks:
+      - my_network
+    env_file:
+      - .env # Sử dụng file .env để thiết lập biến môi trường
+networks:
+  my_network:
+    # external: true
