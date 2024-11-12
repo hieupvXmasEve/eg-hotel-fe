@@ -12,8 +12,16 @@ import CheckoutElement from "@/features/checkout/components/checkout-element";
 import { Cross1Icon } from "@radix-ui/react-icons";
 import { Baby, Banknote, Bed, Check, Users } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
 import { useRoomDetail } from "../stores/use-room-detail";
 import Rating from "./rating";
+
+type BookingResponse = {
+  success: boolean;
+  message: string;
+  data?: any;
+};
 
 export default function BookNowDialog({
   showCheckout,
@@ -26,6 +34,52 @@ export default function BookNowDialog({
   const roomDetail = useRoomDetail((state) => state.roomDetail);
   const dateFrom = useRoomDetail((state) => state.dateFrom);
   const dateTo = useRoomDetail((state) => state.dateTo);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleBooking = async () => {
+    if (!roomDetail) return;
+    setIsLoading(true);
+
+    const makeBookingRequest = async (): Promise<BookingResponse> => {
+      const response = await fetch("/api/room/booking", {
+        method: "POST",
+        body: JSON.stringify({
+          roomId: roomDetail.room_id,
+          dateFrom,
+          dateTo,
+        }),
+      });
+
+      return response.json();
+    };
+
+    try {
+      // First attempt
+      let result = await makeBookingRequest();
+      console.log("result", result);
+      if (!result.success) {
+        // Second attempt
+        result = await makeBookingRequest();
+
+        if (!result.success) {
+          throw new Error(result.message || "Booking failed");
+        }
+      }
+
+      toast.success(t("booking-success"));
+      // setShowCheckout(false);
+      // router.push("/bookings"); // Redirect to bookings page
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (error) {
+      toast.error(t("booking-error"));
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  useEffect(() => {
+    handleBooking();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (!roomDetail) return null;
 
@@ -124,9 +178,6 @@ export default function BookNowDialog({
             </div>
           </div>
           <CheckoutElement amount={roomDetail.non_member_price} />
-          {/* <div className="sticky bottom-0 w-full">
-            <Button className="w-full">Book now</Button>
-          </div> */}
         </ScrollArea>
         <DialogClose
           aria-label="Close"
