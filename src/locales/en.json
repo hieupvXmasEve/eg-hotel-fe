@@ -114,8 +114,11 @@
       "title": "Book now",
       "number-of-rooms": "Number of rooms",
       "rooms": "rooms",
-      "book-now": "BOOK NOW",
-      "booking-details": "Booking details"
+      "booking-details": "Booking details",
+      "booking-success": "Booking successful!",
+      "booking-error": "Unable to complete booking. Please try again later.",
+      "booking-processing": "Processing...",
+      "book-now": "Book Now"
     }
   },
   "contact": {
