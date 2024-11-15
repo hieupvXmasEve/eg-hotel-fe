@@ -9,14 +9,20 @@ const stripe = new Stripe(env.STRIPE_SECRET_KEY, {
 
 export async function POST(request: NextRequest) {
   try {
-    const { amount } = await request.json();
-
-    const paymentIntent = await stripe.paymentIntents.create({
+    const { amount, paymentMethodId } = await request.json();
+    console.log(amount, paymentMethodId);
+    await stripe.paymentIntents.create({
       amount: amount,
       currency: "usd",
-      automatic_payment_methods: { enabled: true },
+      payment_method_types: ["card"],
+      payment_method: paymentMethodId,
+      confirm: true,
+      error_on_requires_action: true,
     });
-    return NextResponse.json({ clientSecret: paymentIntent.client_secret });
+    return NextResponse.json(
+      { message: "Payment successful" },
+      { status: 201 },
+    );
   } catch (error) {
     console.error("Internal Error:", error);
     // Handle other errors (e.g., network issues, parsing errors)

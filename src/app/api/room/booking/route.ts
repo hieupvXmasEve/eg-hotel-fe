@@ -5,10 +5,10 @@ const api = new ApiClient("en", "usd");
 
 export async function POST(request: NextRequest) {
   try {
-    // await api.fetch("/booking/register", {
-    //   method: "POST",
-    //   data: request.body,
-    // });
+    await api.fetch("/booking/register", {
+      method: "POST",
+      data: request.body,
+    });
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Internal Error:", error);

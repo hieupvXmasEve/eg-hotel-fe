@@ -11,7 +11,6 @@ import { cn } from "@/lib/utils";
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 import { RoomDetail } from "../data/get-room-detail";
-import { useRoomDetail } from "../stores/use-room-detail";
 
 const MapComponent = dynamic(() => import("@/features/rooms/components/map"), {
   ssr: false,
@@ -40,16 +39,6 @@ export default function RoomDetailComponent({
     policies: useRef(null),
     amenities: useRef(null),
   };
-
-  // Reset and initialize store on component mount
-  useEffect(() => {
-    useRoomDetail.getState().reset();
-    useRoomDetail.setState({
-      roomDetail: data,
-      dateFrom: date_from,
-      dateTo: date_to,
-    });
-  }, [data, date_from, date_to]);
 
   useEffect(() => {
     const observers = Object.entries(sectionRefs).map(([id, ref]) => {
@@ -136,7 +125,7 @@ export default function RoomDetailComponent({
             <Policies />
           </section>
           <div className="sticky bottom-20 mx-auto flex w-full justify-center md:bottom-4">
-            <BookNow />
+            <BookNow data={data} date_from={date_from} date_to={date_to} />
           </div>
         </div>
       </div>

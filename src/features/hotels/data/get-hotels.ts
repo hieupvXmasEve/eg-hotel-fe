@@ -9,6 +9,7 @@ export async function getHotels() {
       hotels: Hotel[];
     };
   }>("/api/hotels/all", {
+    method: "POST",
     data: {
       pageNumb: null,
       pageSize: null,
