@@ -149,7 +149,14 @@
       "phone": "Phone",
       "complete-booking": "Complete Booking",
       "country-code": "Country code",
-      "special-requests": "Accessibility & special requests (optional)"
+      "special-requests": "Accessibility & special requests (optional)",
+      "card-holder": "Card holder",
+      "first-name-required": "First name is required",
+      "last-name-required": "Last name is required",
+      "email-required": "Email is required",
+      "phone-required": "Phone is required",
+      "country-required": "Country is required",
+      "card-holder-required": "Card holder is required"
     },
     "taxes-and-fees": "Taxes and fees",
     "payment-method": "Payment method"

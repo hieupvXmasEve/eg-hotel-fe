@@ -146,7 +146,14 @@
       "first-name": "Tên",
       "last-name": "Họ",
       "phone": "Điện thoại",
-      "special-requests": "Khả năng tiếp cận"
+      "special-requests": "Yêu cầu hỗ trợ tiếp cận và các yêu cầu đặc biệt",
+      "card-holder": "tên chủ thẻ",
+      "first-name-required": "Tên không được để trống",
+      "last-name-required": "Họ không được để trống",
+      "email-required": "Email không được để trống",
+      "phone-required": "Điện thoại không được để trống",
+      "country-required": "Mã quốc gia không được để trống",
+      "card-holder-required": "Tên chủ thẻ không được để trống"
     },
     "payment-method": "Phương thức thanh toán",
     "taxes-and-fees": "Thuế và phí"

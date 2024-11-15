@@ -25,7 +25,7 @@ export interface RoomDetail {
   check_in: string;
   check_out: string;
   rate: number | null;
-  room_images: [];
+  room_images: Array<{ image_url: string }>;
   room_facilities: [];
 }
 export interface RoomDetailResponse {
