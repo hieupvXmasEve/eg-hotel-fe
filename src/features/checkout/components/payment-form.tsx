@@ -26,6 +26,10 @@ import { convertToSubCurrency } from "@/lib/convertToSubcurrency";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
+import { bookingRegister } from "@/features/orders/booking-register";
+import { BookingRoom } from "@/types/booking-room";
+import { toast } from "@/hooks/use-toast";
+import { usePathname, useRouter } from "@/i18n/routing";
 
 // const roomReservation = {
 //   checkIn: new Date(),
@@ -38,13 +42,19 @@ import { useState } from "react";
 //   },
 // };
 
-export default function PaymentForm() {
+export default function PaymentForm({
+  amount,
+  dataBooking,
+}: {
+  amount: number;
+  dataBooking: BookingRoom;
+}) {
   const t = useTranslations("checkout");
-  const amount = 3;
 
   const stripe = useStripe();
   const elements = useElements();
-
+  const router = useRouter();
+  const pathname = usePathname();
   const [errorMessage, setErrorMessage] = useState<string>();
   const [loading, setLoading] = useState(false);
 
@@ -75,7 +85,6 @@ export default function PaymentForm() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setLoading(true);
-    console.log(values);
     if (!stripe || !elements) {
       return;
     }
@@ -88,6 +97,32 @@ export default function PaymentForm() {
         setLoading(false);
         return;
       }
+      const { data, success } = await bookingRegister({
+        checkinPerson: {
+          email: values.email,
+          firstName: values.firstName,
+          gender: 1,
+          lastName: values.lastName,
+          phoneNumber: values.phone,
+        },
+        roomBookings: [
+          {
+            adults: dataBooking.roomDetail.adults,
+            children: dataBooking.roomDetail.children,
+            checkIn: dataBooking.dateFrom,
+            checkOut: dataBooking.dateTo,
+            roomId: dataBooking.roomDetail.room_id,
+            customerNote: values.specialRequests,
+          },
+        ],
+      });
+      if (!success && !data) {
+        toast({
+          title: t("booking-failed"),
+          variant: "destructive",
+        });
+        return;
+      }
 
       const { error, paymentMethod } = await stripe.createPaymentMethod({
         type: "card",
@@ -97,8 +132,11 @@ export default function PaymentForm() {
           email: values.email,
           phone: values.phone,
         },
+        metadata: {
+          amount: amount,
+          bookingId: data!.booking_id,
+        },
       });
-      console.log("paymentMethod", paymentMethod?.id);
       // return_url: `${env.NEXT_PUBLIC_FRONTEND_URL}/${locale}/payment-success?amount=${amount}`,
 
       if (error) {
@@ -115,21 +153,14 @@ export default function PaymentForm() {
             paymentMethodId: paymentMethod?.id,
           }),
         });
-        const data = await response.json();
-        console.log("data", data);
-        // The payment UI automatically closes with a success animation.
-        // Your customer is redirected to your `return_url`.
-        // First make the booking payment API call
-        // const bookingResponse = await fetch('/api/booking/payment', {
-        //   method: 'POST',
-        //   headers: {
-        //     'Content-Type': 'application/json',
-        //   },
-        //   body: JSON.stringify({ amount }),
-        // });
-        // if (!bookingResponse.ok) {
-        //   throw new Error('Failed to process booking');
-        // }
+        await response.json();
+        const queries = {
+          order_id: data!.booking_id,
+        };
+        router.replace(
+          // @ts-expect-error https://github.com/vercel/next.js/issues/45038
+          { pathname, query: queries },
+        );
       }
     } catch (error) {
       console.error(error);

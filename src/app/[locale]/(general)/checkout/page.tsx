@@ -14,19 +14,31 @@ import PaymentForm from "@/features/checkout/components/payment-form";
 import { env } from "@/lib/env";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import { format } from "date-fns";
+import { differenceInDays, format } from "date-fns";
 import { useRouter } from "@/i18n/routing";
 import { BookingRoom } from "@/types/booking-room";
 import Rating from "@/features/rooms/components/rating";
+import { useTranslations } from "next-intl";
+import { useUser } from "@/components/user-context";
 
 const stripePromise = loadStripe(env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY);
 
 export default function HotelCheckout() {
+  const t = useTranslations("checkout");
   const router = useRouter();
+  const { isAuthenticated } = useUser();
   const dataBooking: BookingRoom | null = localStorage.getItem("dataBooking")
     ? JSON.parse(localStorage.getItem("dataBooking") as string)
     : null;
+
   if (!dataBooking) return router.push("/");
+  const nights = differenceInDays(
+    new Date(dataBooking.dateTo),
+    new Date(dataBooking.dateFrom),
+  );
+  const roomPrice = isAuthenticated
+    ? dataBooking.roomDetail.member_price
+    : dataBooking.roomDetail.non_member_price;
   return (
     <div className="grid gap-6 lg:grid-cols-10">
       {/* Left Section */}
@@ -38,7 +50,10 @@ export default function HotelCheckout() {
           </p>
         </div>
         <Elements stripe={stripePromise}>
-          <PaymentForm />
+          <PaymentForm
+            amount={Math.round(roomPrice * nights * 100) / 100}
+            dataBooking={dataBooking}
+          />
         </Elements>
       </div>
       <div className="col-span-1"></div>
@@ -79,13 +94,13 @@ export default function HotelCheckout() {
                 <div className="flex flex-col gap-2">
                   <span className="text-sm font-medium">Check-in</span>
                   <span className="text-sm font-bold">
-                    {format(dataBooking.dateFrom, "EEE, MMM d")}, 2:00pm
+                    {format(dataBooking.dateFrom, "EEE, MMM d YYY")} - 2:00pm
                   </span>
                 </div>
                 <div className="flex flex-col gap-2">
                   <span className="text-sm font-medium">Check-out</span>
                   <span className="text-sm font-bold">
-                    {format(dataBooking.dateTo, "EEE, MMM d")}, 12:00pm
+                    {format(dataBooking.dateTo, "EEE, MMM d YYY")} - 12:00pm
                   </span>
                 </div>
               </div>
@@ -124,14 +139,16 @@ export default function HotelCheckout() {
         <div className="mt-5 rounded-lg border p-3">
           <h3 className="text-2xl font-semibold">Price details</h3>
           <div className="flex justify-between text-xs">
-            <span>1 night</span>
-            <span>$180.00</span>
+            <span>
+              {nights} {nights > 1 ? t("nights") : t("night")}
+            </span>
+            <span>${(roomPrice * nights).toFixed(2)}</span>
           </div>
           <div className="mt-3 flex justify-between text-xs">
             <Popover>
               <PopoverTrigger>
                 <div className="flex cursor-pointer items-center gap-1 hover:underline">
-                  Taxes and fees <InfoIcon className="h-4 w-4" />
+                  {t("taxes-and-fees")} <InfoIcon className="h-4 w-4" />
                 </div>
               </PopoverTrigger>
               <PopoverContent align="start" className="text-xs">
@@ -142,13 +159,13 @@ export default function HotelCheckout() {
               </PopoverContent>
             </Popover>
 
-            <span>$21.60</span>
+            <span>$0</span>
           </div>
           <Separator className="my-4" />
 
           <div className="flex justify-between font-semibold">
             <span>Total (USD)</span>
-            <span>$201.60</span>
+            <span>${(roomPrice * nights + 0).toFixed(2)}</span>
           </div>
         </div>
       </div>

@@ -47,7 +47,6 @@ export const SignInForm = () => {
       const callbackUrl = new URLSearchParams(window.location.search).get(
         "callbackUrl",
       );
-      console.log("callbackUrl", callbackUrl);
       if (callbackUrl) {
         router.push(callbackUrl);
       } else {

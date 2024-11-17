@@ -9,7 +9,6 @@ export default async function RoomDetailPage({
 }) {
   const { data, success } = await getRoomDetail(searchParams.room_id);
   if (!success) return notFound();
-
   return (
     <RoomDetailComponent
       data={data}

@@ -115,7 +115,10 @@ export default function RoomDetailComponent({
               </section>
             </div>
             <div className="col-span-4 md:col-span-1">
-              <MapComponent />
+              <MapComponent
+                longitude={data.longitude}
+                latitude={data.latitude}
+              />
             </div>
           </div>
           <section ref={sectionRefs.accessibility} className="">

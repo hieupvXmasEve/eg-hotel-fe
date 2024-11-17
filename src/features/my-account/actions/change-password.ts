@@ -36,7 +36,6 @@ export const changePassword = async ({
     },
   );
   if (response.data) {
-    console.log("response.data", response.data);
     const { access_token, ...useData } = response.data;
     setAuthCookies(access_token, useData);
   }

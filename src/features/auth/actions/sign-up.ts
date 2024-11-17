@@ -24,7 +24,6 @@ export const signUp = async (data: SignUpData) => {
     method: "POST",
     data,
   });
-  console.log("response", response);
   return {
     success: response.success,
     message: response.message,

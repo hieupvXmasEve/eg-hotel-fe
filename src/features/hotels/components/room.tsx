@@ -4,6 +4,7 @@ import { Link } from "@/i18n/routing";
 import Image from "next/image";
 import { IRoom } from "../data/search-room";
 import { convertNameToUrl } from "../utils/convert-name-to-url";
+import { useTranslations } from "next-intl";
 
 interface RoomProps {
   room: IRoom;
@@ -20,6 +21,7 @@ export default function Room({
   date_from,
   date_to,
 }: RoomProps) {
+  const t = useTranslations("room");
   return (
     <Link
       href={{
@@ -40,21 +42,18 @@ export default function Room({
     >
       <div className="flex h-32 rounded-lg bg-white shadow-md sm:h-36">
         <div className="relative w-28 sm:w-48">
-          {room.room_images && room.room_images.length > 0 ? (
-            room.room_images.map((roomImg) => (
-              <Image
-                key={roomImg.image_url}
-                src={
-                  roomImg.image_url.startsWith("https")
-                    ? roomImg.image_url
-                    : "/images/room-type-1.jpg"
-                }
-                alt={`${room.room_type_name} image`}
-                className="h-full rounded-lg object-cover object-center"
-                width={300}
-                height={200}
-              />
-            ))
+          {room.room_images &&
+          room.room_images.length > 0 &&
+          room.room_images?.[0] ? (
+            <Image
+              key={room.room_images[0].image_url}
+              src={room.room_images[0].image_url}
+              alt={`${room.room_type_name} image`}
+              className="h-full rounded-lg object-cover object-center"
+              width={300}
+              height={200}
+              unoptimized
+            />
           ) : (
             <div className="h-full w-full bg-secondary"></div>
           )}
@@ -79,7 +78,9 @@ export default function Room({
                 8.6/20
               </Badge>
               <span className="text-slate-500">Very good</span>
-              <span className="text-slate-500">(123 reviews)</span>
+              <span className="text-slate-500">
+                ({room.review || 0} {t("reviews")})
+              </span>
             </div>
             <span className="text-xl font-semibold">${room.base_price}</span>
           </div>

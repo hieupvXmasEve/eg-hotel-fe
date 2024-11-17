@@ -32,7 +32,6 @@ export default async function RoomList({
     },
   });
   if (!data.data?.length) return <div className="text-center">No data</div>;
-
   return (
     <div className="space-y-3">
       {data.data.map((room) => (

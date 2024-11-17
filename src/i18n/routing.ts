@@ -27,7 +27,7 @@ export const routing = defineRouting({
     "/amenities": "/amenities",
     "/contact": "/contact",
     "/booking": "/booking",
-    "/payment": "/payment",
+    "/payment-success": "/payment-success",
     "/review": "/review",
     "/orders": "/orders",
     "/[hotelName]": "/[hotelName]",

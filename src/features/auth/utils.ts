@@ -13,8 +13,11 @@ export interface UserAuth {
   display_name: string;
   avatar_url: string;
 }
-export const setAuthCookies = (accessToken: string, userData: UserAuth) => {
-  const cookieStore = cookies();
+export const setAuthCookies = async (
+  accessToken: string,
+  userData: UserAuth,
+) => {
+  const cookieStore = await cookies();
   cookieStore.set("accessToken", accessToken, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
