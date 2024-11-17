@@ -18,7 +18,7 @@ export interface IRoom {
   room_id: number;
   room_type_id: number;
   room_type_name: string;
-  room_images: RoomImage[] | null;
+  room_images: Array<RoomImage> | null;
   room_features: RoomFeature[] | null;
   review: string;
   rate: number;

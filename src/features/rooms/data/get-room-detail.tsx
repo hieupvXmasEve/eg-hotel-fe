@@ -12,7 +12,7 @@ export interface RoomDetail {
   member_price: number;
   non_member_price: number;
   adults: number;
-  children: number | null;
+  children: number;
   stars: number | null;
   bed_number: number;
   bed_type_id: number;

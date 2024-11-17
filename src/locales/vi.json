@@ -116,7 +116,8 @@
       "rooms": "phòng",
       "title": "Đặt ngay",
       "booking-details": "Chi tiết đặt chỗ"
-    }
+    },
+    "reviews": "đánh giá"
   },
   "contact": {
     "contact-information": "Thông tin liên hệ",
@@ -155,8 +156,13 @@
       "country-required": "Mã quốc gia không được để trống",
       "card-holder-required": "Tên chủ thẻ không được để trống"
     },
+    "taxes-and-fees": "Thuế và phí",
     "payment-method": "Phương thức thanh toán",
-    "taxes-and-fees": "Thuế và phí"
+    "price-details": "Chi tiết giá",
+    "total": "tổng cộng",
+    "night": "ngày",
+    "nights": "ngày",
+    "booking-failed": "Đặt chỗ không thành công"
   },
   "footer": {
     "about-us": "Về chúng tôi",

@@ -119,7 +119,8 @@
       "booking-error": "Unable to complete booking. Please try again later.",
       "booking-processing": "Processing...",
       "book-now": "Book Now"
-    }
+    },
+    "reviews": "reviews"
   },
   "contact": {
     "title": "Contact Us",
@@ -159,7 +160,12 @@
       "card-holder-required": "Card holder is required"
     },
     "taxes-and-fees": "Taxes and fees",
-    "payment-method": "Payment method"
+    "payment-method": "Payment method",
+    "price-details": "Price details",
+    "total": "total",
+    "night": "night",
+    "nights": "nights",
+    "booking-failed": "Booking failed"
   },
   "footer": {
     "about-us": "About us",
