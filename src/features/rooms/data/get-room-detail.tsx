@@ -12,7 +12,7 @@ export interface RoomDetail {
   member_price: number;
   non_member_price: number;
   adults: number;
-  children: number | null;
+  children: number;
   stars: number | null;
   bed_number: number;
   bed_type_id: number;
@@ -25,7 +25,7 @@ export interface RoomDetail {
   check_in: string;
   check_out: string;
   rate: number | null;
-  room_images: [];
+  room_images: Array<{ image_url: string }>;
   room_facilities: [];
 }
 export interface RoomDetailResponse {

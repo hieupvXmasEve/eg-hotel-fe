@@ -1,8 +1,8 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
-import { getAuthCookies } from "@/features/auth/utils";
-import { Link } from "@/i18n/routing";
+import { Link, usePathname } from "@/i18n/routing";
 import { History, LogOut, User } from "lucide-react";
-import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 import LogoutComponent from "./logout";
 import {
@@ -12,10 +12,13 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
+import { useTranslations } from "next-intl";
+import { useUser } from "./user-context";
 
-export default async function UserButton() {
-  const t = await getTranslations("auth");
-  const { user, isAuthenticated } = await getAuthCookies();
+export default function UserButton() {
+  const t = useTranslations("auth");
+  const { user, isAuthenticated } = useUser();
+  const pathname = usePathname();
   if (isAuthenticated && user) {
     return (
       <div className="relative">
@@ -69,7 +72,12 @@ export default async function UserButton() {
   }
 
   return (
-    <Link href="/sign-in">
+    <Link
+      href={{
+        pathname: "/sign-in",
+        query: { callbackUrl: pathname },
+      }}
+    >
       <Button
         variant="outline"
         size="default"

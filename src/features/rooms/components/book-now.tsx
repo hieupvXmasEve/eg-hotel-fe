@@ -1,23 +1,33 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { useRouter } from "@/i18n/routing";
 import { Minus, Plus } from "lucide-react";
 import { useTranslations } from "next-intl";
-import dynamic from "next/dynamic";
+
 import { useState } from "react";
+import { RoomDetail } from "../data/get-room-detail";
+import { BookingRoom } from "@/types/booking-room";
 
-const BookNowDialogDynamic = dynamic(() => import("./book-now-dialog"), {
-  ssr: false,
-});
-
-export default function BookNow() {
+interface BookNowProps {
+  data: RoomDetail;
+  date_from: string;
+  date_to: string;
+}
+export default function BookNow({ data, date_from, date_to }: BookNowProps) {
   const t = useTranslations("room.book-now");
   const [rooms, setRooms] = useState(1);
-  const [showCheckout, setShowCheckout] = useState(false);
+  const router = useRouter();
   const decreaseRooms = () => setRooms((prev) => Math.max(1, prev - 1));
   const increaseRooms = () => setRooms((prev) => prev + 1);
   const onCheckout = () => {
-    setShowCheckout(true);
+    const dataBooking: BookingRoom = {
+      roomDetail: data,
+      dateFrom: date_from,
+      dateTo: date_to,
+    };
+    localStorage.setItem("dataBooking", JSON.stringify(dataBooking));
+    router.push(`/checkout`);
   };
   return (
     <>
@@ -52,10 +62,6 @@ export default function BookNow() {
           {t("book-now")}
         </Button>
       </div>
-      <BookNowDialogDynamic
-        showCheckout={showCheckout}
-        setShowCheckout={setShowCheckout}
-      />
     </>
   );
 }

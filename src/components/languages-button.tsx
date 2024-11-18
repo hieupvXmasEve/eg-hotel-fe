@@ -5,7 +5,7 @@ import clsx from "clsx";
 import { Loader } from "lucide-react";
 import { useLocale } from "next-intl";
 import Image from "next/image";
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import { useTransition } from "react";
 import {
   DropdownMenu,
@@ -18,6 +18,8 @@ export default function LanguagesButton() {
   const locale = useLocale();
   const router = useRouter();
   const params = useParams();
+  const searchParams = useSearchParams();
+
   const languages: { code: Locale; name: string; country: string }[] = [
     { code: "en", name: "English", country: "US" },
     { code: "vi", name: "Vietnamese", country: "VN" },
@@ -25,11 +27,13 @@ export default function LanguagesButton() {
   const [isPending, startTransition] = useTransition();
   const pathname = usePathname();
   const onChangeLanguage = (code: Locale) => {
+    const queries = Object.fromEntries(searchParams);
     startTransition(() => {
-      // @ts-expect-error -- TypeScript will validate that only known `params`
-      // are used in combination with a given `pathname`. Since the two will
-      // always match for the current route, we can skip runtime checks.
-      router.replace({ pathname, params }, { locale: code });
+      router.replace(
+        // @ts-expect-error https://github.com/vercel/next.js/issues/45038
+        { pathname, params, query: queries },
+        { locale: code },
+      );
     });
   };
 

@@ -55,7 +55,6 @@ export async function signInAction(
     });
     if (!response.success)
       return { error: response.message ?? "Unknown error" };
-    console.log(response.data);
     const { access_token, ...userData } = response.data!;
     setAuthCookies(access_token, userData);
 

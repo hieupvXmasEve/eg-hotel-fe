@@ -114,9 +114,13 @@
       "title": "Book now",
       "number-of-rooms": "Number of rooms",
       "rooms": "rooms",
-      "book-now": "BOOK NOW",
-      "booking-details": "Booking details"
-    }
+      "booking-details": "Booking details",
+      "booking-success": "Booking successful!",
+      "booking-error": "Unable to complete booking. Please try again later.",
+      "booking-processing": "Processing...",
+      "book-now": "Book Now"
+    },
+    "reviews": "reviews"
   },
   "contact": {
     "title": "Contact Us",
@@ -146,10 +150,22 @@
       "phone": "Phone",
       "complete-booking": "Complete Booking",
       "country-code": "Country code",
-      "special-requests": "Accessibility & special requests (optional)"
+      "special-requests": "Accessibility & special requests (optional)",
+      "card-holder": "Card holder",
+      "first-name-required": "First name is required",
+      "last-name-required": "Last name is required",
+      "email-required": "Email is required",
+      "phone-required": "Phone is required",
+      "country-required": "Country is required",
+      "card-holder-required": "Card holder is required"
     },
     "taxes-and-fees": "Taxes and fees",
-    "payment-method": "Payment method"
+    "payment-method": "Payment method",
+    "price-details": "Price details",
+    "total": "total",
+    "night": "night",
+    "nights": "nights",
+    "booking-failed": "Booking failed"
   },
   "footer": {
     "about-us": "About us",

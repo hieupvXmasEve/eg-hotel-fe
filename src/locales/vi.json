@@ -116,7 +116,8 @@
       "rooms": "phòng",
       "title": "Đặt ngay",
       "booking-details": "Chi tiết đặt chỗ"
-    }
+    },
+    "reviews": "đánh giá"
   },
   "contact": {
     "contact-information": "Thông tin liên hệ",
@@ -146,10 +147,22 @@
       "first-name": "Tên",
       "last-name": "Họ",
       "phone": "Điện thoại",
-      "special-requests": "Khả năng tiếp cận"
+      "special-requests": "Yêu cầu hỗ trợ tiếp cận và các yêu cầu đặc biệt",
+      "card-holder": "tên chủ thẻ",
+      "first-name-required": "Tên không được để trống",
+      "last-name-required": "Họ không được để trống",
+      "email-required": "Email không được để trống",
+      "phone-required": "Điện thoại không được để trống",
+      "country-required": "Mã quốc gia không được để trống",
+      "card-holder-required": "Tên chủ thẻ không được để trống"
     },
+    "taxes-and-fees": "Thuế và phí",
     "payment-method": "Phương thức thanh toán",
-    "taxes-and-fees": "Thuế và phí"
+    "price-details": "Chi tiết giá",
+    "total": "tổng cộng",
+    "night": "ngày",
+    "nights": "ngày",
+    "booking-failed": "Đặt chỗ không thành công"
   },
   "footer": {
     "about-us": "Về chúng tôi",
