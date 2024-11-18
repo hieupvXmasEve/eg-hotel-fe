@@ -9,7 +9,7 @@ const stripe = new Stripe(env.STRIPE_SECRET_KEY, {
 
 export async function POST(request: NextRequest) {
   try {
-    const { amount, paymentMethodId } = await request.json();
+    const { amount, paymentMethodId, bookingId } = await request.json();
     await stripe.paymentIntents.create({
       amount: amount,
       currency: "usd",
@@ -17,6 +17,9 @@ export async function POST(request: NextRequest) {
       payment_method: paymentMethodId,
       confirm: true,
       error_on_requires_action: true,
+      metadata: {
+        bookingId: bookingId,
+      },
     });
     return NextResponse.json(
       { message: "Payment successful" },

@@ -29,7 +29,7 @@ import { useState } from "react";
 import { bookingRegister } from "@/features/orders/booking-register";
 import { BookingRoom } from "@/types/booking-room";
 import { toast } from "@/hooks/use-toast";
-import { usePathname, useRouter } from "@/i18n/routing";
+import { useRouter } from "@/i18n/routing";
 
 // const roomReservation = {
 //   checkIn: new Date(),
@@ -54,7 +54,6 @@ export default function PaymentForm({
   const stripe = useStripe();
   const elements = useElements();
   const router = useRouter();
-  const pathname = usePathname();
   const [errorMessage, setErrorMessage] = useState<string>();
   const [loading, setLoading] = useState(false);
 
@@ -108,7 +107,7 @@ export default function PaymentForm({
         roomBookings: [
           {
             adults: dataBooking.roomDetail.adults,
-            children: dataBooking.roomDetail.children,
+            children: dataBooking.roomDetail.children || 0,
             checkIn: dataBooking.dateFrom,
             checkOut: dataBooking.dateTo,
             roomId: dataBooking.roomDetail.room_id,
@@ -116,7 +115,7 @@ export default function PaymentForm({
           },
         ],
       });
-      if (!success && !data) {
+      if (!success || !data) {
         toast({
           title: t("booking-failed"),
           variant: "destructive",
@@ -151,16 +150,14 @@ export default function PaymentForm({
           body: JSON.stringify({
             amount: convertToSubCurrency(amount),
             paymentMethodId: paymentMethod?.id,
+            bookingId: data!.booking_id,
           }),
         });
         await response.json();
         const queries = {
           order_id: data!.booking_id,
         };
-        router.replace(
-          // @ts-expect-error https://github.com/vercel/next.js/issues/45038
-          { pathname, query: queries },
-        );
+        router.replace({ pathname: "/payment-success", query: queries });
       }
     } catch (error) {
       console.error(error);
