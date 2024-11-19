@@ -40,6 +40,7 @@ PaginationItem.displayName = "PaginationItem";
 
 type PaginationLinkProps = {
   isActive?: boolean;
+  scroll?: boolean;
 } & Pick<ButtonProps, "size"> &
   React.ComponentProps<"a">;
 
@@ -47,8 +48,11 @@ const PaginationLink = ({
   className,
   isActive,
   size = "icon",
+  href = "",
+  scroll = true,
   ...props
 }: PaginationLinkProps) => (
+  // @eslint-disable-next-line jsx-a11y/anchor-has-content
   <Link
     aria-current={isActive ? "page" : undefined}
     className={cn(
@@ -58,6 +62,8 @@ const PaginationLink = ({
       }),
       className,
     )}
+    href={href}
+    scroll={scroll}
     {...props}
   />
 );

@@ -60,6 +60,7 @@ export default function OrderCard({
       <Link
         href={`?page=${current_page || 1}&modal=true&bookingid=${booking.booking_id}`}
         className="border-t"
+        scroll={false}
       >
         <Button
           variant="ghost"

@@ -61,6 +61,7 @@ export default function ListOrderPagination({
         <PaginationItem>
           <PaginationPrevious
             href={`?page=${current_page > total_page ? current_page - 1 : 1}`}
+            scroll={current_page !== 1}
           />
         </PaginationItem>
         {getPageNumbers().map((pageNum, index) => (
@@ -82,6 +83,7 @@ export default function ListOrderPagination({
             href={`?page=${
               current_page < total_page ? current_page + 1 : total_page
             }`}
+            scroll={current_page < total_page}
           />
         </PaginationItem>
       </PaginationContent>
