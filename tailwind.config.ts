@@ -91,11 +91,16 @@ const config: Config = {
           "0%": { strokeDashoffset: "100" },
           "100%": { strokeDashoffset: "0" },
         },
+        fadeIn: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "check-draw": "check-draw 2s ease-out forwards",
+        fadeIn: "fadeIn 0.2s ease-out forwards",
       },
     },
     screens: {

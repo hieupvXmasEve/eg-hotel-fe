@@ -1,9 +1,9 @@
 import { Link } from "@/i18n/routing";
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 
-export default function ListRoomType() {
-  const t = useTranslations("home");
+export default async function ListRoomType() {
+  const t = await getTranslations("home");
   const roomTypes = [
     {
       image: "/images/room-type-1.jpg",

@@ -1,13 +1,13 @@
 "use client";
 
 import { UserAuth } from "@/features/auth/utils";
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, ReactNode } from "react";
 
 interface UserContextType {
   user: UserAuth | null;
-  setUser: (user: UserAuth | null) => void;
+  // setUser: (user: UserAuth | null) => void;
   isAuthenticated: boolean;
-  logout: () => void;
+  // logout: () => void;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -19,15 +19,9 @@ export function UserProvider({
   children: ReactNode;
   userDefault: UserAuth | null;
 }) {
-  const [user, setUser] = useState<UserAuth | null>(userDefault);
-  const logout = () => {
-    setUser(null);
-  };
   const value = {
-    user,
-    setUser,
-    isAuthenticated: !!user,
-    logout,
+    user: userDefault,
+    isAuthenticated: !!userDefault,
   };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;

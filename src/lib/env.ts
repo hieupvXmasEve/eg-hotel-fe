@@ -5,7 +5,6 @@ import { z } from "zod";
 export const env = createEnv({
   emptyStringAsUndefined: true,
   client: {
-    NEXT_PUBLIC_SERVER_URL: z.string().url(),
     NEXT_PUBLIC_STRIPE_PUBLIC_KEY: z.string(),
     NEXT_PUBLIC_API_URL: z.string().url(),
     NEXT_PUBLIC_FRONTEND_URL: z.string().url(),
@@ -14,7 +13,6 @@ export const env = createEnv({
     STRIPE_SECRET_KEY: z.string(),
   },
   experimental__runtimeEnv: {
-    NEXT_PUBLIC_SERVER_URL: process.env.NEXT_PUBLIC_SERVER_URL,
     NEXT_PUBLIC_STRIPE_PUBLIC_KEY: process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY,
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
     NEXT_PUBLIC_FRONTEND_URL: process.env.NEXT_PUBLIC_FRONTEND_URL,

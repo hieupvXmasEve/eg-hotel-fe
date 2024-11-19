@@ -1,49 +1,46 @@
+import ApiClient from "@/lib/client";
+
+const api = new ApiClient("en", "usd");
+
 export interface OrderHistory {
-  id: string;
-  roomNumber: string;
-  hotelName: string;
-  location: string;
-  checkIn: string;
-  checkOut: string;
-  price: number;
-  status: "Successful" | "Cancelled";
-  image: string;
+  booking_id: number;
+  room_image: string;
+  room_name: string;
+  address: string;
+  check_in: string;
+  check_out: string;
+  total_price: number;
+  payment_status: number;
 }
-export async function getOrders(): Promise<OrderHistory[]> {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-  return [
+interface OrderHistoryResponse {
+  success: boolean;
+  data: {
+    booking_history: OrderHistory[];
+    total_record: number;
+    total_page: number;
+  };
+  status: string;
+}
+export async function getOrders({ page }: { page: number }): Promise<{
+  booking_history: OrderHistory[];
+  total_record: number;
+  total_page: number;
+}> {
+  const response = await api.fetch<OrderHistoryResponse>(
+    "/api/booking/history",
     {
-      id: "1",
-      roomNumber: "123455",
-      hotelName: "EG Paradise Angkor Villa Hotel",
-      location: "Cambodia",
-      checkIn: "21/10/2024",
-      checkOut: "22/10/2024",
-      price: 59.99,
-      status: "Successful",
-      image: "/images/room-type-1.jpg",
+      method: "POST",
+      data: {
+        pageNumb: page,
+        pageSize: 5,
+        sorts: [
+          {
+            field: "booking_id",
+            isDesc: true,
+          },
+        ],
+      },
     },
-    {
-      id: "2",
-      roomNumber: "123455",
-      hotelName: "EG Paradise Angkor Villa Hotel",
-      location: "Cambodia",
-      checkIn: "21/10/2024",
-      checkOut: "22/10/2024",
-      price: 59.99,
-      status: "Cancelled",
-      image: "/images/room-type-1.jpg",
-    },
-    {
-      id: "3",
-      roomNumber: "123455",
-      hotelName: "EG Paradise Angkor Villa Hotel",
-      location: "Cambodia",
-      checkIn: "21/10/2024",
-      checkOut: "22/10/2024",
-      price: 59.99,
-      status: "Successful",
-      image: "/images/room-type-1.jpg",
-    },
-  ];
+  );
+  return response.data;
 }

@@ -4,7 +4,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 export default function OrderHistorySkeleton() {
   return (
     <>
-      {[1, 2].map((index) => (
+      {[1, 2, 3].map((index) => (
         <Card key={index} className="mb-4">
           <div className="flex items-center">
             <div className="relative aspect-square w-28 flex-shrink-0 p-2">
