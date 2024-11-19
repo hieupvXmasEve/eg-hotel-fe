@@ -183,7 +183,8 @@
     "adult": "adult",
     "children": "children",
     "booking-info": "Booking information",
-    "booking-details": "Booking details"
+    "booking-details": "Booking details",
+    "no-data": "No data"
   },
   "sign-up": {
     "title": "Sign up",

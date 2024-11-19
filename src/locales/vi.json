@@ -180,7 +180,8 @@
     "booking-info": "Thông tin đặt phòng",
     "children": "những đứa trẻ",
     "room": "phòng",
-    "title": "Lịch sử đặt hàng"
+    "title": "Lịch sử đặt hàng",
+    "no-data": "Không có dữ liệu"
   },
   "sign-in": {
     "forgot-password": "Quên mật khẩu?",

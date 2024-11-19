@@ -50,7 +50,7 @@ export default function PaymentSuccessPage() {
         </CardHeader>
         <CardContent>
           <dl className="text-center">
-            <Link href="/orders" className="">
+            <Link href="/my-account/order-history" className="">
               <Button variant="link" className="mt-2 p-0">
                 View order
               </Button>

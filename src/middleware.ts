@@ -23,14 +23,7 @@ export default async function middleware(req: NextRequest) {
 
   const authState = await getAuthCookies();
   // Redirect authenticated users from public routes to home
-  if (
-    authState.isAuthenticated &&
-    PUBLIC_ROUTES.some((route) => pathname.startsWith(route))
-  ) {
-    return NextResponse.redirect(new URL(`/${locale}`, req.url));
-  }
-
-  // Check if the route is protected
+  //  // Check if the route is protected
   if (PROTECTED_ROUTES.some((route) => pathname.startsWith(route))) {
     if (!authState.isAuthenticated) {
       // Redirect to sign-in page if not authenticated
@@ -39,6 +32,14 @@ export default async function middleware(req: NextRequest) {
       return NextResponse.redirect(signInUrl);
     }
   }
+
+  if (
+    authState.isAuthenticated &&
+    PUBLIC_ROUTES.some((route) => pathname.startsWith(route))
+  ) {
+    return NextResponse.redirect(new URL(`/${locale}`, req.url));
+  }
+
   return response;
 }
 
