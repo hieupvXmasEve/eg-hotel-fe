@@ -115,7 +115,10 @@
       "number-of-rooms": "Số phòng",
       "rooms": "phòng",
       "title": "Đặt ngay",
-      "booking-details": "Chi tiết đặt chỗ"
+      "booking-details": "Chi tiết đặt chỗ",
+      "booking-error": "Không thể hoàn tất việc đặt chỗ. \nVui lòng thử lại sau.",
+      "booking-processing": "Xử lý...",
+      "booking-success": "Đặt phòng thành công!"
     },
     "reviews": "đánh giá"
   },
@@ -162,7 +165,19 @@
     "total": "tổng cộng",
     "night": "ngày",
     "nights": "ngày",
-    "booking-failed": "Đặt chỗ không thành công"
+    "booking-failed": "Đặt chỗ không thành công",
+    "adult": "người lớn",
+    "check-in": "Đăng ký vào",
+    "check-out": "Trả phòng",
+    "children": "những đứa trẻ",
+    "quantity": "Số lượng",
+    "review": "ôn tập",
+    "reviews": "đánh giá",
+    "room": "phòng",
+    "rooms": "phòng",
+    "signin-for-checkin": "Đăng nhập để thanh toán nhanh hơn.",
+    "tax-tooltip": "Thuế là phí thu hồi thuế Expedia trả cho các nhà cung cấp của mình (ví dụ: khách sạn); \nđể biết chi tiết, vui lòng xem Điều khoản sử dụng của chúng tôi. \nChúng tôi giữ lại phí dịch vụ của mình như một khoản bồi thường trong việc phục vụ việc đặt chỗ du lịch của bạn.",
+    "who-checkin": "Ai đang đăng ký?"
   },
   "footer": {
     "about-us": "Về chúng tôi",
@@ -172,7 +187,8 @@
     "legal": "Hợp pháp",
     "minimals": "Tối thiểu",
     "privacy-policy": "Chính sách bảo mật",
-    "terms-of-service": "Điều khoản dịch vụ"
+    "terms-of-service": "Điều khoản dịch vụ",
+    "phone": "Điện thoại"
   },
   "order-history": {
     "adult": "người lớn",

@@ -25,6 +25,7 @@ export default function BookNow({ data, date_from, date_to }: BookNowProps) {
       roomDetail: data,
       dateFrom: date_from,
       dateTo: date_to,
+      quantity: rooms,
     };
     localStorage.setItem("dataBooking", JSON.stringify(dataBooking));
     router.push(`/checkout`);

@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import LogoColor from "./logo-color";
 import { useTranslations } from "next-intl";
+import { useSettings } from "./settings-context";
 
 type FooterPathname =
   | "/promotion"
@@ -19,6 +20,7 @@ type FooterPathname =
 export default function Footer({}) {
   const pathname = usePathname();
   const t = useTranslations();
+  const settings = useSettings();
   // Định nghĩa biến routes
   const routes: {
     icon: React.ReactNode;
@@ -72,11 +74,7 @@ export default function Footer({}) {
             {/* column 1 */}
             <div className="col-span-3 flex flex-col gap-4">
               <LogoColor />
-              <p className="text-sm text-gray-600">
-                The starting point for your next project with Minimal UI Kit,
-                built on the newest version of Material-UI ?, ready to be
-                customized to your style.
-              </p>
+              <p className="text-sm text-gray-600">{settings.about}</p>
             </div>
             {/* column 2 */}
             <div className="col-span-2 col-start-6">
@@ -138,14 +136,14 @@ export default function Footer({}) {
               </h4>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <p className="text-gray-600">{t("home.hotel-address")}</p>
+                  <p className="text-gray-600">{settings.address}</p>
                 </li>
                 <li>
                   <a
                     href="tel:+855123456789"
                     className="text-gray-600 hover:text-primary"
                   >
-                    {t("home.hotel-phone")}
+                    {t("footer.phone")}: {settings.hotline_number}
                   </a>
                 </li>
                 <li>
@@ -153,7 +151,7 @@ export default function Footer({}) {
                     href="mailto:support@minimals.cc"
                     className="text-gray-600 hover:text-primary"
                   >
-                    {t("home.hotel-email")}
+                    {settings.contact_email}
                   </a>
                 </li>
               </ul>

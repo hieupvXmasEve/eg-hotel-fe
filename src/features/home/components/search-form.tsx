@@ -44,6 +44,7 @@ interface SearchFormProps {
     hotel_id: number;
     hotel_name: string;
     value: string;
+    hotel_image: string;
   }>;
   hotelId: string;
 }
@@ -66,6 +67,30 @@ export default function SearchForm({ hotels, hotelId }: SearchFormProps) {
   function onSubmit(data: z.infer<typeof FormSchema>) {
     const date_from = format(data.check_in_date.from, "yyyy-MM-dd");
     const date_to = format(data.check_in_date.to, "yyyy-MM-dd");
+
+    // Store search in localStorage
+    const selectedHotel = hotels.find(
+      (hotel) => hotel.hotel_id === Number(data.hotel_id),
+    );
+    const searchData = {
+      id: Date.now(),
+      hotel_name: selectedHotel?.hotel_name || "",
+      image: selectedHotel?.hotel_image || "",
+      dateRange: `${format(data.check_in_date.from, "dd/MM")} - ${format(data.check_in_date.to, "dd/MM")}`,
+      people: rooms.reduce((acc, room) => acc + room.adults + room.children, 0),
+      timestamp: Date.now(),
+    };
+
+    // Get existing searches from localStorage
+    const existingSearches = JSON.parse(
+      localStorage.getItem("recentSearches") || "[]",
+    );
+
+    // Add new search to the beginning and keep only last 6 searches
+    const updatedSearches = [searchData, ...existingSearches].slice(0, 6);
+
+    // Save back to localStorage
+    localStorage.setItem("recentSearches", JSON.stringify(updatedSearches));
 
     // Create URLSearchParams from the query object
     const params = new URLSearchParams();

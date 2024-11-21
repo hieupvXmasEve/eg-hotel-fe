@@ -122,10 +122,10 @@ export default function RoomDetailComponent({
             </div>
           </div>
           <section ref={sectionRefs.accessibility} className="">
-            <Accessibility />
+            <Accessibility data={data} />
           </section>
           <section ref={sectionRefs.policies} className="">
-            <Policies />
+            <Policies data={data} />
           </section>
           <div className="sticky bottom-20 mx-auto flex w-full justify-center md:bottom-4">
             <BookNow data={data} date_from={date_from} date_to={date_to} />

@@ -15,7 +15,6 @@ export default async function OrderHistoryPage({
   const page = searchParams.page ? parseInt(searchParams.page) : 1;
   const showModal = searchParams?.modal === "true";
   const bookingId = searchParams?.bookingid;
-  console.log("render");
   return (
     <div className="flex h-full flex-col gap-4">
       <h1 className="mb-4 text-2xl font-bold">{t("title")}</h1>

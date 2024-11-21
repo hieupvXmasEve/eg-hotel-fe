@@ -22,6 +22,9 @@ export default async function Header() {
       hotel_id: hotel.hotel_id,
       hotel_name: hotel.hotel_name,
       value: hotel.hotel_id.toString(),
+      hotel_image: hotel.hotel_images?.[0]
+        ? hotel.hotel_images[0].image_url
+        : "/images/rooms/placeholder.svg",
     })) || [];
 
   return (

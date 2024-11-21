@@ -165,7 +165,19 @@
     "total": "total",
     "night": "night",
     "nights": "nights",
-    "booking-failed": "Booking failed"
+    "booking-failed": "Booking failed",
+    "check-in": "Check-in",
+    "check-out": "Check-out",
+    "room": "room",
+    "rooms": "rooms",
+    "adult": "adult",
+    "children": "children",
+    "quantity": "Quantity",
+    "who-checkin": "Who’s checking in?",
+    "signin-for-checkin": "Sign in for faster checkout.",
+    "review": "review",
+    "reviews": "reviews",
+    "tax-tooltip": "The taxes are tax recovery charges Expedia pays to its vendors (e.g. hotels); for details, please see our Terms of Use. We retain our service fees as compensation in servicing your travel reservation."
   },
   "footer": {
     "about-us": "About us",
@@ -175,7 +187,8 @@
     "terms-of-service": "Terms of service",
     "contact": "Contact",
     "minimals": "Minimals",
-    "legal": "Legal"
+    "legal": "Legal",
+    "phone": "Phone"
   },
   "order-history": {
     "title": "Order history",

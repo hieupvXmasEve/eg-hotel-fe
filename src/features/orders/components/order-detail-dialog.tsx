@@ -14,7 +14,6 @@ const OrderDetailDialog = async ({
     redirect("/my-account/order-history");
   }
   const bookingDetail = await getBookingDetail(parseInt(bookingId, 10));
-
   return (
     <Card className="fixed inset-0 z-10 flex items-center justify-center overflow-hidden border-none bg-transparent">
       <OrderDetailContent

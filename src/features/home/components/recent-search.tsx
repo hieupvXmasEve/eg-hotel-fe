@@ -1,43 +1,31 @@
+"use client";
+
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
-interface Room {
+interface RecentSearch {
   id: number;
-  name: string;
+  hotel_name: string;
   image: string;
   dateRange: string;
   people: number;
+  timestamp: number;
 }
 
 export default function RecentSearch() {
   const t = useTranslations("home");
-  const rooms: Room[] = [
-    {
-      id: 1,
-      name: "Deluxe Ocean View",
-      image: "/images/rooms/placeholder.svg",
-      dateRange: "18/10 - 20/10",
-      people: 2,
-    },
-    {
-      id: 2,
-      name: "Mountain Retreat Suite",
-      image: "/images/rooms/placeholder.svg",
-      dateRange: "18/10 - 20/10",
-      people: 3,
-    },
-    {
-      id: 3,
-      name: "Deluxe Ocean View",
-      image: "/images/rooms/placeholder.svg",
-      dateRange: "18/10 - 20/10",
-      people: 2,
-    },
-  ];
+  const [recentSearches, setRecentSearches] = useState<RecentSearch[]>([]);
 
-  if (rooms.length === 0) {
+  useEffect(() => {
+    // Get recent searches from localStorage
+    const searches = JSON.parse(localStorage.getItem("recentSearches") || "[]");
+    setRecentSearches(searches);
+  }, []);
+
+  if (recentSearches.length === 0) {
     return null;
   }
 
@@ -47,25 +35,28 @@ export default function RecentSearch() {
         {t("title-recent-search")}
       </h2>
       <div className="2xl:grid-cols-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {rooms.map((room) => (
-          <Link href="#" key={room.id} className="block">
-            <Card key={room.id} className="overflow-hidden">
+        {recentSearches.map((search) => (
+          <Link href="#" key={search.id} className="block">
+            <Card key={search.id} className="overflow-hidden">
               <CardContent className="p-3">
-                <div
-                  key={room.id}
-                  className="flex items-center space-x-4 rounded-lg bg-white"
-                >
-                  <Image
-                    src={room.image}
-                    alt={`${room.name} image`}
-                    width={80}
-                    height={80}
-                    className="rounded-lg"
-                  />
+                <div className="flex items-center space-x-4 rounded-lg bg-white">
+                  <div className="aspect-square">
+                    <Image
+                      src={search.image}
+                      alt={`${search.hotel_name} image`}
+                      width={80}
+                      height={80}
+                      className="h-full rounded-lg"
+                      unoptimized
+                    />
+                  </div>
                   <div className="flex-1 space-y-2">
-                    <h3 className="text-lg font-semibold">{room.name}</h3>
+                    <h3 className="text-lg font-semibold">
+                      {search.hotel_name}
+                    </h3>
                     <p className="text-gray-500">
-                      {room.dateRange}, {room.people} {t("search-form.adult")}
+                      {search.dateRange}, {search.people}{" "}
+                      {t("search-form.adult")}
                     </p>
                   </div>
                 </div>

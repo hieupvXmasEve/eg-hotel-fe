@@ -4,4 +4,5 @@ export interface BookingRoom {
   roomDetail: RoomDetail;
   dateFrom: string;
   dateTo: string;
+  quantity: number;
 }

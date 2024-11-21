@@ -104,16 +104,14 @@ export default function PaymentForm({
           lastName: values.lastName,
           phoneNumber: values.phone,
         },
-        roomBookings: [
-          {
-            adults: dataBooking.roomDetail.adults,
-            children: dataBooking.roomDetail.children || 0,
-            checkIn: dataBooking.dateFrom,
-            checkOut: dataBooking.dateTo,
-            roomId: dataBooking.roomDetail.room_id,
-            customerNote: values.specialRequests,
-          },
-        ],
+        roomBookings: Array.from({ length: dataBooking.quantity }).map(() => ({
+          adults: dataBooking.roomDetail.adults,
+          children: dataBooking.roomDetail.children || 0,
+          checkIn: dataBooking.dateFrom,
+          checkOut: dataBooking.dateTo,
+          roomId: dataBooking.roomDetail.room_id,
+          customerNote: values.specialRequests,
+        })),
       });
       if (!success || !data) {
         toast({
