@@ -36,6 +36,9 @@ export const getAuthCookies = async (): Promise<AuthCookies> => {
   const cookieStore = await cookies();
   const accessToken = cookieStore.get("accessToken")?.value ?? null;
   const userDataCookie = cookieStore.get("userData")?.value;
+  if (accessToken && isTokenExpired(accessToken)) {
+    return { user: null, accessToken: null, isAuthenticated: false };
+  }
   const user = userDataCookie ? JSON.parse(userDataCookie) : null;
   const isAuthenticated =
     accessToken !== null && user !== null && !isTokenExpired(accessToken);
